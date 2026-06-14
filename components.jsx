@@ -95,7 +95,7 @@ function Button({ children, variant = "primary", onClick, href, arrow = true }) 
   };
   const skin = variant === "primary"
     ? { background: hover ? "#a6cc00" : "var(--pp-acid)", color: "#030303", border: "1px solid transparent" }
-    : { background: hover ? "var(--pp-surface-3)" : "transparent", color: "var(--pp-fg)", border: `1px solid ${hover ? "#3a3a3a" : "#2a2a2a"}` };
+    : { background: hover ? "var(--pp-surface-2)" : "transparent", color: "var(--pp-fg)", border: `1px solid ${hover ? "#3a3a3a" : "#2a2a2a"}` };
   const Tag = href ? "a" : "button";
   return (
     <Tag href={href} onClick={onClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
