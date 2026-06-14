@@ -1,4 +1,4 @@
-/* Karta — animated Lucide icons (Path A: hand-ported, no framer-motion).
+/* Karta - animated Lucide icons (Path A: hand-ported, no framer-motion).
    Lucide geometry (24×24, 2px round stroke, currentColor), restrained micro-motion.
    Triggers: hover the host (play prop) + a one-time pulse when scrolled into view.
    Static / print / reduced-motion always shows the fully-drawn icon. */

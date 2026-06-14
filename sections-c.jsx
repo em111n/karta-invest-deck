@@ -1,10 +1,10 @@
-/* Karta — Investor Deck · sections 8-12: Market, Vision, Team, Roadmap, Ask + Footer */
+/* Karta - Investor Deck · sections 8-12: Market, Vision, Team, Roadmap, Ask + Footer */
 const { useState: cS, useEffect: cE, useRef: cR } = React;
 
-/* 08 — MARKET lives in market-section.jsx (ported bento layout) */
+/* 08 - MARKET lives in market-section.jsx (ported bento layout) */
 
 /* ============================================================
-   08 — VISION
+   08 - VISION
    ============================================================ */
 const HORIZONS = [
   { y: "5",  unit: "years", tagline: "Near term",
@@ -13,14 +13,14 @@ const HORIZONS = [
     tag: "A neobank-scale business on stablecoin rails." },
   { y: "10", unit: "years", tagline: "Infrastructure",
     t: "Stablecoins become the infrastructure of money.",
-    d: "Like TCP/IP for the internet — invisible, universal, default.",
+    d: "Like TCP/IP for the internet - invisible, universal, default.",
     tag: "Karta is one of the consumer interfaces that won that transition." },
   { y: "∞",  unit: "bigger bet", tagline: "The worldview",
-    t: "Borderless living isn't a niche — it's where the world is going.",
+    t: "Borderless living isn't a niche - it's where the world is going.",
     d: "Remote work. Creator economy. Global teams. Distributed families. The financial system has to adapt.",
     tag: "We're building it.", acid: true },
 ];
-/* crescendo card — big top-pinned ghost number (+ gray "years" to its right) */
+/* crescendo card - big top-pinned ghost number (+ gray "years" to its right) */
 function CCard({ h, half }) {
   const fd = "var(--pp-font-display)";
   return (
@@ -72,7 +72,7 @@ function Vision() {
 }
 
 /* ============================================================
-   10 — TEAM
+   10 - TEAM
    ============================================================ */
 const LINE = "var(--pp-line)";
 const AVATAR = "assets/user-avatar.png";
@@ -91,7 +91,7 @@ const OPEN_ROLES = [
   "B2B team (1 Back + 1 QA + Design)", "AI Engineer",
   "19 marketing positions across Q2 2026 → Q1 2027 (see Roadmap)",
 ];
-/* render a headcount cell — [FILL...] placeholders show dimmed */
+/* render a headcount cell - [FILL...] placeholders show dimmed */
 function Cell({ v, head, total }) {
   const fill = typeof v === "string" && v.indexOf("[FILL") === 0;
   return <span style={{ fontFamily: total ? FD : FB, fontWeight: total ? 700 : 400, fontSize: head ? 11 : 13.5, letterSpacing: head ? ".14em" : 0, textTransform: head ? "uppercase" : "none", color: head ? FG4 : (fill ? "#4a4a4a" : (total ? FG : FG2)), fontStyle: fill ? "italic" : "normal" }}>{v}</span>;
@@ -128,16 +128,16 @@ function OpenRoles() {
 const PEOPLE = [
   { name: "Nik Zimarkov", role: "Founder & CEO", initials: "NZ", li: "https://www.linkedin.com",
     photo: "https://randomuser.me/api/portraits/men/32.jpg",
-    short: "Serial entrepreneur since 2013. Co-founded SWIPE (Thailand) — scaled the team 20→100, $1M revenue in two months. Founded Karta in 2021.",
-    bio: "Serial entrepreneur since 2013. Co-founded SWIPE (Thailand) — raised seed from FRII, scaled the team 20→100, $1M revenue in two months. Led business development at DataLead managing $0.5M+ enterprise accounts. Founded Karta in 2021, building next-generation payment infrastructure." },
+    short: "Serial entrepreneur since 2013. Co-founded SWIPE (Thailand) - scaled the team 20→100, $1M revenue in two months. Founded Karta in 2021.",
+    bio: "Serial entrepreneur since 2013. Co-founded SWIPE (Thailand) - raised seed from FRII, scaled the team 20→100, $1M revenue in two months. Led business development at DataLead managing $0.5M+ enterprise accounts. Founded Karta in 2021 to build stablecoin-native payment infrastructure for borderless people." },
   { name: "Ron Lieberman", role: "Co-Founder", initials: "RL", li: "https://www.linkedin.com",
     photo: "https://randomuser.me/api/portraits/men/45.jpg",
     short: "Venture builder & serial entrepreneur. Co-founded Karta in 2022. Built Kometa.Black and Raketa.Fit; Managing Partner at Boson Kicks.",
-    bio: "Venture builder and serial entrepreneur. Co-founded Karta in July 2022. Previously founded and scaled Kometa.Black — a concept fitness and social club that became a category icon in Moscow. CEO of Raketa.Fit. Managing Partner at Boson Kicks — a VC and acceleration fund focused on IT, e-commerce and SaaS. Board Member at Cosmic Solutions OÜ (Estonia)." },
+    bio: "Venture builder and serial entrepreneur. Co-founded Karta in July 2022. Previously founded and scaled Kometa.Black - a concept fitness and social club that became a category icon in Moscow. CEO of Raketa.Fit. Managing Partner at Boson Kicks - a VC and acceleration fund focused on IT, e-commerce and SaaS. Board Member at Cosmic Solutions OÜ (Estonia)." },
   { name: "Matvey Aliev", role: "Co-Founder & CTO", initials: "MA", li: "https://www.linkedin.com",
     photo: "https://randomuser.me/api/portraits/men/41.jpg",
     short: "Engineer & AI systems builder. 120× gains at Haute Coupure; launched Supastore solo. Owns Karta's AI-agent architecture.",
-    bio: "Engineer and AI systems builder. Built algorithmic financial-strategy systems at Haute Coupure — 120× performance gains, 3rd place in U.S. Financial Competitions (2023). Founded and launched Supastore solo (full-stack e-commerce, 2024). At Karta, defined the end-to-end AI-agent architecture and shipped the first production finance assistant with stateful memory and compliance guardrails." },
+    bio: "Engineer and AI systems builder. Built algorithmic financial-strategy systems at Haute Coupure - 120× performance gains, 3rd place in U.S. Financial Competitions (2023). Founded and launched Supastore solo (full-stack e-commerce, 2024). At Karta, defined the end-to-end AI-agent architecture and shipped the first production finance assistant with stateful memory and compliance guardrails." },
 ];
 
 /* circular avatar with initials fallback */
@@ -169,7 +169,7 @@ function NameRole({ p, nameSize = 19 }) {
 }
 
 /* ============================================================
-   A — COMPACT CARDS (3 columns, small avatar, short bio)
+   A - COMPACT CARDS (3 columns, small avatar, short bio)
    ============================================================ */
 function Team() {
   return (
@@ -193,7 +193,7 @@ function Team() {
         ))}
       </div>
 
-      {/* headcount summary band — 35 → 57 */}
+      {/* headcount summary band - 35 → 57 */}
       <Reveal>
         <div style={{ display: "flex", alignItems: "center", gap: "clamp(24px,4vw,56px)", flexWrap: "wrap", padding: "clamp(28px,3.5vw,44px) clamp(28px,3.5vw,48px)", border: `1px solid ${LINE}`, borderRadius: 8, background: "linear-gradient(100deg, rgba(204,255,0,.06), transparent 60%), var(--pp-card)" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 8, flex: "none" }}>
@@ -222,7 +222,7 @@ function Team() {
           <Reveal delay={0.04}><HeadcountTable /></Reveal>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <Reveal><Label variant="acid">open roles — seed-funded</Label></Reveal>
+          <Reveal><Label variant="acid">open roles - seed-funded</Label></Reveal>
           <Reveal delay={0.04}><OpenRoles /></Reveal>
         </div>
       </div>
@@ -231,11 +231,11 @@ function Team() {
 }
 
 /* ============================================================
-   11 — ROADMAP → SERIES A
+   11 - ROADMAP → SERIES A
    ============================================================ */
 const QUARTERS = [
   { q: "Q2 2026", items: ["Self-custody migration (Privy)", "Metal LED card + US launch", "Pay In / Pay Out (VA + local rails)"], milestone: "Foundation set, self-custody live" },
-  { q: "Q3 2026", items: ["iOS + Android apps live", "Visa Direct", "Earn — yield on balance"], milestone: "Mobile distribution unlocked, yield enabled" },
+  { q: "Q3 2026", items: ["iOS + Android apps live", "Visa Direct", "Earn - yield on balance"], milestone: "Mobile distribution unlocked, yield enabled" },
   { q: "Q4 2026", items: ["Karat Loyalty + Cashback", "Karta Card launch", "QR Payments"], milestone: "Monetization & retention live" },
   { q: "Q1 2027", items: ["Credit Line launch", "Family Banking (shared accounts)", "Series A close"], milestone: "~$14M ARR (neutral case)", hero: true },
 ];
@@ -248,7 +248,7 @@ function Roadmap() {
   return (
     <React.Fragment>
       <SectionHero id="roadmap" num="10" kicker="roadmap → series a" align="center"
-        parts={[{ t: "Three priorities a quarter — to " }, { t: "Series A.", hi: true }]}
+        parts={[{ t: "Three priorities a quarter - to " }, { t: "Series A.", hi: true }]}
         lead="Rebased on April 2026. We commit to Neutral; Positive is upside." />
       <Section tightTop dataLabel="10 Roadmap · detail">
 
@@ -294,7 +294,7 @@ function Roadmap() {
         </Reveal>
         <Reveal>
           <p className="pp-body" style={{ margin: 0, fontSize: 15, maxWidth: 820 }}>
-            <span style={{ color: "var(--pp-fg)" }}>We commit to Neutral.</span> Positive if compounding holds; Negative is the floor. 49% of the 3–5yr SOM target already at run-rate.
+            <span style={{ color: "var(--pp-fg)" }}>We commit to Neutral.</span> Positive if compounding holds; Negative is the floor. 49% of the 3-5yr SOM target already at run-rate.
           </p>
         </Reveal>
       </div>
@@ -304,7 +304,7 @@ function Roadmap() {
 }
 
 /* ============================================================
-   12 — ASK + USE OF FUNDS + CLOSE
+   12 - ASK + USE OF FUNDS + CLOSE
    ============================================================ */
 const BUCKETS = [
   { t: "Growth", pct: "[ 50% ]", d: "Paid acquisition. 20K+ MAU by Q1 2027." },
@@ -313,14 +313,14 @@ const BUCKETS = [
 ];
 const STEPS = [
   { t: "Data room", d: "within 1 week" },
-  { t: "Term sheet", d: "4–6 weeks" },
+  { t: "Term sheet", d: "4-6 weeks" },
   { t: "Contact", d: "[ Nik · email + Telegram ]" },
 ];
 function Ask() {
   return (
     <React.Fragment>
       <SectionHero id="ask" num="11" kicker="the ask" align="center" glow
-        parts={[{ t: "Raising " }, { t: "$[ FILL ]M", hi: true }, { t: " seed — to accelerate, not to survive." }]}
+        parts={[{ t: "Raising " }, { t: "$[ FILL ]M", hi: true }, { t: " seed - to accelerate, not to survive." }]}
         lead="Profitable four months. The round accelerates Series A; it doesn't buy runway." />
       <Section tightTop dataLabel="11 The ask · detail" style={{ paddingBottom: 80 }}>
       {/* use of funds */}
@@ -395,13 +395,13 @@ function Close() {
 Object.assign(window, { Market, Vision, Team, Roadmap, Ask, Close });
 
 
-/* ===== Market (bento) — merged from market-section.jsx for deterministic load order ===== */
-/* Market — SCROLL-context section layouts (full-width, tall, Karta site).
+/* ===== Market (bento) - merged from market-section.jsx for deterministic load order ===== */
+/* Market - SCROLL-context section layouts (full-width, tall, Karta site).
    Three ways to tell the "borderless money market" story as a real
-   vertical-scroll chapter — each uses the world map differently:
-     A — Map-led: full-bleed map centerpiece with regional callouts
-     B — Editorial spec-sheet: numbered beats, converging-markets table → map band → SAM/SOM
-     C — TAM → SAM → SOM: structured around the bottom-up funnel, map is the "where we play" wedge
+   vertical-scroll chapter - each uses the world map differently:
+     A - Map-led: full-bleed map centerpiece with regional callouts
+     B - Editorial spec-sheet: numbered beats, converging-markets table → map band → SAM/SOM
+     C - TAM → SAM → SOM: structured around the bottom-up funnel, map is the "where we play" wedge
    Reuses the site's real components (Reveal, Label, HCard, Bar, Hi, Section, SectionHero). */
 
 const { useState: mS, useEffect: mE } = React;
@@ -433,7 +433,7 @@ const SIZE_FRAME = [
   { v: "$150B+", l: "Annual revenue pool" },
   { v: "$53B+",  l: "Annual border tax on remittances" },
 ];
-/* map markers — base grid 201×97 (matches the site's GeoMap) */
+/* map markers - base grid 201×97 (matches the site's GeoMap) */
 const GEO = [
   { id: "usa",   x: 22.9, y: 32.0, lx: 22.9, ly: 9,  side: "top",    live: false, label: "USA" },
   { id: "eu",    x: 51.7, y: 24.7, lx: 51.7, ly: 7,  side: "top",    live: false, label: "EU" },
@@ -454,12 +454,12 @@ function geoLabel(pos) {
   if (pos === "right")  return { ...base, left: "calc(100% + 12px)", top: "50%", transform: "translateY(-50%)" };
   return base;
 }
-/* origin dot — small marker sitting on the region itself */
+/* origin dot - small marker sitting on the region itself */
 function OriginDot({ x, y, live }) {
   const c = live ? ACID : ROAD, g = live ? "rgba(204,255,0,.6)" : "rgba(255,122,26,.6)";
   return <span style={{ position: "absolute", left: x + "%", top: y + "%", transform: "translate(-50%,-50%)", width: 5, height: 5, borderRadius: "50%", background: c, boxShadow: `0 0 4px 1px ${g}`, pointerEvents: "none" }} />;
 }
-/* leader dot — the glowing pinging dot + label out in the black area */
+/* leader dot - the glowing pinging dot + label out in the black area */
 function LeaderDot({ lx, ly, live, delay, label, side }) {
   const c = live ? ACID : ROAD, g = live ? "rgba(204,255,0,.55)" : "rgba(255,122,26,.5)";
   return (
@@ -485,7 +485,7 @@ function GeoMap({ maxWidth = 1180, callouts = false, showLabels = true }) {
   const leader = showLabels && !callouts;
   return (
     <div className="geo-map" style={{ position: "relative", width: "100%", maxWidth, margin: "0 auto" }}>
-      <img src="assets/world-map-dots-sm.svg" alt="World map — Karta active regions" draggable={false}
+      <img src="assets/world-map-dots-sm.svg" alt="World map - Karta active regions" draggable={false}
         style={{ display: "block", width: "100%", height: "auto", filter: "saturate(0) brightness(1.05)", opacity: 0.82 }} />
       {leader && (
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }}>
@@ -561,7 +561,7 @@ function InfoTip({ text }) {
       )}
     </span>);
 }
-/* converging-markets data table (bento card) — matches the site's canonical
+/* converging-markets data table (bento card) - matches the site's canonical
    Key-metrics table: right-aligned numeric columns, muted metric name, acid
    last column, hairline row dividers. fr columns so rows align. */
 function MiniMarketList() {
@@ -616,7 +616,7 @@ function RegionStrip() {
 }
 
 /* ============================================================
-   MARKET — Bento dashboard (ported into the main deck).
+   MARKET - Bento dashboard (ported into the main deck).
    Hero + market sizing in number cards; map is its own block.
    ============================================================ */
 function Market() {
@@ -629,7 +629,7 @@ function Market() {
     <Section tightTop dataLabel="07 Market" style={{ overflowX: "clip", overflowY: "visible" }}>
       {/* ---------- the market, by the numbers (bento) ---------- */}
       <div style={{ display: "flex", flexDirection: "column", gap: 34 }}>
-        {/* large planet — anchored to the section's right edge, behind the blocks */}
+        {/* large planet - anchored to the section's right edge, behind the blocks */}
         <video src="assets/planet.webm" autoPlay loop muted playsInline aria-hidden="true" className="market-planet" style={{
           position: "absolute", top: "calc(clamp(-280px, -16vw, -150px) - 80px)", right: "clamp(20px, 2.5vw, 56px)",
           width: "clamp(422px, 42vw, 669px)", height: "auto", objectFit: "contain",
@@ -637,7 +637,7 @@ function Market() {
         }} />
         <Reveal style={{ position: "relative", zIndex: 1 }}><h3 style={{ margin: 0, fontFamily: FD, fontWeight: 700, fontStretch: "125%", fontVariationSettings: "'wght' 700,'wdth' 125", fontSize: "clamp(19px,2vw,26px)", letterSpacing: "-.02em", color: FG }}>Three converging markets <span style={{ color: FG4 }}>(TAM)</span></h3></Reveal>
 
-        {/* row 1 — $33T proof + converging markets */}
+        {/* row 1 - $33T proof + converging markets */}
         <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "stretch", position: "relative", zIndex: 1 }}>
           <Reveal variant="up" style={{ height: "100%" }}>
             <HCard style={{ gap: 18, padding: 26, justifyContent: "center", height: "100%" }}>
@@ -654,12 +654,12 @@ function Market() {
                 <span className="pp-stat" style={{ fontSize: 84, lineHeight: 1, fontStretch: "125%" }}>$33T</span>
                 <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 18, letterSpacing: "-.01em", color: FG3, whiteSpace: "nowrap" }}><span style={{ color: FG4 }}>2025</span> → <span style={{ color: FG2 }}>~$140T</span> <span style={{ color: FG4 }}>2030E</span></span>
               </div>
-              <p className="pp-body" style={{ margin: 0, fontSize: 15, lineHeight: 1.55, maxWidth: 470, position: "relative", zIndex: 1 }}>In 2025, stablecoin transaction volume surpassed Visa — <span style={{ color: FG }}>Stablecoin's $33T</span> vs. <a className="inl-link" href={SRC_VISA} target="_blank" rel="noopener noreferrer">Visa's $16.7T<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 3, marginBottom: 1 }}><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg></a> fiscal year. This is no longer a niche: stablecoins are becoming <span style={{ color: FG }}>core payment infrastructure</span>. For Karta, that's the tailwind — the rails our product runs on are now at global scale.</p>
+              <p className="pp-body" style={{ margin: 0, fontSize: 15, lineHeight: 1.55, maxWidth: 470, position: "relative", zIndex: 1 }}>In 2025, stablecoin transaction volume surpassed Visa - <span style={{ color: FG }}>Stablecoin's $33T</span> vs. <a className="inl-link" href={SRC_VISA} target="_blank" rel="noopener noreferrer">Visa's $16.7T<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ display: "inline-block", verticalAlign: "middle", marginLeft: 3, marginBottom: 1 }}><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg></a> fiscal year. This is no longer a niche: stablecoins are becoming <span style={{ color: FG }}>core payment infrastructure</span>. For Karta, that's the tailwind - the rails our product runs on are now at global scale.</p>
             </HCard>
           </Reveal>
         </div>
 
-        {/* row 2 — size frame ×3 */}
+        {/* row 2 - size frame ×3 */}
         <Reveal style={{ position: "relative", zIndex: 1, marginTop: 10 }}><h3 style={{ margin: 0, fontFamily: FD, fontWeight: 700, fontStretch: "125%", fontVariationSettings: "'wght' 700,'wdth' 125", fontSize: "clamp(19px,2vw,26px)", letterSpacing: "-.02em", color: FG4 }}>TAM <span style={{ color: FG4 }}>·</span> Top-Down</h3></Reveal>
         <div className="grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {SIZE_FRAME.map((s, i) => (
@@ -672,7 +672,7 @@ function Market() {
           ))}
         </div>
 
-        {/* row 3 — SAM + SOM, each with its own heading above */}
+        {/* row 3 - SAM + SOM, each with its own heading above */}
         <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "start" }}>
           <Reveal>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -691,7 +691,7 @@ function Market() {
           </Reveal>
           <Reveal delay={0.08}>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <h3 style={{ margin: 0, fontFamily: FD, fontWeight: 700, fontStretch: "125%", fontVariationSettings: "'wght' 700,'wdth' 125", fontSize: "clamp(19px,2vw,26px)", letterSpacing: "-.02em", color: FG4 }}>SOM <span style={{ color: FG4 }}>·</span> 3–5yr target</h3>
+              <h3 style={{ margin: 0, fontFamily: FD, fontWeight: 700, fontStretch: "125%", fontVariationSettings: "'wght' 700,'wdth' 125", fontSize: "clamp(19px,2vw,26px)", letterSpacing: "-.02em", color: FG4 }}>SOM <span style={{ color: FG4 }}>·</span> 3-5yr target</h3>
               <HCard style={{ gap: 14, minHeight: 214, justifyContent: "space-between", padding: 32, borderColor: "rgba(204,255,0,.24)", background: "linear-gradient(140deg, rgba(204,255,0,.07), var(--pp-card) 55%)" }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
@@ -707,12 +707,12 @@ function Market() {
         </div>
       </div>
 
-      {/* ---------- where we operate (map — geography only) ---------- */}
+      {/* ---------- where we operate (map - geography only) ---------- */}
       <div style={{ display: "flex", flexDirection: "column", gap: 30, textAlign: "center" }}>
         <Reveal><h3 style={{ margin: 0, fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125", fontSize: "clamp(32px,4.4vw,56px)", lineHeight: 1.04, letterSpacing: "-.025em", color: ACID }}>Where we operate</h3></Reveal>
         <Reveal delay={0.04}>
           <h3 className="pp-h3" style={{ margin: "0 auto", maxWidth: 780, fontWeight: 500, fontSize: 23, color: FG2 }}>
-            Concrete markets, validated by team analysis — <span style={{ color: FG }}>live across MENA, LATAM and SE Asia</span>, with USA &amp; EU on the roadmap.</h3>
+            Concrete markets, validated by team analysis - <span style={{ color: FG }}>live across MENA, LATAM and SE Asia</span>, with USA &amp; EU on the roadmap.</h3>
         </Reveal>
         <Reveal variant="scale"><GeoMap maxWidth={1320} /></Reveal>
         <Reveal delay={0.05}><MapLegend /></Reveal>

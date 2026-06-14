@@ -1,18 +1,18 @@
-/* Karta — Investor Deck · sections 5-7: Solution, How it works, Traction */
+/* Karta - Investor Deck · sections 5-7: Solution, How it works, Traction */
 const { useState: bS, useEffect: bE, useRef: bR } = React;
 
 /* ============================================================
-   05 — SOLUTION
+   05 - SOLUTION
    ============================================================ */
 const CAPS = [
 { t: "Store", d: "Self-custody MPC wallet. Stablecoin-denominated. Your keys, always.", tag: "live" },
-{ t: "Receive", d: "Crypto on any chain · USD/EUR virtual accounts · local rails (PIX, PromptPay, UAE) — auto-converted to stablecoins.", tag: "live" },
-{ t: "Spend", d: "Visa Signature — virtual, plastic, metal LED. High limits across 150+ countries.", tag: "live" },
+{ t: "Receive", d: "Crypto on any chain · USD/EUR virtual accounts · local rails (PIX, PromptPay, UAE) - auto-converted to stablecoins.", tag: "live" },
+{ t: "Spend", d: "Visa Signature - virtual, plastic, metal LED. High limits across 150+ countries.", tag: "live" },
 { t: "Send", d: "Crypto (any token, no gas thinking) · bank requisites · QR payments.", tag: "live" },
 { t: "Earn", d: "Yield on balance via Karta stablecoin. Native staking + DeFi next.", tag: "roadmap" }];
 
 const CAP_ICONS = ["store", "receive", "spend", "send", "earn"];
-/* per-capability app screen — all default to the home screen; swap individually when more screens arrive */
+/* per-capability app screen - all default to the home screen; swap individually when more screens arrive */
 const CAP_SCREENS = {
   Receive: "assets/app-home.jpg",
   Store: "assets/app-home.jpg",
@@ -49,8 +49,8 @@ function Solution() {
   return (
     <React.Fragment>
       <SectionHero id="solution" num="04" kicker="solution" align="left"
-      parts={[{ t: "Karta — " }, { t: "one wallet for every payment", hi: true }, { t: ", anywhere." }]}
-      lead="Stablecoins as the spine, familiar UX on top. Five money jobs, one app — the user never has to know it's crypto." />
+      parts={[{ t: "Karta - " }, { t: "one wallet for every payment", hi: true }, { t: ", anywhere." }]}
+      lead="Stablecoins as the spine, familiar UX on top. Five money jobs, one app - the user never has to know it's crypto." />
       <Section tightTop dataLabel="04 Solution · detail">
       <div style={{ display: "grid", gridTemplateColumns: "minmax(0,0.82fr) minmax(0,1fr)", gap: 36, alignItems: "center" }} className="solution-grid">
         {/* capabilities list + proof line */}
@@ -68,7 +68,7 @@ function Solution() {
             </div>
           </Reveal>
         </div>
-        {/* bare iPhone mockup — screen follows the selected capability */}
+        {/* bare iPhone mockup - screen follows the selected capability */}
         <Reveal variant="right" delay={0.1}>
           <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <PhoneMockup vh={70}>
@@ -87,7 +87,7 @@ function Solution() {
 }
 
 /* ============================================================
-   05 — HOW IT WORKS — two principles + vertical pipeline (layout B)
+   05 - HOW IT WORKS - two principles + vertical pipeline (layout B)
    ============================================================ */
 const HIW_DUE = "assets/partners/due.svg", HIW_RAIN = "assets/partners/rain.svg",
       HIW_TEMPO = "assets/partners/tempo.svg", HIW_SUMSUB = "assets/partners/sumsub.svg";
@@ -139,17 +139,17 @@ function HowItWorks() {
       <Section tightTop dataLabel="05 How it works · detail">
         <Reveal variant="scale">
           <div className="hiw-b" style={{ display: "flex", flexDirection: "row-reverse", gap: 56, alignItems: "center", maxWidth: 1180, margin: 0, width: "100%" }}>
-            {/* LEFT — two principles */}
+            {/* LEFT - two principles */}
             <div className="hiw-b-col" style={{ flex: "1 1 0", minWidth: 0, display: "flex", flexDirection: "column", gap: 26 }}>
               <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 27, lineHeight: 1.2, letterSpacing: "-.01em", color: "var(--pp-fg)" }}>Two principles. One architecture.</span>
               <div style={{ display: "flex", flexDirection: "column", gap: 20, borderTop: "1px solid #161616", paddingTop: 24 }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-                  <span style={HIW_PLABEL}>1 — Self-custody by design</span>
-                  <p style={{ margin: 0, ...HIW_SUB, fontSize: 17 }}>Customers hold their own keys via Privy — we never custody. Karta orchestrates; assets never touch our balance sheet, keeping us outside the custodial regulatory perimeter by design.</p>
+                  <span style={HIW_PLABEL}>1 - Self-custody by design</span>
+                  <p style={{ margin: 0, ...HIW_SUB, fontSize: 17 }}>Customers hold their own keys via Privy - we never custody. Karta orchestrates; assets never touch our balance sheet, keeping us outside the custodial regulatory perimeter by design.</p>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-                  <span style={HIW_PLABEL}>2 — Stablecoins in the middle</span>
-                  <p style={{ margin: 0, ...HIW_SUB, fontSize: 17 }}>Stablecoins are always the settlement layer. Fiat moves in and out through partners (Due, Rain, local PSPs) — we never touch fiat directly.</p>
+                  <span style={HIW_PLABEL}>2 - Stablecoins in the middle</span>
+                  <p style={{ margin: 0, ...HIW_SUB, fontSize: 17 }}>Stablecoins are always the settlement layer. Fiat moves in and out through partners (Due, Rain, local PSPs) - we never touch fiat directly.</p>
                 </div>
               </div>
               <div style={{ borderTop: "1px solid #161616", paddingTop: 18, display: "flex", flexDirection: "column", gap: 11 }}>
@@ -161,7 +161,7 @@ function HowItWorks() {
                 </p>
               </div>
             </div>
-            {/* RIGHT — architecture, wrapped in a frosted acid-glass frame */}
+            {/* RIGHT - architecture, wrapped in a frosted acid-glass frame */}
             <div className="hiw-b-col" style={{ flex: "1.18 1 0", minWidth: 0, position: "relative" }}>
               {/* acid glow behind the glass so the frosted surface has something to refract */}
               {/* frosted acid-glass frame */}
@@ -228,9 +228,9 @@ function HowItWorks() {
 }
 
 /* ============================================================
-   07 — TRACTION (hero numbers + animated growth chart)
+   07 - TRACTION (hero numbers + animated growth chart)
    ============================================================ */
-/* GTV trajectory ($M): Sep '25, Dec '25, Apr '26 — drawn as a rising line */
+/* GTV trajectory ($M): Sep '25, Dec '25, Apr '26 - drawn as a rising line */
 function GrowthChart() {
   const ref = bR(null);
   const pts = [
@@ -331,11 +331,11 @@ function MetricsTable() {
 }
 
 const TRACTION_PANELS = [
-  { t: "Profitable for four straight months — and accelerating.",
-    d: "Net income hit $64.6K in April 2026 (13.9% net margin), 16× March's $3.9K. Net-positive every month Jan–Apr 2026.",
+  { t: "Profitable for four straight months - and accelerating.",
+    d: "Net income hit $64.6K in April 2026 (13.9% net margin), 16× March's $3.9K. Net-positive every month Jan-Apr 2026.",
     imp: "We scale marketing by choice, not necessity." },
   { t: "Premium product-market fit, proven with zero marketing.",
-    d: "300+ Metal LED cards pre-sold at $300 each — $90K+ pre-revenue, fully organic.",
+    d: "300+ Metal LED cards pre-sold at $300 each - $90K+ pre-revenue, fully organic.",
     imp: "Real brand pull at the premium tier, before a dollar of acquisition." },
   { t: "4× the spend depth of our nearest comparable.",
     d: "$22K GTV per spending user vs. ~$5K at KAST ($5B GTV / 1M users).",
@@ -347,7 +347,7 @@ const TRACTION_PANELS = [
     d: "$159K (Apr 2025) → $464K (Apr 2026); +18.8% MoM Mar → Apr.",
     imp: "" },
   { t: "PMF concentrated in high-value crypto spenders.",
-    d: "High spenders (>$4K/mo) are 9.4% of MAU but drive 73.2% of GTV — ~$14.1K monthly GTV per high-spender.",
+    d: "High spenders (>$4K/mo) are 9.4% of MAU but drive 73.2% of GTV - ~$14.1K monthly GTV per high-spender.",
     imp: "" },
   { t: "Self-funded since inception. Four consecutive profitable months, accelerating.",
     d: "",
@@ -492,7 +492,7 @@ function Traction() {
 }
 
 /* ============================================================
-   05b — SOLUTION (hand-phone variant) — real hand photo with the
+   05b - SOLUTION (hand-phone variant) - real hand photo with the
    screen cut to transparency; app screens swap underneath as the
    capability rows are selected. Pinned flush to the right edge.
    ============================================================ */
@@ -511,12 +511,12 @@ function SolutionHand() {
   return (
     <React.Fragment>
       <SectionHero id="solution" num="04" kicker="solution" align="left"
-      parts={[{ t: "Karta — " }, { t: "one wallet for every payment", hi: true }, { t: ", anywhere." }]}
-      lead="Stablecoins as the spine, familiar UX on top. Five money jobs, one app — the user never has to know it's crypto." />
+      parts={[{ t: "Karta - " }, { t: "one wallet for every payment", hi: true }, { t: ", anywhere." }]}
+      lead="Stablecoins as the spine, familiar UX on top. Five money jobs, one app - the user never has to know it's crypto." />
       {/* full-width detail section so the photo can pin to the viewport's right edge */}
       <section id="solution-hand-detail" data-screen-label="04 Solution (hand) · detail"
       style={{ position: "relative", zIndex: 1, background: "var(--pp-page)", padding: "56px 0 120px", overflow: "hidden", minHeight: "calc(90vh + 120px)", display: "flex", alignItems: "center" }}>
-        {/* hand-phone with swappable screen — pinned to the right edge, vertically centered */}
+        {/* hand-phone with swappable screen - pinned to the right edge, vertically centered */}
         <div className="hand-pin" style={{ position: "absolute", top: "50%", right: "-3%", transform: "translateY(-50%)", zIndex: 0, pointerEvents: "none" }}>
           <HandScreen screens={screens} vh={90} />
         </div>
@@ -543,7 +543,7 @@ function SolutionHand() {
 }
 
 /* ============================================================
-   05c — SOLUTION (hand-phone variant V2) — large title-only buttons
+   05c - SOLUTION (hand-phone variant V2) - large title-only buttons
    in a narrow column; the selected row reveals its description to the
    RIGHT of the buttons, then the phone. Layout: buttons · text · phone.
    ============================================================ */
@@ -601,7 +601,7 @@ function SolutionHandV2() {
   useSectionRecede(solCardRef, solDivRef, solNumRef);
   return (
     <React.Fragment>
-      {/* sticky divider — the big "solution" word (consistent with other sections) */}
+      {/* sticky divider - the big "solution" word (consistent with other sections) */}
       <section id="solution" data-screen-label="04 Solution" ref={solDivRef} style={{
         position: "sticky", top: 0, zIndex: 0, height: "88vh", minHeight: 640, overflow: "hidden",
         background: "var(--pp-page)",
@@ -621,9 +621,9 @@ function SolutionHandV2() {
           style={{ position: "relative", zIndex: 1, fontSize: "clamp(48px,8vw,112px)", lineHeight: 1.0, letterSpacing: "-.035em", textTransform: "capitalize", maxWidth: 1440, textAlign: "center", padding: "0 24px" }} />
         </div>
       </section>
-      {/* content slide — narrow title + buttons + phone, all risen to the top */}
+      {/* content slide - narrow title + buttons + phone, all risen to the top */}
       <section id="solution-detail" data-screen-label="04 Solution · detail"
-      style={{ position: "relative", zIndex: 1, background: "var(--pp-page)", height: "100vh", minHeight: 600, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+      style={{ position: "relative", zIndex: 1, background: "var(--pp-page)", height: "100dvh", minHeight: 600, overflow: "hidden", display: "flex", flexDirection: "column" }}>
       {/* hand-phone pinned right, sized to fit the viewport height */}
       <div className="hand-pin" style={{ position: "absolute", top: "50%", right: "-3%", transform: "translateY(-50%)", zIndex: 0, pointerEvents: "none" }}>
         <div ref={handObsRef} style={{
@@ -637,15 +637,15 @@ function SolutionHandV2() {
         </div>
       </div>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: "clamp(40px,8vh,96px) 24px clamp(20px,4vh,48px)", position: "relative", zIndex: 1, width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", gap: "clamp(24px,4vh,44px)" }}>
-        {/* narrow header — capped width so it clears the phone */}
+        {/* narrow header - capped width so it clears the phone */}
         <div style={{ flex: "0 0 auto", maxWidth: 760, display: "flex", flexDirection: "column", gap: "clamp(8px,1.3vh,14px)" }}>
           <span style={{ display: "inline-flex", alignItems: "baseline", gap: ".55em", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 14, letterSpacing: ".04em", textTransform: "capitalize", color: "var(--pp-fg-3)" }}>
             <span style={{ color: "var(--pp-acid)", letterSpacing: 0 }}>[ 04 ]</span>solution
           </span>
           <h2 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontSize: "clamp(40px,6.2vh,72px)", lineHeight: 1.04, letterSpacing: "-.03em", color: "var(--pp-fg)", whiteSpace: "nowrap" }}>
-            Karta – One Wallet,<br /><span style={{ color: "var(--pp-acid)" }}>For Every Move.</span>
+            Karta - One Wallet,<br /><span style={{ color: "var(--pp-acid)" }}>For Every Move.</span>
           </h2>
-          <p style={{ margin: 0, maxWidth: 580, fontFamily: "var(--pp-font-body)", fontSize: "clamp(17px,2.3vh,24px)", lineHeight: 1.5, color: "var(--pp-fg-2)" }}>Stablecoins as the spine, familiar UX on top.<br />Five money jobs, one app — the user never has to know it's crypto.</p>
+          <p style={{ margin: 0, maxWidth: 580, fontFamily: "var(--pp-font-body)", fontSize: "clamp(17px,2.3vh,24px)", lineHeight: 1.5, color: "var(--pp-fg-2)" }}>Stablecoins as the spine, familiar UX on top.<br />Five money jobs, one app - the user never has to know it's crypto.</p>
         </div>
         {/* buttons · description */}
         <div className="solv2-row" style={{ flex: "0 0 auto", display: "flex", alignItems: "center", gap: "clamp(22px,2.6vw,44px)" }}>

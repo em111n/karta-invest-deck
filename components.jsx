@@ -1,4 +1,4 @@
-/* Karta — Investor Deck · shared components & hooks. Exports to window. */
+/* Karta - Investor Deck · shared components & hooks. Exports to window. */
 const { useState, useEffect, useRef, useCallback } = React;
 
 /* ============================================================
@@ -106,7 +106,7 @@ function Button({ children, variant = "primary", onClick, href, arrow = true }) 
   );
 }
 
-/* DS "Pill Button" — softly-raised gradient pill + leading disc/glyph.
+/* DS "Pill Button" - softly-raised gradient pill + leading disc/glyph.
    accent = lime gradient (dark disc, lime glyph) · default = charcoal gradient (white disc, dark glyph) */
 const PILL_GLYPHS = {
   arrow: <path d="M8 12h7.4M12 8l4 4-4 4" />,
@@ -172,7 +172,7 @@ function HCard({ children, style, hover, className }) {
   );
 }
 
-/* section shell — centered 1040 column, big rhythm */
+/* section shell - centered 1040 column, big rhythm */
 function Section({ id, children, label, intro, dataLabel, tightTop, style }) {
   const pad = tightTop ? "56px 24px 120px" : "120px 24px";
   return (
@@ -190,7 +190,7 @@ function Section({ id, children, label, intro, dataLabel, tightTop, style }) {
   );
 }
 
-/* per-word stagger title — parts: [{t, hi}] ; staggers each word up on scroll-in */
+/* per-word stagger title - parts: [{t, hi}] ; staggers each word up on scroll-in */
 function StaggerTitle({ parts, className = "", style, base = 0.05, step = 0.04 }) {
   const ref = useReveal({ threshold: 0.3 });
   let i = -1;
@@ -218,7 +218,7 @@ function useSectionRecede(cardRef, secRef, numRef) {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     /* Progress is read LIVE from the sticky container (the .chapter wrapper),
-       not a cached startY — so it stays correct even when content above shifts
+       not a cached startY - so it stays correct even when content above shifts
        the divider down after mount (lazy images, video, fonts). The divider sits
        at the top of its chapter, so once the chapter's top scrolls past the
        viewport top, -top == pixels receded. */
@@ -245,7 +245,7 @@ function useSectionRecede(cardRef, secRef, numRef) {
   }, []);
 }
 
-/* SECTION DIVIDER — every numbered section opens with a full-screen chapter
+/* SECTION DIVIDER - every numbered section opens with a full-screen chapter
    break: acid bottom-glow + [ NN ] + the section NAME, which pins and recedes
    as the section's thesis scrolls up over it. The descriptive headline + lead
    follow below in normal flow. */
@@ -318,7 +318,7 @@ function Statement({ label, children, sub, align = "left", max = 920 }) {
 /* acid highlight inline */
 function Hi({ children }) { return <span style={{ color: "var(--pp-acid)" }}>{children}</span>; }
 
-/* animated horizontal bar — fills to pct% when scrolled into view */
+/* animated horizontal bar - fills to pct% when scrolled into view */
 function Bar({ pct, color = "var(--pp-acid)", opacity = 1, height = 8, dur = 1.1, delay = 0 }) {
   const [on, setOn] = useState(false);
   const ref = useRef(null);
@@ -342,7 +342,7 @@ function Bar({ pct, color = "var(--pp-acid)", opacity = 1, height = 8, dur = 1.1
    Real photo of a hand holding a phone with the screen cut to
    transparency (the FRAME), with app screens stacked underneath.
    All layers share ONE canvas (987×1203), so they're placed at
-   inset:0 full-size — switching = cross-fade the active screen.
+   inset:0 full-size - switching = cross-fade the active screen.
    To add a screen: drop a 987×1203 PNG with the screen content
    in place (rest transparent) and add it to `screens`.
    ============================================================ */
@@ -354,7 +354,7 @@ const HAND_RATIO = "987 / 1203";
 const HAND_SCREEN_CLIP = "inset(5.32% 48.33% 22.44% 11.14% round 5.98% / 4.9%)";
 /* Hand-phone screen layer. Pass an array of 987×1203 screen PNGs.
    1 screen → static. >1 → auto-swipe carousel that slides left every
-   `interval` ms and loops. The frame is a PERMANENT node — it never
+   `interval` ms and loops. The frame is a PERMANENT node - it never
    remounts or re-fades when the screen set changes; only the screen
    inside swaps (and fades/slides in). */
 function HandScreen({ screens = [], vh = 78, frame = HAND_FRAME, interval = 4000 }) {
@@ -373,7 +373,7 @@ function HandScreen({ screens = [], vh = 78, frame = HAND_FRAME, interval = 4000
   }, [sig, n, interval]);
 
   const boxStyle = { height: `${vh}vh`, maxWidth: "100%", aspectRatio: HAND_RATIO, position: "relative", margin: "0 auto" };
-  // the screen layer is clipped to the glass rect — nothing escapes the phone
+  // the screen layer is clipped to the glass rect - nothing escapes the phone
   const clipStyle = { position: "absolute", inset: 0, clipPath: HAND_SCREEN_CLIP, WebkitClipPath: HAND_SCREEN_CLIP };
   const imgStyle = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain", pointerEvents: "none", userSelect: "none" };
 
@@ -383,7 +383,7 @@ function HandScreen({ screens = [], vh = 78, frame = HAND_FRAME, interval = 4000
 
   return (
     <div style={boxStyle}>
-      {/* segmented progress — one bar per screen; the active one fills over `interval` */}
+      {/* segmented progress - one bar per screen; the active one fills over `interval` */}
       {n > 1 && (
         <div style={{ position: "absolute", left: "17.22%", width: "28.37%", top: "calc(4.24% - 26px)", display: "flex", gap: 7, zIndex: 5 }}>
           {screens.map((_, b) => (
@@ -406,13 +406,13 @@ function HandScreen({ screens = [], vh = 78, frame = HAND_FRAME, interval = 4000
           className={sliding ? "hand-slide-in" : "hand-screen-fade"}
           style={{ ...imgStyle, zIndex: 2 }} />
       </div>
-      {/* PERMANENT frame — stable element, never remounts on set change */}
+      {/* PERMANENT frame - stable element, never remounts on set change */}
       <img src={frame} alt="Karta app in hand" style={{ ...imgStyle, zIndex: 3 }} />
     </div>
   );
 }
 
-/* iPhone mockup — titanium frame + dynamic island; screen content via children. Sized by height (vh). */
+/* iPhone mockup - titanium frame + dynamic island; screen content via children. Sized by height (vh). */
 function PhoneMockup({ children, vh = 70 }) {
   return (
     <div style={{ height: `${vh}vh`, maxWidth: "100%", aspectRatio: "1 / 2.03", margin: "0 auto", position: "relative" }}>

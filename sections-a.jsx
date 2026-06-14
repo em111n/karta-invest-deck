@@ -1,8 +1,8 @@
-/* Karta — Investor Deck · Header + Hero (3 variants) + sections 2-4 */
+/* Karta - Investor Deck · Header + Hero (3 variants) + sections 2-4 */
 const { useState: uS, useEffect: uE, useRef: uR } = React;
 
 /* ============================================================
-   NAV — sticky collapsible mega-menu
+   NAV - sticky collapsible mega-menu
    ============================================================ */
 const SECTIONS = [
   { n: "01", label: "Mission", id: "mission" },
@@ -114,7 +114,7 @@ function Header({ active }) {
 }
 
 /* ============================================================
-   HERO — sticky recede stage (shared by A & C)
+   HERO - sticky recede stage (shared by A & C)
    ============================================================ */
 function useHeroRecede(cardRef, secRef) {
   uE(() => {
@@ -150,12 +150,12 @@ function HeroShaderBg({ intensity = 1, blur = 95 }) {
   return <div ref={ref} style={{ position: "absolute", inset: 0 }} />;
 }
 
-/* ---- Variant A — Aurora (centered, reference-style) ---- */
+/* ---- Variant A - Aurora (centered, reference-style) ---- */
 function HeroAurora() {
   const cardRef = uR(null), secRef = uR(null);
   useHeroRecede(cardRef, secRef);
   return (
-    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: 14, perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
+    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 14, perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
       <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 6, overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 30, padding: 48, background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
         <HeroShaderBg intensity={1} />
         <img src="assets/karta-logo-white.svg" alt="Karta" style={{ position: "absolute", top: 36, height: 22, opacity: .92 }} />
@@ -166,25 +166,25 @@ function HeroAurora() {
             <Stagger text="as the people who use it." base={0.5} />
           </h1>
           <h2 className="pp-rise pp-lead" style={{ animationDelay: "1.15s", margin: 0, textAlign: "center", maxWidth: 640, fontSize: "clamp(20px,2.4vw,30px)" }}>
-            One wallet to earn, hold, spend and send — anywhere.
+            One wallet to earn, hold, spend and send - anywhere.
           </h2>
           <div className="pp-rise" style={{ animationDelay: "1.35s", display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center", marginTop: 6 }}>
             <Button href="#problem" onClick={scrollToCb("problem")}>Explore the round</Button>
             <Button href="#ask" onClick={scrollToCb("ask")} variant="ghost" arrow={false}>The ask</Button>
           </div>
         </div>
-        <p className="pp-rise pp-caption" style={{ animationDelay: "1.5s", position: "absolute", bottom: 30, margin: 0, letterSpacing: ".04em" }}>Our mission — to make money as free as the people who use it.</p>
+        <p className="pp-rise pp-caption" style={{ animationDelay: "1.5s", position: "absolute", bottom: 30, margin: 0, letterSpacing: ".04em" }}>Our mission - to make money as free as the people who use it.</p>
       </div>
     </section>
   );
 }
 
-/* ---- Variant B — Split editorial (headline + product slot) ---- */
+/* ---- Variant B - Split editorial (headline + product slot) ---- */
 function HeroSplit() {
   const cardRef = uR(null), secRef = uR(null);
   useHeroRecede(cardRef, secRef);
   return (
-    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100vh", display: "flex", alignItems: "center", padding: 14, overflow: "hidden", perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
+    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", padding: 14, overflow: "hidden", perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
       <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 6, overflow: "hidden", display: "flex", alignItems: "center", padding: "clamp(32px,4.5vw,84px)", background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
       <HeroShaderBg intensity={.85} />
       <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 1440, margin: "0 auto", display: "grid", gridTemplateColumns: "minmax(0,1.15fr) minmax(0,.85fr)", gap: 56, alignItems: "center" }} className="hero-split-grid">
@@ -210,7 +210,7 @@ function HeroSplit() {
   );
 }
 
-/* running partner / ecosystem strip — white logos on charcoal chips, pinned to the hero's bottom edge */
+/* running partner / ecosystem strip - white logos on charcoal chips, pinned to the hero's bottom edge */
 const PARTNERS = [
   { src: "assets/partners/tempo.svg", alt: "Tempo", h: 22 },
   { src: "assets/partners/privy.svg", alt: "Privy", h: 19 },
@@ -244,7 +244,7 @@ function HeroStatement() {
   const cardRef = uR(null), secRef = uR(null);
   useHeroRecede(cardRef, secRef);
   return (
-    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: 14, perspective: "1500px", perspectiveOrigin: "50% 0%" }}>
+    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 14, perspective: "1500px", perspectiveOrigin: "50% 0%" }}>
       <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 6, overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "clamp(32px,5vw,72px)", background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
         <HeroShaderBg intensity={.55} blur={105} />
         <div style={{ position: "relative", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -293,7 +293,7 @@ function HeroSpacer({ variant }) {
 }
 
 /* ============================================================
-   02 — WHO WE SERVE
+   02 - WHO WE SERVE
    ============================================================ */
 const BEHAVIORS = [
   { k: "Earn", rest: " in any currency", who: "Freelancers, remote workers, Web3 contributors, creators, influencers", v: "earn" },
@@ -353,7 +353,7 @@ function WhoWeServe() {
           <span className="pp-stat" style={{ flexShrink: 0, fontSize: 150, lineHeight: 0.85, fontStretch: "125%", color: "var(--pp-acid)" }}>2<span style={{ color: "var(--pp-fg-4)", fontSize: 72 }}>/3</span></span>
           <div className="ratio-rule" style={{ width: 1, alignSelf: "stretch", background: "var(--pp-line)" }}></div>
           <h3 className="pp-h3" style={{ margin: 0, fontFamily: "var(--pp-font-body)", fontWeight: 400, fontSize: 26, lineHeight: 1.3, color: "var(--pp-fg)" }}>
-            do at least two of the three —<br /><span style={{ color: "var(--pp-acid)", fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%" }}>so we built a bank that fits them.</span>
+            do at least two of the three -<br /><span style={{ color: "var(--pp-acid)", fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%" }}>so we built a bank that fits them.</span>
           </h3>
         </div>
       </Reveal>
@@ -363,7 +363,7 @@ function WhoWeServe() {
 }
 
 /* ============================================================
-   03 — PROBLEM
+   03 - PROBLEM
    ============================================================ */
 const PRODUCT_LOGOS = {
   "MetaMask": "assets/logo-metamask.webp",
@@ -389,16 +389,16 @@ const FIVE_APPS = [
   { t: "Hold value", d: "Broker / stablecoin app", ex: ["Coinbase", "Binance", "eToro"] },
 ];
 const PAINS = [
-  { t: "Complex", d: "Five apps, five logins, five support lines — to move your own money." },
+  { t: "Complex", d: "Five apps, five logins, five support lines - to move your own money." },
   { t: "Slow", d: "SWIFT takes days. Local rails stop at borders. Crypto is fast but hostile." },
-  { t: "Expensive", d: "5–15% of disposable income lost to fees, spreads, and conversion." },
+  { t: "Expensive", d: "5-15% of disposable income lost to fees, spreads, and conversion." },
 ];
 function Problem() {
   return (
     <React.Fragment>
       <SectionHero id="problem" num="03" kicker="problem" align="left"
         parts={[{ t: "The world has people without borders. " }, { t: "Money still has them.", hi: true }]}
-        lead={<React.Fragment>Banks are simple but trapped. Crypto is global but complex. Borderless people stitch <span style={{ color: "var(--pp-acid)", fontWeight: 700 }}>five apps</span> together — and pay a border tax on every move.</React.Fragment>} />
+        lead={<React.Fragment>Banks are simple but trapped. Crypto is global but complex. Borderless people stitch <span style={{ color: "var(--pp-acid)", fontWeight: 700 }}>five apps</span> together - and pay a border tax on every move.</React.Fragment>} />
       <Section tightTop dataLabel="03 Problem · detail">
       {/* five fragmented apps */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12 }} className="grid-5">
@@ -444,9 +444,9 @@ function Problem() {
 
       <Reveal delay={0.05}>
         <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap", background: "linear-gradient(100deg, rgba(204,255,0,.06), transparent 70%)", border: "1px solid var(--pp-line)", borderRadius: 4, padding: "32px 32px" }}>
-          <span className="pp-stat" style={{ fontSize: 80, lineHeight: 1 }}><CountUp to={15} dur={1400} format={(v) => "5–" + Math.round(v) + "%"} /></span>
+          <span className="pp-stat" style={{ fontSize: 80, lineHeight: 1 }}><CountUp to={15} dur={1400} format={(v) => "5-" + Math.round(v) + "%"} /></span>
           <h3 className="pp-h3" style={{ margin: 0, fontWeight: 500, maxWidth: 560, fontSize: 22, color: "var(--pp-fg-2)" }}>
-            of disposable income lost — every transaction.
+            of disposable income lost - every transaction.
           </h3>
         </div>
       </Reveal>

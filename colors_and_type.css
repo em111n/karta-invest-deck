@@ -1,15 +1,14 @@
 /* ============================================================
-   KARTA — Design System Foundations
+   KARTA - Design System Foundations
    Brand: Karta · Visual language based on the Pitch Pro
    interactive-proposal template (dark editorial + acid accent).
    Colors + Typography tokens and semantic styles.
    Token namespace: --pp-*  (kept stable across the system).
-   Fonts: Archivo (self-hosted, fonts/archivo.woff2) + Inter (CDN).
+   Fonts: Archivo (self-hosted, fonts/archivo.woff2) + system stack
+   (SF Pro on Apple, Segoe UI on Windows, Helvetica Neue fallback).
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-/* Archivo — self-hosted (variable, latin subset) */
+/* Archivo - self-hosted (variable, latin subset) */
 @font-face {
   font-family: 'Archivo';
   src: url('fonts/archivo.woff2') format('woff2');
@@ -21,7 +20,7 @@
 
 :root {
   /* ---- Brand palette ---- */
-  --pp-acid:        #ccff00;   /* KARTA primary accent — buttons, labels, stats, links */
+  --pp-acid:        #ccff00;   /* KARTA primary accent - buttons, labels, stats, links */
   --pp-lime:        #ccff00;   /* alias of --pp-acid (template legacy name) */
   --pp-page:        #030303;   /* page background (near-black) */
   --pp-ink:         #010209;   /* deepest ink */
@@ -49,7 +48,7 @@
 
   /* ---- Typefaces ---- */
   --pp-font-display: 'Archivo', system-ui, sans-serif;
-  --pp-font-body:    'Inter', system-ui, sans-serif;
+  --pp-font-body:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --pp-font-mono:    'Archivo', ui-monospace, 'SF Mono', monospace; /* hero title uses display as "code" */
 
   /* ---- Type scale (root 16px; matches Framer rem multipliers) ---- */
@@ -85,7 +84,7 @@
 
   /* ---- Borders & elevation ---- */
   --pp-hairline: 1px solid var(--pp-line);
-  --pp-shadow-none: none; /* the system is flat — depth comes from surface steps + hairlines */
+  --pp-shadow-none: none; /* the system is flat - depth comes from surface steps + hairlines */
   --pp-card-bg: var(--pp-card);
 
   /* ---- Motion ---- */
@@ -160,7 +159,7 @@
   color: var(--pp-lime);
 }
 
-/* Section label — rendered as [ label ] with dim brackets */
+/* Section label - rendered as [ label ] with dim brackets */
 .pp-label {
   font-family: var(--pp-font-display);
   font-weight: var(--pp-w-medium);
@@ -181,7 +180,7 @@
   color: var(--pp-fg-3);
 }
 
-/* Heading display axis — Archivo Weight 800 / Width 125% */
+/* Heading display axis - Archivo Weight 800 / Width 125% */
 .pp-hero, .pp-h1, .pp-h3, .pp-stat {
   font-weight: 800;
   font-stretch: 125%;
@@ -216,7 +215,7 @@
 
 /* ---- Secondary variants (pick one) ---- */
 
-/* A · Outline acid — accent border, fills on hover */
+/* A · Outline acid - accent border, fills on hover */
 .pp-btn--outline {
   background: transparent;
   color: var(--pp-lime);
@@ -224,7 +223,7 @@
 }
 .pp-btn--outline:hover { background: var(--pp-lime); color: var(--pp-on-accent); filter: none; }
 
-/* B · Outline neutral — hairline, low-key */
+/* B · Outline neutral - hairline, low-key */
 .pp-btn--ghost {
   background: transparent;
   color: var(--pp-fg);
@@ -232,7 +231,7 @@
 }
 .pp-btn--ghost:hover { background: var(--pp-surface-3); border-color: #3a3a3a; filter: none; }
 
-/* C · Subtle text — minimal, link-like with a chip hit area */
+/* C · Subtle text - minimal, link-like with a chip hit area */
 .pp-btn--subtle {
   background: rgba(255,255,255,0.06);
   color: var(--pp-fg);

@@ -1,8 +1,8 @@
-/* Karta — Investor Deck · app shell: assembles sections, scroll-spy */
+/* Karta - Investor Deck · app shell: assembles sections, scroll-spy */
 const { useState: aS, useEffect: aE, useRef: aRf } = React;
 
 /* ONE shared mesh shader behind the whole deck (fixed, pointer-through). */
-/* scroll progress bar — DOM-driven (no React re-render per scroll frame) */
+/* scroll progress bar - DOM-driven (no React re-render per scroll frame) */
 function Progress() {
   const ref = aRf(null);
   aE(() => {

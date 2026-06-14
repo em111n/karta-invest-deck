@@ -3,10 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Karta — Investor Deck</title>
+<title>Karta - Investor Deck</title>
+<meta name="description" content="Karta. One wallet to earn, hold, spend and send. Stablecoin-powered banking for borderless people.">
+<meta property="og:title" content="Karta - Investor Deck">
+<meta property="og:description" content="One wallet to earn, hold, spend and send, anywhere. Stablecoin-powered banking for borderless people.">
+<meta property="og:image" content="assets/karta-logo-acid.svg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Karta - Investor Deck">
+<meta name="twitter:description" content="One wallet to earn, hold, spend and send, anywhere.">
+<meta name="twitter:image" content="assets/karta-logo-acid.svg">
 <link rel="icon" href="assets/karta-symbol-acid.svg">
 <link rel="stylesheet" href="colors_and_type.css">
 <style>
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   html, body { margin: 0; background: var(--pp-page); color: var(--pp-fg); }
   body { font-family: var(--pp-font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   * { box-sizing: border-box; }
@@ -108,7 +119,7 @@
     position: absolute; inset: 0; pointer-events: none; z-index: 0;
     background: radial-gradient(68% 58% at 50% 88%, rgba(204,255,0,.10), transparent 70%);
   }
-  /* source link in tables (Karta dark style — not browser blue) */
+  /* source link in tables (Karta dark style - not browser blue) */
   .src-link { color: var(--pp-fg-3); transition: color .2s; }
   .src-link:hover { color: var(--pp-acid); text-decoration-color: var(--pp-acid) !important; }
   /* inline text link (white, acid underline + hover) */
@@ -118,7 +129,7 @@
   .pp-stitle .w { display: inline-block; opacity: 0; transform: translateY(34px); will-change: transform, opacity; }
   .pp-stitle.in .w { animation: ppRise .62s cubic-bezier(.44,0,.16,1) both; }
 
-  /* divider ghost number — slides in from the right with a slight scale */
+  /* divider ghost number - slides in from the right with a slight scale */
   @keyframes secNumIn { from { opacity: 0; transform: translateX(64px) scale(1.09); } to { opacity: .7; transform: translateX(0) scale(1); } }
   .pp-ghostnum.sec-num { opacity: 0; }
   .pp-ghostnum.sec-num.in { animation: secNumIn 1.15s cubic-bezier(.22,.61,.36,1) .04s both; }
