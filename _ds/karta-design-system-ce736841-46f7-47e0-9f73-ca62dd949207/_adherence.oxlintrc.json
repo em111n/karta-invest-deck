@@ -1,0 +1,168 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "slides/**",
+              "ui_kits/proposal/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Archivo|Inter))/i]",
+        "message": "Font not provided by the design system. Available: Archivo, Inter."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {},
+    "tokens": [
+      "--pp-accent",
+      "--pp-acid",
+      "--pp-bg",
+      "--pp-border",
+      "--pp-card",
+      "--pp-card-bg",
+      "--pp-control",
+      "--pp-dur",
+      "--pp-ease",
+      "--pp-fg",
+      "--pp-fg-1",
+      "--pp-fg-2",
+      "--pp-fg-3",
+      "--pp-fg-4",
+      "--pp-font-body",
+      "--pp-font-display",
+      "--pp-font-mono",
+      "--pp-hairline",
+      "--pp-ink",
+      "--pp-lime",
+      "--pp-line",
+      "--pp-maxw",
+      "--pp-on-accent",
+      "--pp-page",
+      "--pp-r-button",
+      "--pp-r-card",
+      "--pp-r-pill",
+      "--pp-shadow-none",
+      "--pp-slate",
+      "--pp-space-1",
+      "--pp-space-2",
+      "--pp-space-3",
+      "--pp-space-4",
+      "--pp-space-5",
+      "--pp-space-6",
+      "--pp-space-7",
+      "--pp-surface-2",
+      "--pp-surface-3",
+      "--pp-text",
+      "--pp-text-body",
+      "--pp-text-h1",
+      "--pp-text-h3",
+      "--pp-text-hero",
+      "--pp-text-label",
+      "--pp-text-lead",
+      "--pp-text-muted",
+      "--pp-text-small",
+      "--pp-text-stat",
+      "--pp-w-bold",
+      "--pp-w-medium",
+      "--pp-w-regular",
+      "--pp-w-semi"
+    ],
+    "tokenKinds": {
+      "--pp-acid": "color",
+      "--pp-lime": "color",
+      "--pp-page": "color",
+      "--pp-ink": "color",
+      "--pp-card": "color",
+      "--pp-surface-2": "color",
+      "--pp-surface-3": "color",
+      "--pp-line": "color",
+      "--pp-control": "color",
+      "--pp-slate": "color",
+      "--pp-fg": "color",
+      "--pp-fg-1": "color",
+      "--pp-fg-2": "color",
+      "--pp-fg-3": "color",
+      "--pp-fg-4": "color",
+      "--pp-accent": "color",
+      "--pp-on-accent": "color",
+      "--pp-bg": "color",
+      "--pp-text": "font",
+      "--pp-text-muted": "font",
+      "--pp-border": "color",
+      "--pp-font-display": "font",
+      "--pp-font-body": "font",
+      "--pp-font-mono": "font",
+      "--pp-text-hero": "font",
+      "--pp-text-h1": "font",
+      "--pp-text-lead": "font",
+      "--pp-text-stat": "font",
+      "--pp-text-h3": "font",
+      "--pp-text-body": "font",
+      "--pp-text-label": "font",
+      "--pp-text-small": "font",
+      "--pp-w-regular": "other",
+      "--pp-w-medium": "other",
+      "--pp-w-semi": "other",
+      "--pp-w-bold": "other",
+      "--pp-r-button": "spacing",
+      "--pp-r-card": "spacing",
+      "--pp-r-pill": "spacing",
+      "--pp-space-1": "spacing",
+      "--pp-space-2": "spacing",
+      "--pp-space-3": "spacing",
+      "--pp-space-4": "spacing",
+      "--pp-space-5": "spacing",
+      "--pp-space-6": "spacing",
+      "--pp-space-7": "spacing",
+      "--pp-maxw": "spacing",
+      "--pp-hairline": "color",
+      "--pp-shadow-none": "shadow",
+      "--pp-card-bg": "color",
+      "--pp-ease": "other",
+      "--pp-dur": "other"
+    },
+    "fontFamilies": [
+      "Archivo",
+      "Inter"
+    ]
+  }
+}
