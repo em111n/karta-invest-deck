@@ -25,7 +25,8 @@
   --pp-page:        #030303;   /* page background (near-black) */
   --pp-ink:         #010209;   /* deepest ink */
   --pp-card:        #0d0d0d;   /* card / panel surface */
-  --pp-surface-2:   #141414;   /* raised surface, mega-menu, chip hovers */
+  --pp-surface-2:   #141414;   /* raised surface */
+  --pp-surface-3:   #1c1c1c;   /* mega-menu / chip surface */
   --pp-line:        #111111;   /* hairline border on cards */
   --pp-control:     #333333;   /* control / nav-pill background */
   --pp-slate:       #3f4146;   /* muted slate */
@@ -228,7 +229,7 @@
   color: var(--pp-fg);
   border: 1px solid #2a2a2a;
 }
-.pp-btn--ghost:hover { background: var(--pp-surface-2); border-color: #3a3a3a; filter: none; }
+.pp-btn--ghost:hover { background: var(--pp-surface-3); border-color: #3a3a3a; filter: none; }
 
 /* C · Subtle text - minimal, link-like with a chip hit area */
 .pp-btn--subtle {
