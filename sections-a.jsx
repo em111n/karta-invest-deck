@@ -19,7 +19,7 @@ const SECTIONS = [
 ];
 
 function MenuIcon({ open }) {
-  const bar = { display: "block", position: "absolute", left: 0, width: 22, height: 2, background: "#fafafa", borderRadius: 2, transition: "transform .4s cubic-bezier(.44,0,.16,1), top .4s cubic-bezier(.44,0,.16,1)" };
+  const bar = { display: "block", position: "absolute", left: 0, width: 22, height: 2, background: "#fafafa", borderRadius: 4, transition: "transform .4s cubic-bezier(.44,0,.16,1), top .4s cubic-bezier(.44,0,.16,1)" };
   return (
     <span style={{ position: "relative", width: 22, height: 12, display: "inline-block" }}>
       <span style={{ ...bar, top: open ? 5 : 2, transform: open ? "rotate(45deg)" : "none" }} />
@@ -56,7 +56,7 @@ function Header({ active }) {
         width: open ? "min(100%, 900px)" : "min(100%, 300px)",
         background: "rgba(20,20,20,0.55)",
         backdropFilter: "blur(22px) saturate(165%)", WebkitBackdropFilter: "blur(22px) saturate(165%)",
-        border: "1px solid rgba(255,255,255,0.12)", borderRadius: 14, overflow: "hidden",
+        border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12, overflow: "hidden",
         boxShadow: open
           ? "0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,0.18)"
           : (solid ? "0 8px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,0.16)" : "inset 0 1px 0 rgba(255,255,255,0.16)"),
@@ -75,12 +75,12 @@ function Header({ active }) {
         </div>
         <div style={{ maxHeight: open ? 620 : 0, opacity: open ? 1 : 0, overflow: "hidden", transition: "max-height .55s cubic-bezier(.44,0,.16,1) " + (open ? ".05s" : "0s") + ", opacity .35s ease" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr", gap: 14, padding: "6px 16px 18px" }}>
-            <nav style={{ background: "rgba(13,13,13,0.5)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "14px 10px", display: "grid", gridTemplateColumns: "1fr 1fr", gridAutoFlow: "column", gridTemplateRows: "repeat(7, auto)", gap: "2px 14px", alignContent: "start" }}>
+            <nav style={{ background: "rgba(13,13,13,0.5)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "14px 10px", display: "grid", gridTemplateColumns: "1fr 1fr", gridAutoFlow: "column", gridTemplateRows: "repeat(7, auto)", gap: "2px 14px", alignContent: "start" }}>
               {SECTIONS.map((it, i) => {
                 const on = active === it.id;
                 return (
                   <button key={it.id} onClick={() => go(it.id)}
-                    style={{ textAlign: "left", background: "transparent", border: "none", cursor: "pointer", padding: "9px 12px", borderRadius: 6, display: "flex", alignItems: "baseline", gap: 12,
+                    style={{ textAlign: "left", background: "transparent", border: "none", cursor: "pointer", padding: "9px 12px", borderRadius: 8, display: "flex", alignItems: "baseline", gap: 12,
                       color: on ? "var(--pp-acid)" : "#fafafa", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 19, letterSpacing: "-.01em",
                       transform: open ? "translateY(0)" : "translateY(8px)", opacity: open ? 1 : 0,
                       transition: `transform .4s cubic-bezier(.44,0,.16,1) ${0.05 + i * 0.022}s, opacity .4s ease ${0.05 + i * 0.022}s, color .2s, background .2s` }}
@@ -96,7 +96,7 @@ function Header({ active }) {
               <h3 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 26, color: "#fafafa", letterSpacing: "-.01em" }}>Get in touch.</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                 <p className="pp-body" style={{ margin: 0, fontSize: 14 }}>Send an email to:</p>
-                <button onClick={copyEmail} style={{ display: "inline-flex", alignItems: "center", gap: 10, alignSelf: "flex-start", background: "var(--pp-control)", border: "none", borderRadius: 6, padding: "9px 13px", cursor: "pointer" }}>
+                <button onClick={copyEmail} style={{ display: "inline-flex", alignItems: "center", gap: 10, alignSelf: "flex-start", background: "var(--pp-control)", border: "none", borderRadius: 8, padding: "9px 13px", cursor: "pointer" }}>
                   <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="#fafafa" strokeWidth="1.5"><rect x="6" y="6" width="8" height="8" rx="1.5"/><path d="M11.5 6V5a1.5 1.5 0 0 0-1.5-1.5H5A1.5 1.5 0 0 0 3.5 5v5A1.5 1.5 0 0 0 5 11.5h1"/></svg>
                   <span className="pp-body" style={{ color: "#fafafa", fontSize: 14 }}>{copied ? "Email copied" : "hello@karta.io"}</span>
                 </button>
@@ -156,7 +156,7 @@ function HeroAurora() {
   useHeroRecede(cardRef, secRef);
   return (
     <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 14, perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
-      <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 6, overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 30, padding: 48, background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
+      <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 24, overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 30, padding: 48, background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
         <HeroShaderBg intensity={1} />
         <img src="assets/karta-logo-white.svg" alt="Karta" style={{ position: "absolute", top: 36, height: 22, opacity: .92 }} />
         <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", gap: 26, maxWidth: 1000 }}>
@@ -185,7 +185,7 @@ function HeroSplit() {
   useHeroRecede(cardRef, secRef);
   return (
     <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", padding: 14, overflow: "hidden", perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
-      <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 6, overflow: "hidden", display: "flex", alignItems: "center", padding: "clamp(32px,4.5vw,84px)", background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
+      <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 24, overflow: "hidden", display: "flex", alignItems: "center", padding: "clamp(32px,4.5vw,84px)", background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
       <HeroShaderBg intensity={.85} />
       <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 1440, margin: "0 auto", display: "grid", gridTemplateColumns: "minmax(0,1.15fr) minmax(0,.85fr)", gap: 56, alignItems: "center" }} className="hero-split-grid">
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
@@ -245,7 +245,7 @@ function HeroStatement() {
   useHeroRecede(cardRef, secRef);
   return (
     <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 14, perspective: "1500px", perspectiveOrigin: "50% 0%" }}>
-      <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 6, overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "clamp(32px,5vw,72px)", background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
+      <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 24, overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "clamp(32px,5vw,72px)", background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
         <HeroShaderBg intensity={.55} blur={105} />
         <div style={{ position: "relative", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <img src="assets/karta-logo-white.svg" alt="Karta" style={{ height: 22, opacity: .92 }} />
@@ -404,7 +404,7 @@ function Problem() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12 }} className="grid-5">
         {FIVE_APPS.map((a, i) => (
           <Reveal key={a.t} delay={i * 0.07} style={{ height: "100%" }}>
-            <div style={{ background: "var(--pp-card)", border: "1px solid #1a1a1a", borderRadius: 4, height: "100%", minHeight: 150, display: "flex", overflow: "hidden" }}>
+            <div style={{ background: "var(--pp-card)", border: "1px solid #1a1a1a", borderRadius: 12, height: "100%", minHeight: 150, display: "flex", overflow: "hidden" }}>
               <div style={{ flex: "0 0 44px", display: "flex", justifyContent: "center", alignItems: "flex-start", paddingTop: 20, borderRight: "1px solid #1e1e1e", fontFamily: "var(--pp-font-display)", fontWeight: 700, fontSize: 17, lineHeight: 1.3, color: "var(--pp-acid)" }}>{String(i + 1).padStart(2, "0")}</div>
               <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: 14, flex: 1, minWidth: 0 }}>
                 <div>
@@ -421,7 +421,7 @@ function Problem() {
                     </div>
                   )}
                   {a.ex.filter((p) => !PRODUCT_LOGOS[p]).map((p) => (
-                    <span key={p} style={{ display: "inline-flex", alignItems: "center", padding: "3px 9px", borderRadius: 2, background: "#141414", border: "1px solid #242424", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 12, color: "var(--pp-fg-3)" }}>{p}</span>
+                    <span key={p} style={{ display: "inline-flex", alignItems: "center", padding: "3px 9px", borderRadius: 4, background: "#141414", border: "1px solid #242424", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 12, color: "var(--pp-fg-3)" }}>{p}</span>
                   ))}
                 </div>
               </div>
@@ -443,7 +443,7 @@ function Problem() {
       </div>
 
       <Reveal delay={0.05}>
-        <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap", background: "linear-gradient(100deg, rgba(204,255,0,.06), transparent 70%)", border: "1px solid var(--pp-line)", borderRadius: 4, padding: "32px 32px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12, padding: "32px 32px" }}>
           <span className="pp-stat" style={{ fontSize: 80, lineHeight: 1 }}><CountUp to={15} dur={1400} format={(v) => "5-" + Math.round(v) + "%"} /></span>
           <h3 className="pp-h3" style={{ margin: 0, fontWeight: 500, maxWidth: 560, fontSize: 22, color: "var(--pp-fg-2)" }}>
             of disposable income lost - every transaction.

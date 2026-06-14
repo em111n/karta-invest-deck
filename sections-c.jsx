@@ -24,7 +24,7 @@ const HORIZONS = [
 function CCard({ h, half }) {
   const fd = "var(--pp-font-display)";
   return (
-    <div style={{ position: "relative", overflow: "hidden", borderRadius: 8, border: `1px solid ${h.acid ? "rgba(204,255,0,.28)" : "var(--pp-line)"}`, padding: "clamp(24px,2.6vw,38px)", height: "100%", minHeight: "clamp(200px,19vw,264px)", display: "flex", flexDirection: "column", justifyContent: "center",
+    <div style={{ position: "relative", overflow: "hidden", borderRadius: 12, border: `1px solid ${h.acid ? "rgba(204,255,0,.28)" : "var(--pp-line)"}`, padding: "clamp(24px,2.6vw,38px)", height: "100%", minHeight: "clamp(200px,19vw,264px)", display: "flex", flexDirection: "column", justifyContent: "center",
       background: h.acid ? "radial-gradient(120% 130% at 88% 50%, rgba(204,255,0,.14), transparent 60%), var(--pp-card)" : "var(--pp-card)" }}>
       <div aria-hidden="true" style={{ position: "absolute", right: half ? "clamp(-2px,.6vw,14px)" : "clamp(-4px,1vw,22px)", top: half ? "clamp(-14px,-1.2vw,0px)" : "50%", transform: half ? "none" : "translateY(-50%)", display: "flex", flexDirection: "row", alignItems: "flex-end", gap: "0.06em", lineHeight: 0.8, pointerEvents: "none", userSelect: "none" }}>
         <span style={{ fontFamily: fd, fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125", fontSize: half ? "clamp(120px,15vw,200px)" : "clamp(116px,15vw,224px)", lineHeight: 0.78, letterSpacing: "-.04em", color: "transparent", WebkitTextStroke: `1.4px ${h.acid ? "rgba(204,255,0,.5)" : "#1f1f1f"}` }}>{h.y}</span>
@@ -99,7 +99,7 @@ function Cell({ v, head, total }) {
 function HeadcountTable() {
   const cols = "minmax(0,1.2fr) minmax(0,1.4fr) minmax(0,1.4fr)";
   return (
-    <div style={{ border: `1px solid ${LINE}`, borderRadius: 8, overflow: "hidden" }}>
+    <div style={{ border: `1px solid ${LINE}`, borderRadius: 12, overflow: "hidden" }}>
       <div style={{ display: "grid", gridTemplateColumns: cols, gap: 18, padding: "13px 20px", borderBottom: `1px solid ${LINE}`, background: "#0c0c0c" }}>
         {["Function", "Now", "EOY 2026 plan"].map((h, i) => <Cell key={i} v={h} head />)}
       </div>
@@ -154,7 +154,7 @@ function LinkedIn({ href }) {
     <a href={href} target="_blank" rel="noopener noreferrer"
       style={{ display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none", fontFamily: FD, fontWeight: 600, fontSize: 12.5, letterSpacing: ".02em", color: FG3, transition: "color .2s" }}
       onMouseEnter={(e) => { e.currentTarget.style.color = ACID; }} onMouseLeave={(e) => { e.currentTarget.style.color = FG3; }}>
-      <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 23, height: 23, borderRadius: 4, background: "#1a1a1a", border: `1px solid ${LINE}` }}>
+      <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 23, height: 23, borderRadius: 12, background: "#1a1a1a", border: `1px solid ${LINE}` }}>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM.25 8.25h4.5V24h-4.5V8.25Zm7.5 0h4.31v2.15h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.5v-6.99c0-1.67-.03-3.81-2.32-3.81-2.32 0-2.68 1.81-2.68 3.69V24h-4.5V8.25Z" /></svg>
       </span>
       LinkedIn
@@ -181,7 +181,7 @@ function Team() {
       <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, alignItems: "stretch" }}>
         {PEOPLE.map((p, i) => (
           <Reveal key={p.name} delay={i * 0.07} style={{ height: "100%" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 14, height: "100%", padding: 24, borderRadius: 8, border: `1px solid ${LINE}`, background: "var(--pp-card)" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14, height: "100%", padding: 24, borderRadius: 12, border: `1px solid ${LINE}`, background: "var(--pp-card)" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
                 <Avatar p={p} size={56} />
                 <NameRole p={p} nameSize={18} />
@@ -195,7 +195,7 @@ function Team() {
 
       {/* headcount summary band - 35 → 57 */}
       <Reveal>
-        <div style={{ display: "flex", alignItems: "center", gap: "clamp(24px,4vw,56px)", flexWrap: "wrap", padding: "clamp(28px,3.5vw,44px) clamp(28px,3.5vw,48px)", border: `1px solid ${LINE}`, borderRadius: 8, background: "linear-gradient(100deg, rgba(204,255,0,.06), transparent 60%), var(--pp-card)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "clamp(24px,4vw,56px)", flexWrap: "wrap", padding: "clamp(28px,3.5vw,44px) clamp(28px,3.5vw,48px)", border: `1px solid ${LINE}`, borderRadius: 12, background: "linear-gradient(100deg, rgba(204,255,0,.06), transparent 60%), var(--pp-card)" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 8, flex: "none" }}>
             <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 12.5, letterSpacing: ".16em", textTransform: "uppercase", color: FG4 }}>Teammates</span>
             <div style={{ display: "flex", alignItems: "flex-start", gap: 18 }}>
@@ -272,7 +272,7 @@ function Roadmap() {
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <Reveal><Label variant="acid">projections · december 2026</Label></Reveal>
         <Reveal variant="scale">
-          <div style={{ border: "1px solid var(--pp-line)", borderRadius: 4, overflow: "hidden" }}>
+          <div style={{ border: "1px solid var(--pp-line)", borderRadius: 12, overflow: "hidden" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 1fr 1fr", background: "#080808", borderBottom: "1px solid var(--pp-line)" }} className="proj-head">
               <div style={{ padding: "16px 18px", fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 13, color: "var(--pp-fg-3)" }}>Metric</div>
               {[{ l: "Negative", s: "7% m/m" }, { l: "Neutral", s: "17% m/m", hero: true }, { l: "Positive", s: "35% m/m" }].map((c) => (
@@ -512,7 +512,7 @@ function GeoMap({ maxWidth = 1180, callouts = false, showLabels = true }) {
 function RegionCallout({ region, place }) {
   const c = region.live ? ACID : ROAD;
   return (
-    <div style={{ position: "absolute", width: 234, padding: "13px 15px", background: "rgba(8,8,8,.78)", backdropFilter: "blur(4px)", border: `1px solid ${region.live ? "rgba(204,255,0,.3)" : "rgba(255,122,26,.3)"}`, borderRadius: 5, display: "flex", flexDirection: "column", gap: 5, ...place }}>
+    <div style={{ position: "absolute", width: 234, padding: "13px 15px", background: "rgba(8,8,8,.78)", backdropFilter: "blur(4px)", border: `1px solid ${region.live ? "rgba(204,255,0,.3)" : "rgba(255,122,26,.3)"}`, borderRadius: 4, display: "flex", flexDirection: "column", gap: 5, ...place }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <span style={{ fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontSize: 14, color: c }}>{region.p}</span>
         <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 16, color: FG, letterSpacing: "-.01em" }}>{region.r}</span>
@@ -554,7 +554,7 @@ function InfoTip({ text }) {
         <path d="M9 8.1v4.3" stroke={c} strokeWidth="1.5" strokeLinecap="round" />
       </svg>
       {h && (
-        <span style={{ position: "absolute", bottom: "calc(100% + 10px)", right: -7, width: 230, padding: "11px 13px", background: "var(--pp-surface-2)", border: "1px solid #2a2a2a", borderRadius: 5, zIndex: 40, fontFamily: FB, fontWeight: 400, fontSize: 12.5, lineHeight: 1.45, color: FG2, textAlign: "left", whiteSpace: "normal", letterSpacing: 0, boxShadow: "0 12px 34px rgba(0,0,0,.55)" }}>
+        <span style={{ position: "absolute", bottom: "calc(100% + 10px)", right: -7, width: 230, padding: "11px 13px", background: "var(--pp-surface-2)", border: "1px solid #2a2a2a", borderRadius: 4, zIndex: 40, fontFamily: FB, fontWeight: 400, fontSize: 12.5, lineHeight: 1.45, color: FG2, textAlign: "left", whiteSpace: "normal", letterSpacing: 0, boxShadow: "0 12px 34px rgba(0,0,0,.55)" }}>
           {text}
           <span style={{ position: "absolute", top: "100%", right: 13, width: 0, height: 0, borderLeft: "6px solid transparent", borderRight: "6px solid transparent", borderTop: "6px solid var(--pp-surface-2)" }} />
         </span>
@@ -581,7 +581,7 @@ function MiniMarketList() {
         const mainNo = MARKETS.slice(0, ri + 1).filter((x) => !x.sub).length;
         return (
         <div key={m.l} style={{ display: "grid", gridTemplateColumns: COLS, columnGap: 10, alignItems: "baseline", padding: m.sub ? "11px 0" : "14px 0", ...(m.hero
-          ? { border: "1px solid rgba(204,255,0,.6)", borderRadius: 6, marginLeft: -26, marginRight: -26, paddingLeft: 26, paddingRight: 26, marginTop: 5, marginBottom: 5 }
+          ? { border: "1px solid rgba(204,255,0,.6)", borderRadius: 12, marginLeft: -26, marginRight: -26, paddingLeft: 26, paddingRight: 26, marginTop: 5, marginBottom: 5 }
           : { borderBottom: ri < MARKETS.length - 1 ? "1px solid #141414" : "none" }) }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 1, paddingLeft: m.sub ? 14 : 0, minWidth: 0 }}>
             <span style={{ fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125", fontSize: m.sub ? 13 : 15.5, color: m.sub ? FG2 : FG, lineHeight: 1.2, letterSpacing: "-.01em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", display: "block" }}>{m.sub ? <span style={{ color: FG4, marginRight: 6 }}>↳</span> : <span style={{ color: ACID, marginRight: 9 }}>{mainNo}</span>}{m.l}</span>
@@ -692,7 +692,7 @@ function Market() {
           <Reveal delay={0.08}>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <h3 style={{ margin: 0, fontFamily: FD, fontWeight: 700, fontStretch: "125%", fontVariationSettings: "'wght' 700,'wdth' 125", fontSize: "clamp(19px,2vw,26px)", letterSpacing: "-.02em", color: FG4 }}>SOM <span style={{ color: FG4 }}>·</span> 3-5yr target</h3>
-              <HCard style={{ gap: 14, minHeight: 214, justifyContent: "space-between", padding: 32, borderColor: "rgba(204,255,0,.24)", background: "linear-gradient(140deg, rgba(204,255,0,.07), var(--pp-card) 55%)" }}>
+              <HCard style={{ gap: 14, minHeight: 214, justifyContent: "space-between", padding: 32 }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
                     <span className="pp-stat" style={{ fontSize: 54 }}>$211M</span>

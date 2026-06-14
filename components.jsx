@@ -95,7 +95,7 @@ function Button({ children, variant = "primary", onClick, href, arrow = true }) 
   };
   const skin = variant === "primary"
     ? { background: hover ? "#a6cc00" : "var(--pp-acid)", color: "#030303", border: "1px solid transparent" }
-    : { background: hover ? "var(--pp-surface-3)" : "transparent", color: "var(--pp-fg)", border: `1px solid ${hover ? "#3a3a3a" : "#2a2a2a"}` };
+    : { background: hover ? "var(--pp-surface-2)" : "transparent", color: "var(--pp-fg)", border: `1px solid ${hover ? "#3a3a3a" : "#2a2a2a"}` };
   const Tag = href ? "a" : "button";
   return (
     <Tag href={href} onClick={onClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
@@ -160,7 +160,7 @@ function HCard({ children, style, hover, className }) {
       onMouseEnter={() => hover && setH(true)}
       onMouseLeave={() => hover && setH(false)}
       style={{
-        background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 4,
+        background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12,
         padding: 28, display: "flex", flexDirection: "column",
         transition: "border-color .4s, transform .4s, background .4s",
         borderColor: h ? "rgba(204,255,0,.4)" : "var(--pp-line)",
@@ -387,11 +387,11 @@ function HandScreen({ screens = [], vh = 78, frame = HAND_FRAME, interval = 4000
       {n > 1 && (
         <div style={{ position: "absolute", left: "17.22%", width: "28.37%", top: "calc(4.24% - 26px)", display: "flex", gap: 7, zIndex: 5 }}>
           {screens.map((_, b) => (
-            <div key={b} style={{ flex: 1, height: 5, borderRadius: 5, background: "rgba(255,255,255,.22)", overflow: "hidden" }}>
+            <div key={b} style={{ flex: 1, height: 5, borderRadius: 4, background: "rgba(255,255,255,.22)", overflow: "hidden" }}>
               <div
                 key={b === cur ? "run-" + i : "static"}
                 className={b === cur ? "hand-bar-run" : undefined}
-                style={{ height: "100%", background: "var(--pp-acid)", borderRadius: 5, transformOrigin: "left",
+                style={{ height: "100%", background: "var(--pp-acid)", borderRadius: 4, transformOrigin: "left",
                   boxShadow: b <= cur ? "0 0 10px rgba(204,255,0,.5)" : "none",
                   transform: b < cur ? "scaleX(1)" : (b === cur ? undefined : "scaleX(0)"),
                   animationDuration: b === cur ? interval + "ms" : undefined }} />
@@ -438,7 +438,7 @@ function Social({ k }) {
   const [h, setH] = useState(false);
   return (
     <a href="#" onClick={(e) => e.preventDefault()} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
-      style={{ width: 40, height: 40, borderRadius: 4, background: h ? "#3a3a3a" : "var(--pp-control)", display: "flex", alignItems: "center", justifyContent: "center", transition: "background .3s" }}>
+      style={{ width: 40, height: 40, borderRadius: 12, background: h ? "#3a3a3a" : "var(--pp-control)", display: "flex", alignItems: "center", justifyContent: "center", transition: "background .3s" }}>
       <svg width="18" height="18" viewBox="0 0 18 18" fill="#fff"><path d={socials[k]} /></svg>
     </a>
   );

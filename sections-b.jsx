@@ -23,13 +23,13 @@ const CAP_SCREENS = {
 
 function CapRow({ c, i, active, onSelect }) {
   const [hov, setHov] = bS(false);
-  const borderC = active ? "var(--pp-acid)" : hov ? "rgba(204,255,0,.22)" : "var(--pp-line)";
+  const borderC = active ? "var(--pp-acid)" : hov ? "rgba(255,255,255,.18)" : "var(--pp-line)";
   return (
     <Reveal variant="left" delay={i * 0.06}>
       <button onClick={onSelect} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
       aria-pressed={active}
-      style={{ width: "100%", textAlign: "left", cursor: "pointer", font: "inherit", color: "inherit", display: "flex", gap: 20, alignItems: "flex-start", padding: "20px 22px", background: active ? "rgba(204,255,0,.06)" : "var(--pp-card)", border: "1px solid " + borderC, borderRadius: 4, transition: "border-color .35s ease, background .35s ease" }}>
-        <span style={{ position: "relative", width: 44, height: 44, flex: "0 0 44px", display: "flex", alignItems: "center", justifyContent: "center", background: active ? "rgba(204,255,0,.12)" : "var(--pp-surface-2)", border: "1px solid " + (active ? "rgba(204,255,0,.3)" : "var(--pp-line)"), borderRadius: 4, transition: "background .35s ease, border-color .35s ease" }}>
+      style={{ width: "100%", textAlign: "left", cursor: "pointer", font: "inherit", color: "inherit", display: "flex", gap: 20, alignItems: "flex-start", padding: "20px 22px", background: "var(--pp-card)", border: "1px solid " + borderC, borderRadius: 12, transition: "border-color .35s ease, background .35s ease" }}>
+        <span style={{ position: "relative", width: 44, height: 44, flex: "0 0 44px", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--pp-surface-2)", border: "1px solid " + (active ? "rgba(204,255,0,.3)" : "var(--pp-line)"), borderRadius: 12, transition: "background .35s ease, border-color .35s ease" }}>
           <AnimatedIcon name={CAP_ICONS[i]} play={hov || active} size={22} />
         </span>
         <div style={{ flex: 1 }}>
@@ -165,7 +165,7 @@ function HowItWorks() {
             <div className="hiw-b-col" style={{ flex: "1.18 1 0", minWidth: 0, position: "relative" }}>
               {/* acid glow behind the glass so the frosted surface has something to refract */}
               {/* frosted acid-glass frame */}
-              <div style={{ position: "relative", zIndex: 1, borderRadius: 18, padding: "clamp(22px, 2.6vw, 34px)", background: "linear-gradient(155deg, rgba(204,255,0,0.09), rgba(204,255,0,0.02) 46%, rgba(255,255,255,0.028))", border: "1px solid rgba(204,255,0,0.34)", backdropFilter: "blur(16px) saturate(135%)", WebkitBackdropFilter: "blur(16px) saturate(135%)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.10), inset 0 0 0 1px rgba(204,255,0,0.05), 0 30px 70px -50px rgba(204,255,0,0.30)", overflow: "hidden", display: "flex", flexDirection: "column", gap: 18 }}>
+              <div style={{ position: "relative", zIndex: 1, borderRadius: 24, padding: "clamp(22px, 2.6vw, 34px)", background: "linear-gradient(155deg, rgba(204,255,0,0.09), rgba(204,255,0,0.02) 46%, rgba(255,255,255,0.028))", border: "1px solid rgba(204,255,0,0.34)", backdropFilter: "blur(16px) saturate(135%)", WebkitBackdropFilter: "blur(16px) saturate(135%)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.10), inset 0 0 0 1px rgba(204,255,0,0.05), 0 30px 70px -50px rgba(204,255,0,0.30)", overflow: "hidden", display: "flex", flexDirection: "column", gap: 18 }}>
                 {/* acid glow centred behind the Karta logo, clipped to the frame */}
                 <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "radial-gradient(42% 46% at 15% 33%, rgba(204,255,0,0.40), rgba(204,255,0,0.10) 48%, transparent 76%)", pointerEvents: "none" }} />
                 {/* top sheen */}
@@ -187,14 +187,14 @@ function HowItWorks() {
               <HConn label="karta orchestrates" />
               <div style={HStageRow(true)}>
                 <span style={{ width: 84, flexShrink: 0 }}>
-                  <img src="assets/karta-symbol-acid-emboss.svg" alt="Karta" style={{ display: "block", width: 50, height: 50, borderRadius: 11, boxShadow: "0 6px 16px -6px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.18)" }} />
+                  <img src="assets/karta-symbol-acid-emboss.svg" alt="Karta" style={{ display: "block", width: 50, height: 50, borderRadius: 12, boxShadow: "0 6px 16px -6px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.18)" }} />
                 </span>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
                     <span style={{ ...HIW_TITLE, fontWeight: 700 }}>Privy wallet</span>
                     <span style={{ position: "relative", top: -2, display: "inline-flex", alignItems: "center", gap: 9 }}>
-                      <span style={{ display: "inline-block", background: "var(--pp-acid)", color: "#0a0a0a", fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "110%", fontSize: 13, letterSpacing: ".01em", padding: "5px 12px", borderRadius: 7, boxShadow: "0 6px 18px -5px rgba(204,255,0,.55)", whiteSpace: "nowrap" }}>Self-custody</span>
-                      <span style={{ display: "inline-block", color: "var(--pp-fg-2)", fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12.5, letterSpacing: ".02em", padding: "4px 11px", borderRadius: 7, border: "1px solid rgba(255,255,255,.28)", whiteSpace: "nowrap" }}>ERC-4337</span>
+                      <span style={{ display: "inline-block", background: "var(--pp-acid)", color: "#0a0a0a", fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "110%", fontSize: 13, letterSpacing: ".01em", padding: "5px 12px", borderRadius: 8, boxShadow: "0 6px 18px -5px rgba(204,255,0,.55)", whiteSpace: "nowrap" }}>Self-custody</span>
+                      <span style={{ display: "inline-block", color: "var(--pp-fg-2)", fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12.5, letterSpacing: ".02em", padding: "4px 11px", borderRadius: 8, border: "1px solid rgba(255,255,255,.28)", whiteSpace: "nowrap" }}>ERC-4337</span>
                     </span>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 14, marginLeft: 6 }}>
@@ -273,7 +273,7 @@ function GrowthChart() {
         )}
         {pts.map((p, i) =>
         <g key={i}>
-            <rect className="pp-bar" x={cx(i) - barW / 2} y={yFor(p.gtv)} width={barW} height={Math.max(0, baseY - yFor(p.gtv))} rx="4" fill="url(#gtvBar)" style={{ transformBox: "fill-box", transformOrigin: "bottom", transitionDelay: i * 0.12 + "s" }} />
+            <rect className="pp-bar" x={cx(i) - barW / 2} y={yFor(p.gtv)} width={barW} height={Math.max(0, baseY - yFor(p.gtv))} rx="8" fill="url(#gtvBar)" style={{ transformBox: "fill-box", transformOrigin: "bottom", transitionDelay: i * 0.12 + "s" }} />
             <text x={cx(i)} y={yFor(p.gtv) - 14} fill="#fafafa" fontSize="20" fontWeight="700" textAnchor="middle" fontFamily="var(--pp-font-display)">${p.gtv}M</text>
             <text x={cx(i)} y={H - 12} fill="#ababab" fontSize="15" fontWeight="500" textAnchor="middle" fontFamily="var(--pp-font-display)">{p.label}</text>
           </g>
@@ -416,7 +416,7 @@ function TractionCarousel() {
       <div style={{ overflow: "hidden" }}>
         <div ref={ref} onScroll={onScroll} style={{ display: "flex", gap: 18, overflowX: "auto", scrollSnapType: "x mandatory", paddingBottom: 22, marginBottom: -22, scrollbarWidth: "none" }}>
           {PANELS.map((p, i) =>
-            <div key={i} style={{ scrollSnapAlign: "start", flex: "0 0 clamp(440px, 64%, 660px)", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 4, padding: 36, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 22, minHeight: 320 }}>
+            <div key={i} style={{ scrollSnapAlign: "start", flex: "0 0 clamp(440px, 64%, 660px)", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12, padding: 36, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 22, minHeight: 320 }}>
               <span style={{ position: "absolute", top: -28, right: 8, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800, 'wdth' 125", fontSize: 200, lineHeight: 1, color: "transparent", WebkitTextStroke: "1px #1c1c1c", pointerEvents: "none", userSelect: "none", fontVariantNumeric: "tabular-nums" }}>{String(i + 1).padStart(2, "0")}</span>
               <h3 className="pp-h3" style={{ margin: 0, fontSize: i === 6 ? 45 : 30, color: "var(--pp-acid)", lineHeight: 1.12, maxWidth: i === 6 ? 560 : 416, position: "relative" }}>
                 {i === 6
@@ -555,12 +555,12 @@ function CapButtonLg({ c, i, active, onSelect }) {
     aria-pressed={active}
     style={{ width: "100%", textAlign: "left", cursor: "pointer", font: "inherit",
       display: "flex", alignItems: "center", gap: "clamp(12px,1vw,16px)",
-      padding: "clamp(10px,1.5vh,16px) clamp(15px,1.2vw,20px)", borderRadius: 6,
+      padding: "clamp(10px,1.5vh,16px) clamp(15px,1.2vw,20px)", borderRadius: 8,
       background: active ? "var(--pp-acid)" : "var(--pp-card)",
       color: active ? "#030303" : "var(--pp-fg)",
-      border: "1px solid " + (active ? "var(--pp-acid)" : hov ? "rgba(204,255,0,.3)" : "var(--pp-line)"),
+      border: "1px solid " + (active ? "var(--pp-acid)" : hov ? "rgba(255,255,255,.22)" : "var(--pp-line)"),
       transition: "background .3s ease, border-color .3s ease, color .3s ease" }}>
-      <span style={{ flex: "0 0 auto", width: "clamp(34px,4vh,42px)", height: "clamp(34px,4vh,42px)", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 6,
+      <span style={{ flex: "0 0 auto", width: "clamp(34px,4vh,42px)", height: "clamp(34px,4vh,42px)", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 8,
         background: active ? "#0b0b0b" : "var(--pp-surface-2)", border: "1px solid " + (active ? "rgba(3,3,3,.4)" : "var(--pp-line)") }}>
         <AnimatedIcon name={CAP_ICONS[i]} play={hov || active} size={20} />
       </span>
