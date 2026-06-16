@@ -84,7 +84,7 @@ function ArrowIcon({ color = "#030303", size = 16 }) {
   );
 }
 
-function Button({ children, variant = "primary", onClick, href, arrow = true }) {
+function Button({ children, variant = "primary", onClick, href, arrow = true, target, rel }) {
   const [hover, setHover] = useState(false);
   const base = {
     fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 16, lineHeight: 1,
@@ -98,7 +98,7 @@ function Button({ children, variant = "primary", onClick, href, arrow = true }) 
     : { background: hover ? "var(--pp-surface-2)" : "transparent", color: "var(--pp-fg)", border: `1px solid ${hover ? "#3a3a3a" : "#2a2a2a"}` };
   const Tag = href ? "a" : "button";
   return (
-    <Tag href={href} onClick={onClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+    <Tag href={href} onClick={onClick} target={target} rel={rel} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
       style={{ ...base, ...skin }}>
       {children}
       {arrow && variant === "primary" && <ArrowIcon />}
@@ -115,7 +115,7 @@ const PILL_GLYPHS = {
   info: <React.Fragment><path d="M12 10.6v5.2" /><path d="M12 8.2v.01" /></React.Fragment>,
   alert: <React.Fragment><path d="M12 7.4v5" /><path d="M12 15.8v.01" /></React.Fragment>,
 };
-function PillButton({ children, glyph = "arrow", variant = "default", size = "md", onClick, href }) {
+function PillButton({ children, glyph = "arrow", variant = "default", size = "md", onClick, href, type }) {
   const accent = variant === "accent";
   const S = { sm: { padV: 8, padL: 9, padR: 16, gap: 8, fs: 15, ic: 18 },
               md: { padV: 13, padL: 14, padR: 24, gap: 11, fs: 19, ic: 24 },
@@ -124,7 +124,7 @@ function PillButton({ children, glyph = "arrow", variant = "default", size = "md
   const discFill = accent ? "#0a0a0a" : "#fafafa";
   const glyphStroke = accent ? "var(--pp-acid)" : "#1a1a1a";
   return (
-    <Tag href={href} onClick={onClick} className="pp-pill-btn-dyn" draggable={false} onDragStart={(e) => e.preventDefault()}
+    <Tag href={href} onClick={onClick} type={href ? undefined : type} className="pp-pill-btn-dyn" draggable={false} onDragStart={(e) => e.preventDefault()}
       style={{
         display: "inline-flex", alignItems: "center", gap: S.gap,
         padding: `${S.padV}px ${S.padR}px ${S.padV}px ${S.padL}px`,

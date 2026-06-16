@@ -143,13 +143,13 @@ function HowItWorks() {
             <div className="hiw-b-col" style={{ flex: "1 1 0", minWidth: 0, display: "flex", flexDirection: "column", gap: 26 }}>
               <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 27, lineHeight: 1.2, letterSpacing: "-.01em", color: "var(--pp-fg)" }}>Two principles. One architecture.</span>
               <div style={{ display: "flex", flexDirection: "column", gap: 20, borderTop: "1px solid #161616", paddingTop: 24 }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-                  <span style={HIW_PLABEL}>1 - Self-custody by design</span>
-                  <p style={{ margin: 0, ...HIW_SUB, fontSize: 17 }}>Customers hold their own keys via Privy - we never custody. Karta orchestrates; assets never touch our balance sheet, keeping us outside the custodial regulatory perimeter by design.</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                  <span style={{ ...HIW_PLABEL, fontSize: 22 }}>1 - Self-custody by design</span>
+                  <p style={{ margin: 0, ...HIW_SUB, fontSize: 20, lineHeight: 1.5 }}>Customers hold their own keys via Privy - we never custody. Karta orchestrates; assets never touch our balance sheet, keeping us outside the custodial regulatory perimeter by design.</p>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-                  <span style={HIW_PLABEL}>2 - Stablecoins in the middle</span>
-                  <p style={{ margin: 0, ...HIW_SUB, fontSize: 17 }}>Stablecoins are always the settlement layer. Fiat moves in and out through partners (Due, Rain, local PSPs) - we never touch fiat directly.</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                  <span style={{ ...HIW_PLABEL, fontSize: 22 }}>2 - Stablecoins in the middle</span>
+                  <p style={{ margin: 0, ...HIW_SUB, fontSize: 20, lineHeight: 1.5 }}>Stablecoins are always the settlement layer. Fiat moves in and out through partners (Due, Rain, local PSPs) - we never touch fiat directly.</p>
                 </div>
               </div>
               <div style={{ borderTop: "1px solid #161616", paddingTop: 18, display: "flex", flexDirection: "column", gap: 11 }}>
@@ -189,22 +189,10 @@ function HowItWorks() {
                 <span style={{ width: 84, flexShrink: 0 }}>
                   <img src="assets/karta-symbol-acid-emboss.svg" alt="Karta" style={{ display: "block", width: 50, height: 50, borderRadius: 12, boxShadow: "0 6px 16px -6px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.18)" }} />
                 </span>
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-                    <span style={{ ...HIW_TITLE, fontWeight: 700 }}>Privy wallet</span>
-                    <span style={{ position: "relative", top: -2, display: "inline-flex", alignItems: "center", gap: 9 }}>
-                      <span style={{ display: "inline-block", background: "var(--pp-acid)", color: "#0a0a0a", fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "110%", fontSize: 13, letterSpacing: ".01em", padding: "5px 12px", borderRadius: 8, boxShadow: "0 6px 18px -5px rgba(204,255,0,.55)", whiteSpace: "nowrap" }}>Self-custody</span>
-                      <span style={{ display: "inline-block", color: "var(--pp-fg-2)", fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12.5, letterSpacing: ".02em", padding: "4px 11px", borderRadius: 8, border: "1px solid rgba(255,255,255,.28)", whiteSpace: "nowrap" }}>ERC-4337</span>
-                    </span>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 14, marginLeft: 6 }}>
-                    <HElbow />
-                    <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-                      <span style={HIW_TITLE}>Smart contracts</span>
-                      <span style={{ ...HIW_SUB, display: "inline-flex", alignItems: "center", gap: 6 }}>on <img src="assets/partners/tempo.svg" alt="Tempo" style={{ height: 13, width: "auto", display: "block", opacity: .82 }} /></span>
-                    </div>
-                  </div>
-                </div>
+                <span style={{ ...HIW_TITLE, fontWeight: 700 }}>Self-Custody Wallet</span>
+                <span style={{ marginLeft: "auto", flexShrink: 0 }}>
+                  <img src="assets/partners/privy.svg" alt="Privy" style={{ height: 16, width: "auto", display: "block", opacity: .9 }} />
+                </span>
               </div>
               <HConn label="executes via partners" />
               <div style={{ ...HSurface(false), overflow: "hidden" }}>
@@ -547,13 +535,14 @@ function SolutionHand() {
    in a narrow column; the selected row reveals its description to the
    RIGHT of the buttons, then the phone. Layout: buttons · text · phone.
    ============================================================ */
-function CapButtonLg({ c, i, active, onSelect }) {
+function CapButtonLg({ c, i, active, onSelect, duration, paused }) {
   const [hov, setHov] = bS(false);
   const live = c.tag === "live";
   return (
     <button onClick={onSelect} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
     aria-pressed={active}
     style={{ width: "100%", textAlign: "left", cursor: "pointer", font: "inherit",
+      position: "relative", overflow: "hidden",
       display: "flex", alignItems: "center", gap: "clamp(12px,1vw,16px)",
       padding: "clamp(10px,1.5vh,16px) clamp(15px,1.2vw,20px)", borderRadius: 8,
       background: active ? "var(--pp-acid)" : "var(--pp-card)",
@@ -571,9 +560,26 @@ function CapButtonLg({ c, i, active, onSelect }) {
           color: active ? "#030303" : live ? "var(--pp-acid)" : "var(--pp-fg-3)" }}>{live ? "Live" : "Roadmap"}</span>
         <span style={{ fontSize: 18, lineHeight: 1, opacity: active ? 1 : hov ? .6 : .3, transition: "opacity .3s" }}>→</span>
       </span>
+      {active && duration > 0 && (
+        <span key={duration} className="cap-progress" aria-hidden="true" style={{
+          position: "absolute", left: 0, right: 0, bottom: 0, height: 2,
+          background: "rgba(3,3,3,.85)", transformOrigin: "left",
+          transform: "scaleX(0)",
+          animation: `capProgressFill ${duration}ms linear forwards`,
+          animationPlayState: paused ? "paused" : "running",
+          pointerEvents: "none",
+        }} />
+      )}
     </button>);
 
 }
+/* HandScreen carousel interval (ms) — must mirror the default in <HandScreen> */
+const HAND_SCREEN_INTERVAL = 4000;
+/* Single-screen caps still get a base dwell so they don't feel rushed */
+const SINGLE_SCREEN_DWELL = 5000;
+/* After a user click, hold the active cap at least this long before auto-advancing */
+const POST_CLICK_HOLD = 9000;
+
 function SolutionHandV2() {
   const [active, setActive] = bS(0);
   const c = CAPS[active];
@@ -583,6 +589,32 @@ function SolutionHandV2() {
   const solGhostRef = useReveal({ threshold: 0.2 });
   const [handIn, setHandIn] = bS(false);
   const handObsRef = React.useRef(null);
+
+  /* auto-cycle through CAPS — wait for the current cap's internal screen carousel
+     to finish one full loop before advancing. Pauses on hover, in-view-only,
+     respects reduced-motion, and post-click hold gives the user time to read. */
+  const [hovered, setHovered] = bS(false);
+  const [inView, setInView] = bS(false);
+  const pausedUntil = React.useRef(0);
+  const cycleObsRef = React.useRef(null);
+  bE(() => {
+    const node = cycleObsRef.current;
+    if (!node) return;
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.25 });
+    io.observe(node);
+    return () => io.disconnect();
+  }, []);
+  bE(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!inView || hovered) return;
+    const n = (CAP_HAND_SCREENS[CAPS[active].t] || []).length || 1;
+    const baseDuration = n > 1 ? n * HAND_SCREEN_INTERVAL : SINGLE_SCREEN_DWELL;
+    const heldRemaining = pausedUntil.current - Date.now();
+    const duration = Math.max(baseDuration, heldRemaining);
+    const id = setTimeout(() => setActive((p) => (p + 1) % CAPS.length), duration);
+    return () => clearTimeout(id);
+  }, [active, hovered, inView]);
+  const selectCap = (i) => { pausedUntil.current = Date.now() + POST_CLICK_HOLD; setActive(i); };
   bE(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { setHandIn(true); return; }
     let raf = 0, done = false;
@@ -649,11 +681,20 @@ function SolutionHandV2() {
         </div>
         {/* buttons · description */}
         <div className="solv2-row" style={{ flex: "0 0 auto", display: "flex", alignItems: "center", gap: "clamp(22px,2.6vw,44px)" }}>
-          {/* title-only buttons with icon */}
-          <div style={{ flex: "0 0 clamp(240px,24vw,330px)", maxWidth: 330, display: "flex", flexDirection: "column", gap: "clamp(8px,1.1vh,11px)" }}>
-            {CAPS.map((cap, i) =>
-              <CapButtonLg key={cap.t} c={cap} i={i} active={active === i} onSelect={() => setActive(i)} />
-              )}
+          {/* title-only buttons with icon — auto-cycles, pauses on hover/click */}
+          <div ref={cycleObsRef}
+               onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+               style={{ flex: "0 0 clamp(240px,24vw,330px)", maxWidth: 330, display: "flex", flexDirection: "column", gap: "clamp(8px,1.1vh,11px)" }}>
+            {(() => {
+              const n = (CAP_HAND_SCREENS[CAPS[active].t] || []).length || 1;
+              const baseDuration = n > 1 ? n * HAND_SCREEN_INTERVAL : SINGLE_SCREEN_DWELL;
+              const heldRemaining = pausedUntil.current - Date.now();
+              const activeDuration = inView && !hovered ? Math.max(baseDuration, heldRemaining) : 0;
+              return CAPS.map((cap, i) =>
+                <CapButtonLg key={cap.t} c={cap} i={i} active={active === i} onSelect={() => selectCap(i)}
+                  duration={active === i ? activeDuration : 0} paused={hovered} />
+              );
+            })()}
           </div>
           {/* active description, to the right of the buttons */}
           <div style={{ flex: "1 1 0", maxWidth: 340, minWidth: 0 }}>

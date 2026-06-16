@@ -6,7 +6,7 @@ const { useState: uS, useEffect: uE, useRef: uR } = React;
    ============================================================ */
 const SECTIONS = [
   { n: "01", label: "Mission", id: "mission" },
-  { n: "02", label: "Who we serve", id: "who" },
+  { n: "02", label: "Target audience", id: "who" },
   { n: "03", label: "Problem", id: "problem" },
   { n: "04", label: "Solution", id: "solution" },
   { n: "05", label: "How it works", id: "how" },
@@ -169,7 +169,8 @@ function HeroAurora() {
             One wallet to earn, hold, spend and send - anywhere.
           </h2>
           <div className="pp-rise" style={{ animationDelay: "1.35s", display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center", marginTop: 6 }}>
-            <Button href="#problem" onClick={scrollToCb("problem")}>Explore the round</Button>
+            <Button href="https://t.me/karta" target="_blank" rel="noopener noreferrer">Launch app</Button>
+            <Button href="#problem" onClick={scrollToCb("problem")} variant="ghost">Explore the round</Button>
             <Button href="#ask" onClick={scrollToCb("ask")} variant="ghost" arrow={false}>The ask</Button>
           </div>
         </div>
@@ -302,38 +303,38 @@ const BEHAVIORS = [
 ];
 function WhoWeServe() {
   const heroRef = uR(null);
+  const cardsRef = uR(null);
   const [heroShown, setHeroShown] = uS(false);
   uE(() => {
-    const node = heroRef.current;
+    const node = cardsRef.current;
     if (!node) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { setHeroShown(true); return; }
-    let done = false, raf = 0;
-    const check = () => {
-      if (done || !heroRef.current) return;
-      const r = heroRef.current.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.9 && r.bottom > 0) { done = true; setHeroShown(true); return; }
-      raf = requestAnimationFrame(check);
-    };
-    raf = requestAnimationFrame(check);
-    return () => { done = true; if (raf) cancelAnimationFrame(raf); };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { setHeroShown(true); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
+    io.observe(node);
+    return () => io.disconnect();
   }, []);
   return (
     <React.Fragment>
-      <SectionHero id="who" num="02" kicker="who we serve" align="left"
-        parts={[{ t: "We serve " }, { t: "borderless people.", hi: true }]}
-        lead="They earn in one currency, live in another, send to a third." />
-      <Section tightTop dataLabel="02 Who we serve · detail">
+      <SectionHero id="who" num="02" kicker="target audience" align="left"
+        parts={[{ t: "Built for" }, { br: true }, { t: "borderless people.", hi: true }]}
+        lead="They earn in one currency, live in another and send to a third." />
+      <Section tightTop dataLabel="02 Target audience · detail">
       <img ref={heroRef} src="assets/man-2.webp" alt="" aria-hidden="true" className="hero-media" style={{
-        position: "absolute", top: -302, right: "max(24px, calc(50% - 720px))",
-        width: "clamp(320px, 32vw, 500px)", objectFit: "contain", objectPosition: "top right",
+        position: "absolute", top: -296, right: "max(24px, calc(50% - 720px))",
+        width: "clamp(243px, 24.32vw, 380px)", objectFit: "contain", objectPosition: "top right",
         pointerEvents: "none", zIndex: 0,
         opacity: heroShown ? 1 : 0,
-        transform: heroShown ? "none" : "translateX(46px)",
-        transition: "opacity .9s cubic-bezier(.44,0,.16,1), transform .9s cubic-bezier(.44,0,.16,1)",
-        willChange: "opacity, transform",
+        transform: heroShown ? "translate3d(0, 0, 0) scale(1)" : "translate3d(46px, -28px, 0) scale(.94)",
+        filter: heroShown ? "blur(0)" : "blur(6px)",
+        transition: "opacity 1.1s cubic-bezier(.22, .61, .36, 1), transform 1.2s cubic-bezier(.22, .61, .36, 1), filter .9s cubic-bezier(.22, .61, .36, 1)",
+        willChange: "opacity, transform, filter",
       }} />
       <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: 16 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }} className="grid-3">
+      <div ref={cardsRef} style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }} className="grid-3">
         {BEHAVIORS.map((b, i) => (
           <Reveal key={b.k} delay={i * 0.08}>
             <HCard hover style={{ minHeight: 240, justifyContent: "space-between", gap: 28 }}>

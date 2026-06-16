@@ -27,6 +27,10 @@
   @keyframes ppRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   .pp-rise { display: inline-block; animation: ppRise .7s cubic-bezier(.44,0,.16,1) both; }
 
+  /* Solution capability auto-cycle progress bar */
+  @keyframes capProgressFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) { .cap-progress { animation: none !important; transform: scaleX(0); } }
+
   /* hand-phone screen swap fade */
   @keyframes handScreenFade { from { opacity: 0; } to { opacity: 1; } }
   .hand-screen-fade { animation: handScreenFade .5s var(--pp-ease, cubic-bezier(.44,0,.16,1)) both; }
@@ -155,6 +159,7 @@
     .solv2-row { flex-direction: column !important; align-items: flex-start !important; gap: 22px !important; }
     .solv2-row > div:first-child { flex: none !important; width: 100% !important; max-width: 100% !important; }
     .roadmap-row span[style*="right"], .roadmap-row > span:last-child { text-align: left !important; }
+    .roadmap-c-row { grid-template-columns: 1fr !important; gap: 24px !important; }
     .vision-row { grid-template-columns: 1fr !important; gap: 16px !important; }
     .hero-media { display: none !important; }
   }
@@ -163,7 +168,14 @@
     .proj-head, .proj-row { grid-template-columns: 1.2fr 1fr 1fr 1fr !important; font-size: 12px; }
     .flow-row { flex-direction: column !important; }
     .flow-arrow { transform: rotate(90deg); }
+    .investor-form-grid { grid-template-columns: 1fr !important; }
   }
+  /* Investor form: focus state */
+  .investor-form-grid input:focus, .investor-form-grid select:focus, .investor-form-grid textarea:focus {
+    border-color: var(--pp-acid) !important;
+    background: var(--pp-card) !important;
+  }
+  .investor-form-grid select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23a0a0a0' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px !important; }
 
   /* ---- How-it-works architecture diagram ---- */
   .arch-grid { display: grid; grid-template-columns: 1fr 90px 1.04fr 90px 1.16fr; grid-template-rows: 1fr auto; column-gap: 0; row-gap: 18px; align-items: stretch; }

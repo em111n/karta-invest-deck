@@ -85,12 +85,15 @@ const HEADCOUNT = [
   ["Business / Ops", "~10 (Finance, Ops, Support, HR)", "[FILL]"],
 ];
 const HEADCOUNT_TOTAL = ["Total", "~35+", "~57+ (per hiring plan)"];
-const OPEN_ROLES = [
-  "Head of AI Infra (P1)", "CFO", "SecDevOps",
-  "Mobile dev team (2 Mobile + 1 Back + 1 QA + Design)",
-  "B2B team (1 Back + 1 QA + Design)", "AI Engineer",
-  "19 marketing positions across Q2 2026 → Q1 2027 (see Roadmap)",
+const OPEN_ROLE_GROUPS = [
+  { name: "AI", count: 8, accent: true,
+    roles: "Head of AI Infrastructure · AI Engineers · ML Engineer · SecDevOps · AI Compliance · AI Backend · Data Engineer" },
+  { name: "Product", count: 4,
+    roles: "Mobile (iOS / Android) · Backend · Design" },
+  { name: "Marketing", count: 19,
+    roles: "Performance · Brand · Content · Growth - Q2 2026 → Q1 2027" },
 ];
+const OPEN_ROLES_TOTAL = OPEN_ROLE_GROUPS.reduce((a, g) => a + g.count, 0);
 /* render a headcount cell - [FILL...] placeholders show dimmed */
 function Cell({ v, head, total }) {
   const fill = typeof v === "string" && v.indexOf("[FILL") === 0;
@@ -115,13 +118,20 @@ function HeadcountTable() {
 }
 function OpenRoles() {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      {OPEN_ROLES.map((r, i) => (
-        <div key={i} style={{ display: "flex", alignItems: "baseline", gap: 11, padding: "9px 0", borderTop: i > 0 ? `1px solid #141414` : "none" }}>
-          <span style={{ flex: "none", width: 6, height: 6, borderRadius: "50%", background: ACID, transform: "translateY(-2px)" }} />
-          <span style={{ fontFamily: FB, fontSize: 14, lineHeight: 1.4, color: FG2 }}>{r}</span>
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      {OPEN_ROLE_GROUPS.map((g) => (
+        <div key={g.name} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "14px 16px", borderRadius: 12, border: `1px solid ${g.accent ? "rgba(204,255,0,.28)" : "var(--pp-line)"}`, background: g.accent ? "linear-gradient(155deg, rgba(204,255,0,.07), rgba(204,255,0,.015) 60%)" : "var(--pp-surface-2)" }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10 }}>
+            <span style={{ fontFamily: FD, fontWeight: 700, fontStretch: "125%", fontSize: 17, letterSpacing: "-.01em", color: g.accent ? ACID : FG }}>{g.name}</span>
+            <span style={{ fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontSize: 22, color: g.accent ? ACID : FG }}>{g.count}<span style={{ fontSize: 12, fontWeight: 500, color: FG4, marginLeft: 4 }}>open</span></span>
+          </div>
+          <p style={{ margin: 0, fontFamily: FB, fontSize: 13, lineHeight: 1.45, color: FG3 }}>{g.roles}</p>
         </div>
       ))}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", paddingTop: 8, borderTop: "1px solid var(--pp-line)" }}>
+        <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 12, letterSpacing: ".08em", textTransform: "uppercase", color: FG4 }}>Total seed-funded hires</span>
+        <span style={{ fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontSize: 20, color: FG }}>{OPEN_ROLES_TOTAL}</span>
+      </div>
     </div>);
 }
 
@@ -211,7 +221,7 @@ function Team() {
             </div>
           </div>
           <p style={{ margin: 0, flex: "1 1 360px", minWidth: 300, fontFamily: FD, fontWeight: 600, fontStretch: "125%", fontVariationSettings: "'wght' 600,'wdth' 125", fontSize: "clamp(17px,1.7vw,23px)", lineHeight: 1.38, letterSpacing: "-.01em", color: FG2 }}>
-            <span style={{ color: FG }}>Headcount now → EOY 2026.</span> Round funds: Head of AI Infra, CFO, SecDevOps, mobile &amp; B2B, +19 marketing roles.</p>
+            <span style={{ color: FG }}>Headcount now → EOY 2026.</span> Round funds 31 hires across AI, Product and Marketing.</p>
         </div>
       </Reveal>
 
@@ -234,10 +244,10 @@ function Team() {
    11 - ROADMAP → SERIES A
    ============================================================ */
 const QUARTERS = [
-  { q: "Q2 2026", items: ["Self-custody migration (Privy)", "Metal LED card + US launch", "Pay In / Pay Out (VA + local rails)"], milestone: "Foundation set, self-custody live" },
-  { q: "Q3 2026", items: ["iOS + Android apps live", "Visa Direct", "Earn - yield on balance"], milestone: "Mobile distribution unlocked, yield enabled" },
-  { q: "Q4 2026", items: ["Karat Loyalty + Cashback", "Karta Card launch", "QR Payments"], milestone: "Monetization & retention live" },
-  { q: "Q1 2027", items: ["Credit Line launch", "Family Banking (shared accounts)", "Series A close"], milestone: "~$14M ARR (neutral case)", hero: true },
+  { q: "Q2 2026", range: "Apr-Jun", items: ["Self-custody migration (Privy)", "Metal LED card + US launch", "Pay In / Pay Out (VA + local rails)"], milestone: "Foundation set, self-custody live" },
+  { q: "Q3 2026", range: "Jul-Sep", items: ["iOS + Android apps live", "Visa Direct", "Earn - yield on balance"], milestone: "Mobile distribution unlocked, yield enabled" },
+  { q: "Q4 2026", range: "Oct-Dec", items: ["Karat Loyalty + Cashback", "Karta Card launch", "QR Payments"], milestone: "Monetization & retention live" },
+  { q: "Q1 2027", range: "Jan-Mar", items: ["Credit Line launch", "Family Banking (shared accounts)", "Series A close"], milestone: "Series A close · ~$14M ARR", hero: true },
 ];
 const SCENARIOS = [
   { metric: "Spending MAU", neg: "9,500", neu: "24,000", pos: "95,000" },
@@ -247,57 +257,78 @@ const SCENARIOS = [
 function Roadmap() {
   return (
     <React.Fragment>
-      <SectionHero id="roadmap" num="10" kicker="roadmap → series a" align="center"
-        parts={[{ t: "Three priorities a quarter - to " }, { t: "Series A.", hi: true }]}
-        lead="Rebased on April 2026. We commit to Neutral; Positive is upside." />
+      <SectionHero id="roadmap" num="10" kicker="roadmap → series a" align="left"
+        parts={[{ t: "Twelve months. " }, { t: "One destination.", hi: true }]}
+        lead="Each quarter compounds on the last. The seed accelerates the path; the path is the same." />
       <Section tightTop dataLabel="10 Roadmap · detail">
-
-      {/* timeline */}
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {QUARTERS.map((qq, i) => (
-          <Reveal key={qq.q} delay={i * 0.06}>
-            <div className="roadmap-row" style={{ display: "grid", gridTemplateColumns: "minmax(0,190px) 1fr minmax(0,230px)", gap: 24, alignItems: "center", padding: "22px 0", borderTop: "1px solid var(--pp-line)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
-                <span style={{ width: 9, height: 9, borderRadius: 100, background: qq.hero ? "var(--pp-acid)" : "var(--pp-fg-4)", display: "inline-block", flexShrink: 0 }} />
-                <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 700, fontStretch: "125%", fontSize: 20, color: qq.hero ? "var(--pp-acid)" : "var(--pp-fg)" }}>{qq.q}</span>
-              </div>
-              <p className="pp-body" style={{ margin: 0, fontSize: 15 }}>{qq.items.join(" · ")}</p>
-              <span style={{ textAlign: "right", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 14, color: qq.hero ? "var(--pp-acid)" : "var(--pp-fg-3)" }}>{qq.milestone}</span>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-
-      {/* projections */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        <Reveal><Label variant="acid">projections · december 2026</Label></Reveal>
-        <Reveal variant="scale">
-          <div style={{ border: "1px solid var(--pp-line)", borderRadius: 12, overflow: "hidden" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 1fr 1fr", background: "#080808", borderBottom: "1px solid var(--pp-line)" }} className="proj-head">
-              <div style={{ padding: "16px 18px", fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 13, color: "var(--pp-fg-3)" }}>Metric</div>
-              {[{ l: "Negative", s: "7% m/m" }, { l: "Neutral", s: "17% m/m", hero: true }, { l: "Positive", s: "35% m/m" }].map((c) => (
-                <div key={c.l} style={{ padding: "16px 18px", textAlign: "right", background: c.hero ? "rgba(204,255,0,.07)" : "transparent" }}>
-                  <div style={{ fontFamily: "var(--pp-font-display)", fontWeight: 700, fontSize: 14, color: c.hero ? "var(--pp-acid)" : "var(--pp-fg)" }}>{c.l}{c.hero && " ★"}</div>
-                  <div className="pp-caption" style={{ fontSize: 11 }}>{c.s}</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 36, alignItems: "stretch" }} className="grid-2 roadmap-c-row">
+          {/* LEFT — quarter rail */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 0, position: "relative" }}>
+            <div aria-hidden="true" style={{ position: "absolute", left: 22, top: 24, bottom: 24, width: 1, background: "linear-gradient(180deg, var(--pp-line), rgba(204,255,0,.4))" }} />
+            {QUARTERS.map((qq, i) => (
+              <Reveal key={qq.q} delay={i * 0.07}>
+                <div style={{ display: "grid", gridTemplateColumns: "45px 1fr", gap: 18, padding: "20px 0", borderTop: i > 0 ? "1px solid var(--pp-line)" : "none", alignItems: "flex-start" }}>
+                  <div style={{ position: "relative", paddingTop: 6 }}>
+                    <span style={{ display: "block", width: 14, height: 14, borderRadius: 100, marginLeft: 15, background: qq.hero ? "var(--pp-acid)" : "#1a1a1a", border: "2px solid " + (qq.hero ? "var(--pp-acid)" : "var(--pp-line)"), boxShadow: qq.hero ? "0 0 0 6px rgba(204,255,0,.12)" : "none" }} />
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
+                      <span className="pp-stat" style={{ fontSize: 34, lineHeight: 1, color: qq.hero ? "var(--pp-acid)" : "var(--pp-fg)", fontStretch: "125%", letterSpacing: "-.02em" }}>{qq.q}</span>
+                      <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--pp-fg-4)" }}>{qq.range}</span>
+                    </div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+                      {qq.items.map((it, ii) => (
+                        <span key={ii} style={{ display: "inline-block", padding: "6px 12px", borderRadius: 100, border: "1px solid " + (qq.hero ? "rgba(204,255,0,.32)" : "var(--pp-line)"), background: qq.hero ? "rgba(204,255,0,.06)" : "var(--pp-surface-2)", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 13, lineHeight: 1.2, color: "var(--pp-fg-2)" }}>{it}</span>
+                      ))}
+                    </div>
+                    <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 13, letterSpacing: ".02em", color: qq.hero ? "var(--pp-acid)" : "var(--pp-fg-3)" }}>{qq.milestone}</span>
+                  </div>
                 </div>
-              ))}
+              </Reveal>
+            ))}
+          </div>
+          {/* RIGHT — Series A anchor */}
+          <Reveal variant="scale" delay={0.15}>
+            <HCard hover style={{ padding: 40, display: "flex", flexDirection: "column", gap: 20, justifyContent: "center", height: "100%", background: "radial-gradient(120% 90% at 70% 110%, rgba(204,255,0,.16), rgba(204,255,0,.04) 50%, var(--pp-card))", borderColor: "rgba(204,255,0,.34)" }}>
+              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".18em", textTransform: "uppercase", color: "var(--pp-acid)" }}>[ The anchor ]</span>
+              <span className="pp-stat" style={{ fontSize: "clamp(48px, 6vw, 88px)", lineHeight: 1, color: "var(--pp-fg)", fontStretch: "125%", letterSpacing: "-.03em", whiteSpace: "nowrap" }}>~$14M <span style={{ color: "var(--pp-acid)" }}>ARR</span></span>
+              <p style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 22, lineHeight: 1.35, color: "var(--pp-fg-2)" }}>Q1 2027 · Series A close, neutral case. <span style={{ color: "var(--pp-fg)" }}>49%</span> of the 3-5yr SOM target already at run-rate.</p>
+              <div style={{ borderTop: "1px solid rgba(255,255,255,.1)", paddingTop: 16, display: "flex", justifyContent: "space-between", gap: 14, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 14, color: "var(--pp-fg-3)" }}>
+                <span>Profitable 4 months</span>
+                <span>·</span>
+                <span>49% of SOM achieved</span>
+              </div>
+            </HCard>
+          </Reveal>
+        </div>
+
+        {/* scenarios — single strip with three big columns */}
+        <Reveal><Label variant="acid">december 2026 projections</Label></Reveal>
+        <Reveal variant="scale">
+          <div style={{ border: "1px solid var(--pp-line)", borderRadius: 16, overflow: "hidden" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", padding: "20px 28px", background: "#080808", borderBottom: "1px solid var(--pp-line)" }} className="proj-head">
+              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--pp-fg-4)" }}>Metric</span>
+              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--pp-fg-4)", textAlign: "right" }}>Negative · 7% m/m</span>
+              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--pp-acid)", textAlign: "right" }}>★ Neutral · 17% m/m</span>
+              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--pp-fg-4)", textAlign: "right" }}>Positive · 35% m/m</span>
             </div>
             {SCENARIOS.map((row, ri) => (
-              <div key={row.metric} style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 1fr 1fr", borderBottom: ri < SCENARIOS.length - 1 ? "1px solid var(--pp-line)" : "none" }} className="proj-row">
-                <div style={{ padding: "16px 18px", fontFamily: "var(--pp-font-body)", fontSize: 14, color: "var(--pp-fg-2)" }}>{row.metric}</div>
-                <div style={{ padding: "16px 18px", textAlign: "right", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 16, color: "var(--pp-fg-3)" }}>{row.neg}</div>
-                <div style={{ padding: "16px 18px", textAlign: "right", fontFamily: "var(--pp-font-display)", fontWeight: 700, fontSize: 18, color: "var(--pp-acid)", background: "rgba(204,255,0,.07)" }}>{row.neu}</div>
-                <div style={{ padding: "16px 18px", textAlign: "right", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 16, color: "var(--pp-fg-3)" }}>{row.pos}</div>
-              </div>
+              <Reveal key={row.metric} delay={ri * 0.06}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", padding: "22px 28px", borderTop: ri > 0 ? "1px solid var(--pp-line)" : "none", alignItems: "baseline" }} className="proj-row">
+                  <span style={{ fontFamily: "var(--pp-font-body)", fontSize: 15, color: "var(--pp-fg-2)" }}>{row.metric}</span>
+                  <span style={{ textAlign: "right", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 22, color: "var(--pp-fg-3)", fontStretch: "125%" }}>{row.neg}</span>
+                  <span style={{ textAlign: "right", fontFamily: "var(--pp-font-display)", fontWeight: 800, fontSize: 32, color: "var(--pp-acid)", fontStretch: "125%", letterSpacing: "-.02em" }}>{row.neu}</span>
+                  <span style={{ textAlign: "right", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 22, color: "var(--pp-fg-3)", fontStretch: "125%" }}>{row.pos}</span>
+                </div>
+              </Reveal>
             ))}
           </div>
         </Reveal>
         <Reveal>
-          <p className="pp-body" style={{ margin: 0, fontSize: 15, maxWidth: 820 }}>
-            <span style={{ color: "var(--pp-fg)" }}>We commit to Neutral.</span> Positive if compounding holds; Negative is the floor. 49% of the 3-5yr SOM target already at run-rate.
+          <p className="pp-body" style={{ margin: 0, fontSize: 16, maxWidth: 820 }}>
+            <span style={{ color: "var(--pp-fg)" }}>We commit to Neutral.</span> Positive if compounding holds; Negative is the floor.
           </p>
         </Reveal>
-      </div>
     </Section>
     </React.Fragment>
   );
@@ -320,7 +351,7 @@ function Ask() {
   return (
     <React.Fragment>
       <SectionHero id="ask" num="11" kicker="the ask" align="center" glow
-        parts={[{ t: "Raising " }, { t: "$[ FILL ]M", hi: true }, { t: " seed - to accelerate, not to survive." }]}
+        parts={[{ t: "Raising " }, { t: "$5M", hi: true }, { t: " seed - to accelerate, not to survive." }]}
         lead="Profitable four months. The round accelerates Series A; it doesn't buy runway." />
       <Section tightTop dataLabel="11 The ask · detail" style={{ paddingBottom: 80 }}>
       {/* use of funds */}
@@ -355,8 +386,90 @@ function Ask() {
           </Reveal>
         ))}
       </div>
+
+      {/* investor form */}
+      <Reveal><InvestorForm /></Reveal>
     </Section>
     </React.Fragment>
+  );
+}
+
+/* ===== Investor form ===== */
+function InvestorForm() {
+  const { useState } = React;
+  const [f, setF] = useState({ name: "", email: "", type: "", amount: "", message: "" });
+  const [sent, setSent] = useState(false);
+  const upd = (k) => (e) => setF((p) => ({ ...p, [k]: e.target.value }));
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const subject = "Karta seed · " + (f.name || "investor interest");
+    const body = [
+      "Name: " + f.name,
+      "Email: " + f.email,
+      "Investor type: " + f.type,
+      "Investment amount: " + f.amount,
+      "",
+      "Message:",
+      f.message,
+    ].join("\n");
+    window.location.href = "mailto:invest@karta.io?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    setSent(true);
+  };
+  const FIELD = {
+    width: "100%", padding: "13px 16px", borderRadius: 12,
+    background: "var(--pp-surface-2)", border: "1px solid var(--pp-line)",
+    color: "var(--pp-fg)", fontFamily: "var(--pp-font-body)", fontSize: 15, lineHeight: 1.4,
+    outline: "none", transition: "border-color .2s var(--pp-ease), background .2s var(--pp-ease)",
+  };
+  const LABEL = { fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--pp-fg-3)" };
+  return (
+    <HCard style={{ marginTop: 8, padding: "clamp(24px,3vw,40px)", display: "flex", flexDirection: "column", gap: 22 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <Label variant="acid">become an investor</Label>
+        <h3 className="pp-h3" style={{ margin: 0, fontSize: 28 }}>Join the seed round.</h3>
+        <p className="pp-body" style={{ margin: 0, maxWidth: 580 }}>Leave your details and we will follow up within one business day with data-room access.</p>
+      </div>
+      <form onSubmit={onSubmit} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }} className="investor-form-grid">
+        <label style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+          <span style={LABEL}>Full name</span>
+          <input required type="text" value={f.name} onChange={upd("name")} placeholder="Jane Doe" style={FIELD} />
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+          <span style={LABEL}>Email</span>
+          <input required type="email" value={f.email} onChange={upd("email")} placeholder="jane@fund.vc" style={FIELD} />
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+          <span style={LABEL}>Investor type</span>
+          <select required value={f.type} onChange={upd("type")} style={FIELD}>
+            <option value="">Select one</option>
+            <option value="Angel">Angel</option>
+            <option value="VC">Venture fund</option>
+            <option value="Family Office">Family office</option>
+            <option value="Strategic">Strategic / corporate</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        <label style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+          <span style={LABEL}>Investment amount</span>
+          <select required value={f.amount} onChange={upd("amount")} style={FIELD}>
+            <option value="">Select range</option>
+            <option value="$25K - $100K">$25K - $100K</option>
+            <option value="$100K - $250K">$100K - $250K</option>
+            <option value="$250K - $500K">$250K - $500K</option>
+            <option value="$500K - $1M">$500K - $1M</option>
+            <option value="$1M+">$1M+</option>
+          </select>
+        </label>
+        <label style={{ gridColumn: "1 / -1", display: "flex", flexDirection: "column", gap: 7 }}>
+          <span style={LABEL}>Message <span style={{ color: "var(--pp-fg-4)", textTransform: "none", letterSpacing: 0 }}>(optional)</span></span>
+          <textarea value={f.message} onChange={upd("message")} placeholder="Anything we should know about your firm or thesis." rows={4} style={{ ...FIELD, resize: "vertical", minHeight: 96, fontFamily: "var(--pp-font-body)" }} />
+        </label>
+        <div style={{ gridColumn: "1 / -1", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, marginTop: 4, flexWrap: "wrap" }}>
+          <p className="pp-caption" style={{ margin: 0, color: "var(--pp-fg-4)" }}>{sent ? "Your email draft is open - send it from your client." : "Submitting opens your email client with the details pre-filled."}</p>
+          <PillButton type="submit" variant="accent" glyph="arrow">Submit interest</PillButton>
+        </div>
+      </form>
+    </HCard>
   );
 }
 
