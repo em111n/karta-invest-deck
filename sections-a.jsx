@@ -393,9 +393,9 @@ const FIVE_APPS = [
   { t: "Hold value", d: "Broker / stablecoin app", ex: ["Coinbase", "Binance", "eToro"] },
 ];
 const PAINS = [
-  { t: "Complex", d: "Five apps, five logins, five support lines - to move your own money." },
-  { t: "Slow", d: "SWIFT takes days. Local rails stop at borders. Crypto is fast but hostile." },
-  { t: "Expensive", d: "via traditional banks and money transfer operators." },
+  { t: "Complex", d: "Moving money across borders takes five separate tools. Five apps, five logins, five support lines - none of them talk to each other." },
+  { t: "Slow", d: "Money still moves at the speed of borders. SWIFT takes days, local rails stop at the edge, and crypto breaks the moment it hits cash-out." },
+  { t: "Expensive", d: "There's a cut on both sides. Banks and transfer operators take a fee on fiat - and crypto P2P charges a premium just to move in or out." },
 ];
 function Problem() {
   return (
@@ -447,10 +447,13 @@ function Problem() {
       </div>
 
       <Reveal delay={0.05}>
-        <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12, padding: "32px 32px" }}>
-          <span className="pp-stat" style={{ fontSize: 80, lineHeight: 1 }}><CountUp to={15} dur={1400} format={(v) => "5-" + Math.round(v) + "%"} /></span>
+        <div style={{ display: "flex", alignItems: "center", gap: 36, flexWrap: "wrap", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12, padding: "32px 32px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <span className="pp-stat" style={{ fontSize: 80, lineHeight: 1 }}><CountUp to={15} dur={1400} format={(v) => "5-" + Math.round(v) + "%"} /></span>
+            <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 13, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--pp-fg-4)" }}>of every transfer</span>
+          </div>
           <h3 className="pp-h3" style={{ margin: 0, fontWeight: 500, maxWidth: 560, fontSize: 22, color: "var(--pp-fg-2)" }}>
-            of every transfer - lost to fees, FX spreads, and conversion.
+            Lost to fees, FX spreads, and hidden markups.
           </h3>
         </div>
       </Reveal>
