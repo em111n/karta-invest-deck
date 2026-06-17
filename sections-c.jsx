@@ -476,8 +476,8 @@ function InvestorForm() {
 /* mission close + footer */
 function Close() {
   return (
-    <footer style={{ position: "relative", zIndex: 1, background: "radial-gradient(120% 140% at 50% 120%, rgba(204,255,0,.12), transparent 60%), #050505", padding: "120px 24px 64px", display: "flex", justifyContent: "center" }}>
-      <div style={{ width: "100%", maxWidth: 1440, display: "flex", flexDirection: "column", gap: 56 }}>
+    <footer style={{ position: "relative", zIndex: 1, background: "radial-gradient(120% 140% at 50% 120%, rgba(204,255,0,.12), transparent 60%), #050505", padding: "120px 24px", display: "flex", justifyContent: "center" }}>
+      <div style={{ width: "100%", maxWidth: 1440, display: "flex", flexDirection: "column", gap: 64 }}>
         <Reveal>
           <h2 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125", fontSize: "clamp(34px,6vw,84px)", lineHeight: 1.0, letterSpacing: "-.03em", color: "var(--pp-fg)", maxWidth: 980 }}>
             To make money as <span style={{ color: "var(--pp-acid)" }}>free as the people</span> who use it.

@@ -6,10 +6,10 @@ const { useState: bS, useEffect: bE, useRef: bR } = React;
    ============================================================ */
 const CAPS = [
 { t: "Store", d: "Self-custody MPC wallet. Stablecoin-denominated. Your keys, always.", tag: "live" },
-{ t: "Receive", d: "Crypto on any chain · USD/EUR virtual accounts · local rails (PIX, PromptPay, UAE) - auto-converted to stablecoins.", tag: "live" },
-{ t: "Spend", d: "Visa Signature - virtual, plastic, metal LED. High limits across 150+ countries.", tag: "live" },
-{ t: "Send", d: "Crypto (any token, no gas thinking) · bank requisites · QR payments.", tag: "live" },
-{ t: "Earn", d: "Yield on balance via Karta stablecoin. Native staking + DeFi next.", tag: "roadmap" }];
+{ t: "Receive", d: "Crypto on any chain · USD/EUR virtual accounts · local rails (PIX, PromptPay, UAE) → auto-converted to stablecoins.", tag: "live" },
+{ t: "Spend", d: "Visa Signature: Virtual and Physical cards (Holographic Plastic and Metal LED). Apple/Google Pay and ATM Withdrawals. High limits across 150+ countries.", tag: "live" },
+{ t: "Send", d: "22 networks, 6 tokens and 7 Fiat Virtual Accounts for bank transfers. QR Payments coming in 2026.", tag: "live" },
+{ t: "Earn", d: "Referral Program live, Yield coming in 2026.", tag: "roadmap" }];
 
 const CAP_ICONS = ["store", "receive", "spend", "send", "earn"];
 /* per-capability app screen - all default to the home screen; swap individually when more screens arrive */
@@ -272,7 +272,7 @@ function GrowthChart() {
 }
 
 const HERO_STATS = [
-{ v: 25000, fmt: (n) => Math.round(n / 1000) + "K+", l: "Total cardholders" },
+{ v: 30000, fmt: (n) => Math.round(n / 1000) + "K+", l: "KYC approved" },
 { v: 4926, fmt: (n) => Math.round(n).toLocaleString(), l: "Actively spending" },
 { v: 103, fmt: (n) => "$" + Math.round(n) + "M", l: "Annualized GTV run-rate" },
 { v: 4.8, fmt: (n) => "$" + n.toFixed(1) + "M", l: "Annualized revenue run-rate" }];
@@ -281,9 +281,9 @@ const TRACTION_TABLE = {
   head: ["Metric", "Sep '25", "Dec '25", "Apr '26", "7-mo"],
   rows: [
     ["Spending MAU", "890", "2,992", "4,926", "5.5×"],
-    ["YES users (≥$400)", "156", "888", "1,962", "12.6×"],
+    ["YES users (Spend ≥$400)", "156", "888", "1,962", "12.6×"],
     ["High spenders (≥$4K/mo)", "42", "270", "468", "11.1×"],
-    ["ARPPU / spending MAU", "$967", "$1,726", "$1,738", "1.8×"],
+    ["GTV / User", "$967", "$1,726", "$1,738", "1.8×"],
     ["Annualized GTV", "$10.3M", "$61.9M", "$102.8M", "10×"],
     ["Annualized revenue", "$299K", "$1.80M", "$4.8M", "16×"],
   ],
@@ -323,14 +323,14 @@ const TRACTION_PANELS = [
     d: "Net income hit $64.6K in April 2026 (13.9% net margin), 16× March's $3.9K. Net-positive every month Jan-Apr 2026.",
     imp: "We scale marketing by choice, not necessity." },
   { t: "Premium product-market fit, proven with zero marketing.",
-    d: "300+ Metal LED cards pre-sold at $300 each - $90K+ pre-revenue, fully organic.",
+    d: "164 Metal LED + 557 plastic cards pre-sold - $79K pre-revenue in fees, fully organic.",
     imp: "Real brand pull at the premium tier, before a dollar of acquisition." },
   { t: "4× the spend depth of our nearest comparable.",
-    d: "$22K GTV per spending user vs. ~$5K at KAST ($5B GTV / 1M users).",
+    d: "$22K yearly GTV per spending user vs. ~$5K at KAST ($5B yearly GTV / 1M users).",
     imp: "High-intent crypto spenders with genuine transaction depth." },
   { t: "A multi-revenue platform, not a single-interchange play.",
     d: "April 2026 mix: Card 83.9% · FX & Payments 3.4% · Crypto on/off-ramp 9.1% · Account & Platform 7%.",
-    imp: "Four independent revenue lines, not one fee stream." },
+    imp: "Four independent revenue lines, not one fee stream. With more to go." },
   { t: "2.9× revenue growth year over year.",
     d: "$159K (Apr 2025) → $464K (Apr 2026); +18.8% MoM Mar → Apr.",
     imp: "" },
@@ -589,6 +589,14 @@ function SolutionHandV2() {
   const solGhostRef = useReveal({ threshold: 0.2 });
   const [handIn, setHandIn] = bS(false);
   const handObsRef = React.useRef(null);
+  /* mobile-only layout when viewport ≤900px — initialize synchronously to avoid double-render */
+  const [isMobile, setIsMobile] = bS(() => typeof matchMedia !== "undefined" && matchMedia("(max-width: 900px)").matches);
+  bE(() => {
+    const mq = matchMedia("(max-width: 900px)");
+    const u = () => setIsMobile(mq.matches);
+    if (mq.addEventListener) mq.addEventListener("change", u); else mq.addListener(u);
+    return () => { if (mq.removeEventListener) mq.removeEventListener("change", u); else mq.removeListener(u); };
+  }, []);
 
   /* auto-cycle through CAPS — wait for the current cap's internal screen carousel
      to finish one full loop before advancing. Pauses on hover, in-view-only,
@@ -631,6 +639,56 @@ function SolutionHandV2() {
     return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
   }, []);
   useSectionRecede(solCardRef, solDivRef, solNumRef);
+
+  /* ─── Mobile layout (≤900px) — vertical stack, no sticky divider ─── */
+  if (isMobile) {
+    const mobN = (CAP_HAND_SCREENS[capKey] || []).length || 1;
+    const mobBase = mobN > 1 ? mobN * HAND_SCREEN_INTERVAL : SINGLE_SCREEN_DWELL;
+    const mobHeld = pausedUntil.current - Date.now();
+    const mobDuration = inView && !hovered ? Math.max(mobBase, mobHeld) : 0;
+    return (
+      <section id="solution" data-screen-label="04 Solution · mobile" style={{
+        position: "relative", background: "radial-gradient(120% 80% at 50% 100%, rgba(204,255,0,.18), rgba(204,255,0,.04) 40%, transparent 70%), var(--pp-page)",
+        padding: "72px 20px 56px", display: "flex", flexDirection: "column", gap: 28,
+      }}>
+        {/* header */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <span style={{ display: "inline-flex", alignItems: "baseline", gap: ".55em", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 13, letterSpacing: ".04em", textTransform: "capitalize", color: "var(--pp-fg-3)" }}>
+            <span style={{ color: "var(--pp-acid)", letterSpacing: 0 }}>[ 04 ]</span>solution
+          </span>
+          <h2 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontSize: "clamp(34px, 9vw, 52px)", lineHeight: 1.04, letterSpacing: "-.03em", color: "var(--pp-fg)" }}>
+            Karta - One Wallet,<br /><span style={{ color: "var(--pp-acid)" }}>For Every Move.</span>
+          </h2>
+          <p style={{ margin: 0, fontFamily: "var(--pp-font-body)", fontSize: 16, lineHeight: 1.5, color: "var(--pp-fg-2)" }}>
+            Stablecoins as the spine, familiar UX on top. Five money jobs, one app - the user never has to know it's crypto.
+          </p>
+        </div>
+        {/* phone-mockup — centered, in normal flow */}
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "8px 0" }}>
+          <div style={{ width: "100%", maxWidth: 320, transform: "translateY(0)" }}>
+            <HandScreen screens={screens} vh={56} />
+          </div>
+        </div>
+        {/* capability buttons — full-width vertical stack */}
+        <div ref={cycleObsRef}
+             onTouchStart={() => setHovered(true)} onTouchEnd={() => setTimeout(() => setHovered(false), 200)}
+             style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+          {CAPS.map((cap, i) =>
+            <CapButtonLg key={cap.t} c={cap} i={i} active={active === i} onSelect={() => selectCap(i)}
+              duration={active === i ? mobDuration : 0} paused={hovered} />
+          )}
+        </div>
+        {/* active description */}
+        <div key={capKey} className="hand-screen-fade" style={{ display: "flex", flexDirection: "column", gap: 10, borderTop: "1px solid var(--pp-line)", paddingTop: 18 }}>
+          <span style={{ display: "inline-flex", alignItems: "center", gap: 10, fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase", fontFamily: "var(--pp-font-display)", fontWeight: 600, color: c.tag === "live" ? "var(--pp-acid)" : "var(--pp-fg-3)" }}>
+            <span style={{ width: 18, height: 1, background: "currentColor", display: "inline-block" }} />{c.tag === "live" ? "Live" : "Roadmap"}
+          </span>
+          <p style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 17, lineHeight: 1.4, letterSpacing: "-.01em", color: "var(--pp-fg)", textWrap: "pretty" }}>{c.d}</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <React.Fragment>
       {/* sticky divider - the big "solution" word (consistent with other sections) */}

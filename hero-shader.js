@@ -56,11 +56,20 @@
 
     // blobs: bright acid light blooming from the BOTTOM (like the source) —
     // saturated core that fades up to near-black, plus a brighter hot core.
-    const blobs = [
-      { x: "50%", y: "87%",  s: 820, c: rgba(acid, 1.0 * k),  anim: "khb1", dur: 15, o: 1 },
-      { x: "86%", y: "71%",  s: 600, c: rgba(acid, 0.9 * k),  anim: "khb2", dur: 18, o: 1 },
-      { x: "52%", y: "93%",  s: 420, c: "rgba(230,255,130," + (1.0 * k) + ")", anim: "khb1", dur: 13, o: 1 },
-    ];
+    // `bias` shifts the composition horizontally so the glow sits under a
+    // specific subject (e.g. the phone hero pinned right).
+    const bias = opts.bias || "center";
+    const blobs = bias === "right"
+      ? [
+          /* one big, concentrated spotlight under the phone (right side) */
+          { x: "70%", y: "92%",  s: 1100, c: rgba(acid, 1.0 * k),  anim: "khb1", dur: 16, o: 1 },
+          { x: "73%", y: "96%",  s: 560,  c: "rgba(230,255,130," + (1.0 * k) + ")", anim: "khb1", dur: 13, o: 1 },
+        ]
+      : [
+          { x: "50%", y: "87%",  s: 820, c: rgba(acid, 1.0 * k),  anim: "khb1", dur: 15, o: 1 },
+          { x: "86%", y: "71%",  s: 600, c: rgba(acid, 0.9 * k),  anim: "khb2", dur: 18, o: 1 },
+          { x: "52%", y: "93%",  s: 420, c: "rgba(230,255,130," + (1.0 * k) + ")", anim: "khb1", dur: 13, o: 1 },
+        ];
     for (const b of blobs) {
       const d = document.createElement("div");
       d.className = "khb-blob";

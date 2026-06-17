@@ -79,6 +79,21 @@
   .pp-partner-marquee { animation: ppPartnerMarquee 38s linear infinite; }
   @media (prefers-reduced-motion: reduce) { .pp-partner-marquee { animation: none; } }
 
+  /* Partner strip — scale logos and chips up on large monitors so the rail
+     doesn't look anaemic on Studio Display. img heights are inline so we
+     override with !important. Chip padding gets a wider clamp ceiling.
+     Global 0.85 (-15%) trim applied below per user request. */
+  .pp-partner-marquee img { transform: scale(0.85); transform-origin: center; }
+  @media (min-width: 1600px) {
+    .pp-partner-marquee > span { height: 80px !important; padding: 0 clamp(36px, 3.5vw, 72px) !important; }
+    .pp-partner-marquee img { height: calc(var(--pp-logo-h, 22px) * 1.275) !important; transform: none; }
+  }
+  @media (min-width: 2000px) {
+    .pp-partner-marquee > span { height: 100px !important; padding: 0 clamp(44px, 4vw, 96px) !important; }
+    /* height already includes -15% (multiplier 1.275); scale stays at original 1.85 */
+    .pp-partner-marquee img { transform: scale(1.85); transform-origin: center; }
+  }
+
   /* DS pill button hover / press */
   .pp-pill-btn-dyn:hover { filter: brightness(1.12); }
   .pp-pill-btn-dyn:active { transform: scale(.95); filter: brightness(.85); transition-duration: .08s; }
@@ -170,6 +185,21 @@
     .flow-arrow { transform: rotate(90deg); }
     .investor-form-grid { grid-template-columns: 1fr !important; }
   }
+
+  /* Hero description — single line on desktop, wraps on mobile */
+  .hero-desc { white-space: nowrap; }
+  @media (max-width: 900px) {
+    .hero-desc { white-space: normal !important; }
+    /* H1 fits the narrow column — lower the clamp floor */
+    #mission h1 { font-size: clamp(32px, 8.4vw, 56px) !important; }
+    /* phone image overlaps the stacked text on mobile — hide it */
+    #mission img[alt*="Karta app"] { display: none !important; }
+    /* keep hero full-bleed on mobile — generic `section { padding: 0 18px }`
+       rule would otherwise insert side bars on the first slide */
+    #mission { padding: 0 !important; }
+    /* card padding shrinks so content has more room */
+    #mission > div { padding: clamp(20px, 5vw, 32px) 20px !important; }
+  }
   /* Investor form: focus state */
   .investor-form-grid input:focus, .investor-form-grid select:focus, .investor-form-grid textarea:focus {
     border-color: var(--pp-acid) !important;
@@ -198,11 +228,11 @@
 <body>
 <div id="root"></div>
 <script src="hero-shader.js"></script>
-<script type="text/babel" src="components.jsx"></script>
-<script type="text/babel" src="animated-icons.jsx"></script>
-<script type="text/babel" src="sections-a.jsx"></script>
-<script type="text/babel" src="sections-b.jsx"></script>
-<script type="text/babel" src="sections-c.jsx"></script>
-<script type="text/babel" src="app.jsx"></script>
+<script type="text/babel" src="components.jsx?v=5"></script>
+<script type="text/babel" src="animated-icons.jsx?v=5"></script>
+<script type="text/babel" src="sections-a.jsx?v=5"></script>
+<script type="text/babel" src="sections-b.jsx?v=5"></script>
+<script type="text/babel" src="sections-c.jsx?v=5"></script>
+<script type="text/babel" src="app.jsx?v=5"></script>
 </body>
 </html>

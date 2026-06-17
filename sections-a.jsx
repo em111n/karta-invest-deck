@@ -140,11 +140,11 @@ function useHeroRecede(cardRef, secRef) {
   }, []);
 }
 
-function HeroShaderBg({ intensity = 1, blur = 95 }) {
+function HeroShaderBg({ intensity = 1, blur = 95, bias }) {
   const ref = uR(null);
   uE(() => {
     let h;
-    if (ref.current && window.KartaHeroShader) h = window.KartaHeroShader.mount(ref.current, { acid: "#ccff00", blur, intensity, interactive: true });
+    if (ref.current && window.KartaHeroShader) h = window.KartaHeroShader.mount(ref.current, { acid: "#ccff00", blur, intensity, bias, interactive: true });
     return () => h && h.destroy();
   }, []);
   return <div ref={ref} style={{ position: "absolute", inset: 0 }} />;
@@ -155,7 +155,7 @@ function HeroAurora() {
   const cardRef = uR(null), secRef = uR(null);
   useHeroRecede(cardRef, secRef);
   return (
-    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 14, perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
+    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
       <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 24, overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 30, padding: 48, background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
         <HeroShaderBg intensity={1} />
         <img src="assets/karta-logo-white.svg" alt="Karta" style={{ position: "absolute", top: 36, height: 22, opacity: .92 }} />
@@ -185,16 +185,16 @@ function HeroSplit() {
   const cardRef = uR(null), secRef = uR(null);
   useHeroRecede(cardRef, secRef);
   return (
-    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", padding: 14, overflow: "hidden", perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
-      <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 24, overflow: "hidden", display: "flex", alignItems: "center", padding: "clamp(32px,4.5vw,84px)", background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
-      <HeroShaderBg intensity={.85} />
+    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", padding: 0, overflow: "hidden", perspective: "1400px", perspectiveOrigin: "50% 0%" }}>
+      <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 0, overflow: "hidden", display: "flex", alignItems: "center", padding: "clamp(32px,4.5vw,84px) 24px", background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
+      <HeroShaderBg intensity={.85} bias="right" />
       <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 1440, margin: "0 auto", display: "grid", gridTemplateColumns: "minmax(0,1.15fr) minmax(0,.85fr)", gap: 56, alignItems: "center" }} className="hero-split-grid">
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <span className="pp-rise" style={{ animationDelay: ".05s" }}><Label variant="acid">seed round · 2026</Label></span>
           <h1 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125", fontSize: "clamp(44px,5.6vw,86px)", lineHeight: 1.0, letterSpacing: "-.03em", color: "#fafafa" }}>
             <Stagger text="Money as borderless" base={0.12} step={0.02} /><br /><Stagger text="as the people" base={0.45} step={0.02} /> <span style={{ color: "var(--pp-acid)" }}><Stagger text="who use it." base={0.7} step={0.03} /></span>
           </h1>
-          <p className="pp-rise pp-body" style={{ animationDelay: "1.0s", margin: 0, fontSize: 20, maxWidth: 480 }}>
+          <p className="pp-rise pp-body hero-desc" style={{ animationDelay: "1.0s", margin: 0, fontSize: 20 }}>
             One wallet to earn, hold, spend and send across any country.
           </p>
           <div className="pp-rise" style={{ animationDelay: "1.15s", display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -221,7 +221,10 @@ const PARTNERS = [
   { src: "assets/partners/due.svg", alt: "Due", h: 24 },
 ];
 function PartnerMarquee() {
-  const row = [...PARTNERS, ...PARTNERS];
+  /* Duplicate enough times so the rail covers Apple Studio (2560px+) viewports.
+     The animation translates by -50%, so two halves are required at minimum;
+     triple+ the source list gives generous overflow at all sizes. */
+  const row = [...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS];
   return (
     <div className="hero-partners pp-rise" style={{ animationDelay: "1.5s", position: "absolute", left: 0, right: 0, bottom: "clamp(8px,1.5vw,22px)", zIndex: 4, display: "flex", flexDirection: "column", gap: 14, pointerEvents: "none" }}>
       <div style={{ padding: "0 clamp(32px,4.5vw,84px)", width: "100%", boxSizing: "border-box" }}>
@@ -229,8 +232,8 @@ function PartnerMarquee() {
           <span style={{ color: "var(--pp-acid)" }}>[</span>&nbsp;Karta Ecosystem&nbsp;<span style={{ color: "var(--pp-acid)" }}>]</span>
         </span>
       </div>
-      <div style={{ overflow: "hidden", maskImage: "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)" }}>
-        <div className="pp-partner-marquee" style={{ display: "inline-flex", alignItems: "center", whiteSpace: "nowrap" }}>
+      <div style={{ width: "100%", overflow: "hidden", maskImage: "linear-gradient(90deg, transparent 0, #000 2%, #000 98%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0, #000 2%, #000 98%, transparent 100%)" }}>
+        <div className="pp-partner-marquee" style={{ display: "inline-flex", alignItems: "center", whiteSpace: "nowrap", minWidth: "200%" }}>
           {row.map((p, i) => (
             <span key={i} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", height: 60, padding: "0 clamp(28px,3vw,52px)", flexShrink: 0 }}>
               <img src={p.src} alt={p.alt} style={{ height: p.h, width: "auto", objectFit: "contain", opacity: .7, display: "block" }} />
@@ -245,7 +248,7 @@ function HeroStatement() {
   const cardRef = uR(null), secRef = uR(null);
   useHeroRecede(cardRef, secRef);
   return (
-    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 14, perspective: "1500px", perspectiveOrigin: "50% 0%" }}>
+    <section id="mission" data-screen-label="01 Mission" ref={secRef} style={{ position: "sticky", top: 0, zIndex: 0, height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, perspective: "1500px", perspectiveOrigin: "50% 0%" }}>
       <div ref={cardRef} style={{ position: "relative", width: "100%", height: "100%", borderRadius: 24, overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "clamp(32px,5vw,72px)", background: "#040404", transformOrigin: "50% 0%", willChange: "transform, opacity" }}>
         <HeroShaderBg intensity={.55} blur={105} />
         <div style={{ position: "relative", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -392,7 +395,7 @@ const FIVE_APPS = [
 const PAINS = [
   { t: "Complex", d: "Five apps, five logins, five support lines - to move your own money." },
   { t: "Slow", d: "SWIFT takes days. Local rails stop at borders. Crypto is fast but hostile." },
-  { t: "Expensive", d: "5-15% of disposable income lost to fees, spreads, and conversion." },
+  { t: "Expensive", d: "via traditional banks and money transfer operators." },
 ];
 function Problem() {
   return (
@@ -447,7 +450,7 @@ function Problem() {
         <div style={{ display: "flex", alignItems: "center", gap: 28, flexWrap: "wrap", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12, padding: "32px 32px" }}>
           <span className="pp-stat" style={{ fontSize: 80, lineHeight: 1 }}><CountUp to={15} dur={1400} format={(v) => "5-" + Math.round(v) + "%"} /></span>
           <h3 className="pp-h3" style={{ margin: 0, fontWeight: 500, maxWidth: 560, fontSize: 22, color: "var(--pp-fg-2)" }}>
-            of disposable income lost - every transaction.
+            of every transfer - lost to fees, FX spreads, and conversion.
           </h3>
         </div>
       </Reveal>
