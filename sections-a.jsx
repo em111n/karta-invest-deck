@@ -447,12 +447,12 @@ function Problem() {
       </div>
 
       <Reveal delay={0.05}>
-        <div style={{ display: "flex", alignItems: "center", gap: 36, flexWrap: "wrap", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12, padding: "32px 32px" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            <span className="pp-stat" style={{ fontSize: 80, lineHeight: 1 }}><CountUp to={15} dur={1400} format={(v) => "5-" + Math.round(v) + "%"} /></span>
-            <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 13, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--pp-fg-4)" }}>of every transfer</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "clamp(20px, 4vw, 36px)", flexWrap: "wrap", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12, padding: "clamp(22px, 5vw, 32px)" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6, flex: "0 0 auto" }}>
+            <span className="pp-stat" style={{ fontSize: "clamp(48px, 13vw, 80px)", lineHeight: 1, whiteSpace: "nowrap" }}><CountUp to={15} dur={1400} format={(v) => "5-" + Math.round(v) + "%"} /></span>
+            <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 12, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--pp-fg-4)" }}>of every transfer</span>
           </div>
-          <h3 className="pp-h3" style={{ margin: 0, fontWeight: 500, maxWidth: 560, fontSize: 22, color: "var(--pp-fg-2)" }}>
+          <h3 className="pp-h3" style={{ margin: 0, fontWeight: 500, maxWidth: 560, fontSize: "clamp(17px, 4.4vw, 22px)", lineHeight: 1.35, color: "var(--pp-fg-2)", flex: "1 1 200px", minWidth: 0 }}>
             Lost to fees, FX spreads, and hidden markups.
           </h3>
         </div>

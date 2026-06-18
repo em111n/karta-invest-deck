@@ -404,9 +404,9 @@ function TractionCarousel() {
       <div style={{ overflow: "hidden" }}>
         <div ref={ref} onScroll={onScroll} style={{ display: "flex", gap: 18, overflowX: "auto", scrollSnapType: "x mandatory", paddingBottom: 22, marginBottom: -22, scrollbarWidth: "none" }}>
           {PANELS.map((p, i) =>
-            <div key={i} style={{ scrollSnapAlign: "start", flex: "0 0 clamp(440px, 64%, 660px)", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12, padding: 36, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 22, minHeight: 320 }}>
+            <div key={i} style={{ scrollSnapAlign: "start", flex: "0 0 clamp(280px, 84%, 660px)", background: "var(--pp-card)", border: "1px solid var(--pp-line)", borderRadius: 12, padding: "clamp(22px, 5vw, 36px)", position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "space-between", gap: 22, minHeight: 320 }}>
               <span style={{ position: "absolute", top: -28, right: 8, fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800, 'wdth' 125", fontSize: 200, lineHeight: 1, color: "transparent", WebkitTextStroke: "1px #1c1c1c", pointerEvents: "none", userSelect: "none", fontVariantNumeric: "tabular-nums" }}>{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="pp-h3" style={{ margin: 0, fontSize: i === 6 ? 45 : 30, color: "var(--pp-acid)", lineHeight: 1.12, maxWidth: i === 6 ? 560 : 416, position: "relative" }}>
+              <h3 className="pp-h3" style={{ margin: 0, fontSize: i === 6 ? "clamp(26px, 7.5vw, 45px)" : "clamp(22px, 6.5vw, 30px)", color: "var(--pp-acid)", lineHeight: 1.15, maxWidth: i === 6 ? 560 : 416, position: "relative" }}>
                 {i === 6
                   ? <React.Fragment>Self-funded since inception. <span style={{ color: "var(--pp-fg)" }}>Four consecutive profitable months, accelerating.</span></React.Fragment>
                   : p.t}

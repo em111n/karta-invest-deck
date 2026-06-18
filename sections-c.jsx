@@ -278,7 +278,7 @@ function Roadmap() {
                     </div>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
                       {qq.items.map((it, ii) => (
-                        <span key={ii} style={{ display: "inline-block", padding: "6px 12px", borderRadius: 100, border: "1px solid " + (qq.hero ? "rgba(204,255,0,.32)" : "var(--pp-line)"), background: qq.hero ? "rgba(204,255,0,.06)" : "var(--pp-surface-2)", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 13, lineHeight: 1.2, color: "var(--pp-fg-2)" }}>{it}</span>
+                        <span key={ii} style={{ display: "inline-block", maxWidth: "100%", padding: "6px 12px", borderRadius: 100, border: "1px solid " + (qq.hero ? "rgba(204,255,0,.32)" : "var(--pp-line)"), background: qq.hero ? "rgba(204,255,0,.06)" : "var(--pp-surface-2)", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 13, lineHeight: 1.2, color: "var(--pp-fg-2)", overflowWrap: "break-word" }}>{it}</span>
                       ))}
                     </div>
                     <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 13, letterSpacing: ".02em", color: qq.hero ? "var(--pp-acid)" : "var(--pp-fg-3)" }}>{qq.milestone}</span>
@@ -289,9 +289,9 @@ function Roadmap() {
           </div>
           {/* RIGHT — Series A anchor */}
           <Reveal variant="scale" delay={0.15}>
-            <HCard hover style={{ padding: 40, display: "flex", flexDirection: "column", gap: 20, justifyContent: "center", height: "100%", background: "radial-gradient(120% 90% at 70% 110%, rgba(204,255,0,.16), rgba(204,255,0,.04) 50%, var(--pp-card))", borderColor: "rgba(204,255,0,.34)" }}>
+            <HCard hover style={{ padding: "clamp(24px, 5vw, 40px)", display: "flex", flexDirection: "column", gap: 20, justifyContent: "center", height: "100%", background: "radial-gradient(120% 90% at 70% 110%, rgba(204,255,0,.16), rgba(204,255,0,.04) 50%, var(--pp-card))", borderColor: "rgba(204,255,0,.34)" }}>
               <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 12, letterSpacing: ".18em", textTransform: "uppercase", color: "var(--pp-acid)" }}>[ The anchor ]</span>
-              <span className="pp-stat" style={{ fontSize: "clamp(48px, 6vw, 88px)", lineHeight: 1, color: "var(--pp-fg)", fontStretch: "125%", letterSpacing: "-.03em", whiteSpace: "nowrap" }}>~$14M <span style={{ color: "var(--pp-acid)" }}>ARR</span></span>
+              <span className="pp-stat" style={{ fontSize: "clamp(32px, 8vw, 88px)", lineHeight: 1, color: "var(--pp-fg)", fontStretch: "125%", letterSpacing: "-.03em", whiteSpace: "nowrap" }}>~$14M <span style={{ color: "var(--pp-acid)" }}>ARR</span></span>
               <p style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 22, lineHeight: 1.35, color: "var(--pp-fg-2)" }}>Q1 2027 · Series A close, neutral case. <span style={{ color: "var(--pp-fg)" }}>49%</span> of the 3-5yr SOM target already at run-rate.</p>
               <div style={{ borderTop: "1px solid rgba(255,255,255,.1)", paddingTop: 16, display: "flex", justifyContent: "space-between", gap: 14, fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 14, color: "var(--pp-fg-3)" }}>
                 <span>Profitable 4 months</span>
@@ -366,7 +366,7 @@ function Ask() {
             <HCard hover style={{ minHeight: 200, justifyContent: "space-between", gap: 18 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
                 <h3 className="pp-h3" style={{ margin: 0, fontSize: 24 }}>{b.t}</h3>
-                <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontSize: 22, color: "var(--pp-acid)" }}>{b.pct}</span>
+                <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 800, fontStretch: "125%", fontSize: 22, color: "var(--pp-acid)", whiteSpace: "nowrap", flexShrink: 0 }}>{b.pct}</span>
               </div>
               <p className="pp-body" style={{ margin: 0 }}>{b.d}</p>
             </HCard>
@@ -836,3 +836,395 @@ function Market() {
 }
 
 /* Market is rendered by app.jsx in the main deck. */
+
+/* ============================================================
+   07b - MARKET PITCH (Jana's variant — 3 blocks, no details)
+   Used by /pitch/ route. Block 1: Moment (stablecoins overtook
+   Visa). Block 2: Our slice (SAM / SOM). Block 3: Where we are
+   (live in MENA/LATAM/SEA, USA + EU on roadmap).
+   ============================================================ */
+function MarketPitch() {
+  return (
+    <React.Fragment>
+      <SectionHero id="market" num="07" kicker="market" align="left" glow
+        parts={[{ t: "We're building " }, { t: "borderless money.", hi: true }]}
+        lead="Three things investors need to know — everything else is in the data room." />
+      <Section tightTop dataLabel="07 Market · pitch" style={{ overflowX: "clip", overflowY: "visible" }}>
+
+        {/* Block 1 — The moment */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 18, position: "relative" }}>
+          <Reveal><Label variant="acid">[ 01 · the moment ]</Label></Reveal>
+          <Reveal variant="scale">
+            <HCard style={{ padding: "clamp(28px, 4vw, 48px)", display: "flex", flexDirection: "column", gap: 24, background: "linear-gradient(135deg, rgba(204,255,0,.10), var(--pp-card) 60%)", borderColor: "rgba(204,255,0,.32)" }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "clamp(20px, 4vw, 56px)", flexWrap: "wrap" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                  <span className="pp-stat" style={{ fontSize: "clamp(56px, 9vw, 140px)", lineHeight: 1, color: ACID, fontStretch: "125%", letterSpacing: "-.03em", whiteSpace: "nowrap" }}>$33T</span>
+                  <span style={{ fontFamily: FD, fontWeight: 500, fontSize: 13, letterSpacing: ".1em", textTransform: "uppercase", color: FG3 }}>Stablecoin tx volume · 2025</span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                  <span className="pp-stat" style={{ fontSize: "clamp(36px, 6vw, 88px)", lineHeight: 1, color: FG2, fontStretch: "125%", letterSpacing: "-.03em", whiteSpace: "nowrap" }}>$16.7T</span>
+                  <span style={{ fontFamily: FD, fontWeight: 500, fontSize: 13, letterSpacing: ".1em", textTransform: "uppercase", color: FG4 }}>Visa · fiscal year</span>
+                </div>
+              </div>
+              <p style={{ margin: 0, fontFamily: FD, fontWeight: 600, fontStretch: "125%", fontSize: "clamp(22px, 3vw, 36px)", lineHeight: 1.2, letterSpacing: "-.02em", color: FG, maxWidth: 820 }}>
+                Stablecoin volume <span style={{ color: ACID }}>overtook Visa.</span> The rails we built on are now global infrastructure.
+              </p>
+            </HCard>
+          </Reveal>
+        </div>
+
+        {/* Block 2 — Our slice */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 18, position: "relative" }}>
+          <Reveal><Label variant="acid">[ 02 · our slice ]</Label></Reveal>
+          <div className="grid-2 pitch-slice" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            <Reveal variant="up">
+              <HCard style={{ padding: "clamp(24px, 3.5vw, 40px)", display: "flex", flexDirection: "column", gap: 14, height: "100%" }}>
+                <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: FG4 }}>SAM · serviceable</span>
+                <span className="pp-stat" style={{ fontSize: "clamp(48px, 7vw, 96px)", lineHeight: 1, color: FG, fontStretch: "125%", letterSpacing: "-.025em", whiteSpace: "nowrap" }}>$1.41B</span>
+                <span style={{ fontFamily: FD, fontWeight: 500, fontSize: 14, color: FG3 }}>GTV per year</span>
+                <div style={{ marginTop: "auto", borderTop: "1px solid var(--pp-line)", paddingTop: 14, display: "flex", alignItems: "baseline", gap: 10 }}>
+                  <span style={{ color: ACID, fontFamily: FD, fontWeight: 700, fontSize: 18 }}>→</span>
+                  <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 18, color: FG }}>$40.9M revenue</span>
+                  <span style={{ fontFamily: FB, fontSize: 13, color: FG4 }}>@ 2.9% take</span>
+                </div>
+              </HCard>
+            </Reveal>
+            <Reveal variant="up" delay={0.06}>
+              <HCard style={{ padding: "clamp(24px, 3.5vw, 40px)", display: "flex", flexDirection: "column", gap: 14, height: "100%", background: "linear-gradient(135deg, rgba(204,255,0,.07), var(--pp-card) 70%)", borderColor: "rgba(204,255,0,.24)" }}>
+                <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: ACID }}>SOM · 3-5yr target</span>
+                <span className="pp-stat" style={{ fontSize: "clamp(48px, 7vw, 96px)", lineHeight: 1, color: ACID, fontStretch: "125%", letterSpacing: "-.025em", whiteSpace: "nowrap" }}>$211M</span>
+                <span style={{ fontFamily: FD, fontWeight: 500, fontSize: 14, color: FG3 }}>GTV per year</span>
+                <div style={{ marginTop: "auto", borderTop: "1px solid var(--pp-line)", paddingTop: 14, display: "flex", alignItems: "baseline", gap: 10 }}>
+                  <span style={{ color: ACID, fontFamily: FD, fontWeight: 700, fontSize: 18 }}>→</span>
+                  <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 18, color: FG }}>$6.1M revenue</span>
+                  <span style={{ fontFamily: FB, fontSize: 13, color: FG4 }}>@ 2.9% take</span>
+                </div>
+              </HCard>
+            </Reveal>
+          </div>
+          <Reveal delay={0.1}>
+            <p style={{ margin: 0, fontFamily: FD, fontWeight: 600, fontStretch: "125%", fontSize: "clamp(20px, 2.6vw, 30px)", lineHeight: 1.25, letterSpacing: "-.015em", color: FG, maxWidth: 820 }}>
+              <span style={{ color: ACID }}>49%</span> of the 3-5yr SOM target already at current run-rate.
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Block 3 — Where we are */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 18, position: "relative" }}>
+          <Reveal><Label variant="acid">[ 03 · where we are ]</Label></Reveal>
+          <Reveal variant="scale">
+            <GeoMap maxWidth={1180} callouts={false} showLabels={true} />
+          </Reveal>
+          <Reveal delay={0.08}>
+            <div style={{ display: "flex", gap: "clamp(20px, 4vw, 56px)", flexWrap: "wrap", alignItems: "baseline" }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+                <span style={{ width: 10, height: 10, borderRadius: "50%", background: ACID, display: "inline-block", boxShadow: "0 0 14px rgba(204,255,0,.55)" }} />
+                <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 16, color: FG }}>Live today</span>
+                <span style={{ fontFamily: FB, fontSize: 15, color: FG3 }}>MENA · LATAM · SEA</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+                <span style={{ width: 10, height: 10, borderRadius: "50%", background: ROAD, display: "inline-block", boxShadow: "0 0 14px rgba(255,122,26,.55)" }} />
+                <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 16, color: FG }}>On roadmap</span>
+                <span style={{ fontFamily: FB, fontSize: 15, color: FG3 }}>USA · EU</span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+      </Section>
+    </React.Fragment>);
+}
+Object.assign(window, { MarketPitch });
+
+/* ============================================================
+   07c - MARKET REDESIGN — editorial/Bloomberg-FT take.
+   Three chapters separated by hairlines. Each chapter has a
+   monumental outline numeral, a real visualisation (bar chart,
+   funnel table, world map), and a single-sentence verdict.
+   No card wrappers — typography and rules do the layout work.
+   ============================================================ */
+
+/* one big outline numeral that sits like an editorial stamp */
+function ChapterStamp({ n }) {
+  return (
+    <span aria-hidden="true" style={{
+      position: "absolute", top: "-8px", right: "-4px", lineHeight: 0.78,
+      fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125",
+      fontSize: "clamp(140px, 18vw, 280px)", letterSpacing: "-0.05em",
+      color: "transparent", WebkitTextStroke: "1px #1b1b1b",
+      pointerEvents: "none", userSelect: "none", zIndex: 0,
+    }}>{n}</span>
+  );
+}
+
+/* one row inside the funnel table */
+function FunnelRow({ stage, label, value, sub, accent, big, mid }) {
+  const valueColor = accent ? ACID : (mid ? FG : FG2);
+  const stageColor = accent ? ACID : FG4;
+  const valueSize = big ? "clamp(54px, 8.4vw, 124px)" : (mid ? "clamp(40px, 5.8vw, 84px)" : "clamp(30px, 4.2vw, 60px)");
+  return (
+    <div style={{
+      display: "grid", gridTemplateColumns: "minmax(0, 1.1fr) auto",
+      gap: "clamp(16px, 3vw, 48px)", alignItems: "baseline",
+      paddingTop: "clamp(22px, 3vw, 38px)", paddingBottom: "clamp(22px, 3vw, 38px)",
+      borderTop: "1px solid var(--pp-line)",
+    }} className="market-funnel-row">
+      <div style={{ display: "flex", flexDirection: "column", gap: 6, minWidth: 0 }}>
+        <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 11, letterSpacing: ".18em", textTransform: "uppercase", color: stageColor }}>{stage}</span>
+        <span style={{ fontFamily: FD, fontWeight: 500, fontSize: "clamp(15px, 1.8vw, 19px)", lineHeight: 1.3, color: FG2, letterSpacing: "-.01em" }}>{label}</span>
+        {sub && <span style={{ fontFamily: FB, fontSize: 13, color: FG4, fontVariantNumeric: "tabular-nums" }}>{sub}</span>}
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 4, textAlign: "right" }}>
+        <span className="pp-stat" style={{
+          fontSize: valueSize, lineHeight: 0.95, color: valueColor,
+          fontStretch: "125%", letterSpacing: "-.035em", whiteSpace: "nowrap",
+          fontVariantNumeric: "tabular-nums",
+        }}>{value}</span>
+      </div>
+    </div>
+  );
+}
+
+function MarketRedesign() {
+  return (
+    <React.Fragment>
+      {/* injected keyframes + scoped styles for this slide */}
+      <style>{`
+        @keyframes mktBarGrow { from { transform: scaleX(0); } to { transform: scaleX(var(--w, 1)); } }
+        @keyframes mktProgFill { from { transform: scaleX(0); } to { transform: scaleX(.49); } }
+        .market-bar-fill { transform: scaleX(0); transform-origin: left center; }
+        .reveal.in .market-bar-fill,
+        .reveal-scale.in .market-bar-fill { animation: mktBarGrow 1.4s cubic-bezier(.2,.62,.32,1) .15s forwards; }
+        .market-prog-fill { transform: scaleX(0); transform-origin: left center; }
+        .reveal.in .market-prog-fill { animation: mktProgFill 1.6s cubic-bezier(.2,.62,.32,1) .3s forwards; }
+        @media (prefers-reduced-motion: reduce) {
+          .market-bar-fill, .market-prog-fill { transform: scaleX(1); animation: none !important; }
+        }
+        .market-chapter { position: relative; padding-top: clamp(48px, 7vw, 96px); padding-bottom: clamp(48px, 7vw, 96px); }
+        .market-chapter + .market-chapter { border-top: 1px solid var(--pp-line); }
+        @media (max-width: 720px) {
+          .market-funnel-row { grid-template-columns: 1fr !important; gap: 6px !important; }
+          .market-funnel-row > div:last-child { text-align: left !important; }
+        }
+      `}</style>
+
+      <SectionHero id="market" num="07" kicker="market" align="left" glow
+        parts={[{ t: "Three numbers, " }, { t: "one story.", hi: true }]}
+        lead="A macro shift. A bounded slice. Real geography." />
+
+      <Section tightTop dataLabel="07 Market · redesign" style={{ overflowX: "clip", overflowY: "visible" }}>
+
+        {/* ==================== CHAPTER 01 · THE SHIFT ==================== */}
+        <div className="market-chapter">
+          <ChapterStamp n="01" />
+          <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "clamp(28px, 4vw, 56px)" }}>
+            <Reveal>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 12, letterSpacing: ".22em", textTransform: "uppercase", color: FG4 }}>
+                  <span style={{ color: ACID }}>01 ·</span> &nbsp;The shift
+                </span>
+                <h2 style={{ margin: 0, fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125",
+                  fontSize: "clamp(34px, 4.6vw, 64px)", lineHeight: 1.04, letterSpacing: "-.03em", color: FG, maxWidth: 1000 }}>
+                  Stablecoins <span style={{ color: ACID }}>crossed</span> Visa in 2025.
+                </h2>
+              </div>
+            </Reveal>
+
+            {/* bar chart */}
+            <Reveal variant="scale">
+              <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+                {/* stablecoins bar — full width */}
+                <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) auto", gap: 14, alignItems: "center" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
+                      <span style={{ width: 10, height: 10, borderRadius: 2, background: ACID, boxShadow: "0 0 16px rgba(204,255,0,.55)" }} />
+                      <span style={{ fontFamily: FD, fontWeight: 700, fontSize: "clamp(13px, 1.4vw, 17px)", letterSpacing: ".04em", textTransform: "uppercase", color: FG }}>Stablecoin tx volume</span>
+                      <span style={{ fontFamily: FB, fontSize: 13, color: FG4, fontVariantNumeric: "tabular-nums" }}>· 2025</span>
+                    </div>
+                    <div style={{ position: "relative", height: "clamp(34px, 4.6vw, 64px)", background: "rgba(204,255,0,.04)", borderRadius: 2, overflow: "hidden" }}>
+                      <div className="market-bar-fill" style={{
+                        position: "absolute", inset: 0, "--w": 1,
+                        background: "linear-gradient(90deg, #ccff00 0%, #c2f000 78%, rgba(204,255,0,.78) 100%)",
+                        boxShadow: "0 0 32px rgba(204,255,0,.35), inset 0 1px 0 rgba(255,255,255,.18)",
+                      }} />
+                    </div>
+                  </div>
+                  <span className="pp-stat" style={{
+                    fontSize: "clamp(52px, 7.6vw, 112px)", lineHeight: .9, color: ACID,
+                    fontStretch: "125%", letterSpacing: "-.04em", fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap",
+                  }}>$33T</span>
+                </div>
+
+                {/* visa bar — ~50% width */}
+                <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) auto", gap: 14, alignItems: "center" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10, minWidth: 0 }}>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
+                      <span style={{ width: 10, height: 10, borderRadius: 2, background: "#3a3a3a" }} />
+                      <span style={{ fontFamily: FD, fontWeight: 700, fontSize: "clamp(13px, 1.4vw, 17px)", letterSpacing: ".04em", textTransform: "uppercase", color: FG2 }}>Visa</span>
+                      <span style={{ fontFamily: FB, fontSize: 13, color: FG4, fontVariantNumeric: "tabular-nums" }}>· fiscal year</span>
+                    </div>
+                    <div style={{ position: "relative", height: "clamp(34px, 4.6vw, 64px)", background: "rgba(255,255,255,.025)", borderRadius: 2, overflow: "hidden" }}>
+                      <div className="market-bar-fill" style={{
+                        position: "absolute", inset: 0, "--w": 0.506,
+                        background: "linear-gradient(90deg, #2c2c2c 0%, #3a3a3a 100%)",
+                        borderRight: "1px solid #4a4a4a",
+                      }} />
+                    </div>
+                  </div>
+                  <span className="pp-stat" style={{
+                    fontSize: "clamp(32px, 4.6vw, 64px)", lineHeight: .9, color: FG3,
+                    fontStretch: "125%", letterSpacing: "-.035em", fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap",
+                  }}>$16.7T</span>
+                </div>
+
+                {/* year axis */}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", marginTop: 6, position: "relative" }}>
+                  {["2020","2021","2022","2023","2024","2025"].map((y, i) => (
+                    <div key={y} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 6, position: "relative" }}>
+                      <span style={{ width: 1, height: 10, background: i === 5 ? ACID : "#1f1f1f" }} />
+                      <span style={{ fontFamily: FD, fontWeight: 500, fontSize: 11, letterSpacing: ".08em", color: i === 5 ? ACID : FG4, fontVariantNumeric: "tabular-nums" }}>{y}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <p style={{ margin: 0, fontFamily: FD, fontWeight: 500, fontSize: "clamp(19px, 2.2vw, 28px)", lineHeight: 1.35,
+                letterSpacing: "-.018em", color: FG2, maxWidth: 880, textWrap: "balance" }}>
+                The rails we built on aren't a niche anymore.&nbsp;<span style={{ color: FG }}>They're global payment infrastructure.</span>
+              </p>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* ==================== CHAPTER 02 · THE SLICE ==================== */}
+        <div className="market-chapter">
+          <ChapterStamp n="02" />
+          <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "clamp(24px, 3.4vw, 44px)" }}>
+            <Reveal>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 12, letterSpacing: ".22em", textTransform: "uppercase", color: FG4 }}>
+                  <span style={{ color: ACID }}>02 ·</span> &nbsp;The slice
+                </span>
+                <h2 style={{ margin: 0, fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125",
+                  fontSize: "clamp(34px, 4.6vw, 64px)", lineHeight: 1.04, letterSpacing: "-.03em", color: FG, maxWidth: 1000 }}>
+                  How much of that <span style={{ color: ACID }}>is ours.</span>
+                </h2>
+              </div>
+            </Reveal>
+
+            {/* funnel table */}
+            <Reveal variant="up" delay={0.05}>
+              <div style={{ borderBottom: "1px solid var(--pp-line)" }}>
+                <FunnelRow
+                  stage="TAM · Total addressable"
+                  label="Stablecoin tx volume, all global flows."
+                  value="$33T"
+                />
+                <FunnelRow
+                  stage="SAM · Serviceable addressable"
+                  label="Karta's reachable slice — borderless people moving money."
+                  sub="$40.9M revenue @ 2.9% take rate"
+                  value="$1.41B"
+                  mid
+                />
+                <FunnelRow
+                  stage="SOM · 3-5yr target"
+                  label="What we plan to capture by 2030."
+                  sub="$6.1M revenue @ 2.9% take rate"
+                  value="$211M"
+                  accent
+                  big
+                />
+              </div>
+            </Reveal>
+
+            {/* 49% progress bar */}
+            <Reveal delay={0.12}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14, paddingTop: "clamp(8px, 1.4vw, 18px)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 16, flexWrap: "wrap" }}>
+                  <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: FG4 }}>Progress toward SOM</span>
+                  <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 13, color: FG3, fontVariantNumeric: "tabular-nums" }}>
+                    <span style={{ color: ACID }}>$102.8M</span> current run-rate · <span style={{ color: FG2 }}>$211M target</span>
+                  </span>
+                </div>
+                <div style={{ position: "relative", height: 14, background: "rgba(255,255,255,.04)", borderRadius: 2, overflow: "hidden", border: "1px solid rgba(255,255,255,.05)" }}>
+                  <div className="market-prog-fill" style={{
+                    position: "absolute", inset: 0, width: "100%",
+                    background: "linear-gradient(90deg, #ccff00 0%, #c2f000 100%)",
+                    boxShadow: "0 0 24px rgba(204,255,0,.45), inset 0 1px 0 rgba(255,255,255,.18)",
+                  }} />
+                  {/* tick at 49% */}
+                  <span style={{ position: "absolute", left: "49%", top: -6, bottom: -6, width: 1, background: ACID, boxShadow: "0 0 8px rgba(204,255,0,.7)" }} />
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
+                  <span style={{ fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontSize: "clamp(38px, 5vw, 72px)", lineHeight: 1, letterSpacing: "-.03em", color: ACID, fontVariantNumeric: "tabular-nums" }}>49%</span>
+                  <span style={{ fontFamily: FD, fontWeight: 500, fontSize: "clamp(16px, 2vw, 22px)", lineHeight: 1.35, color: FG2, textAlign: "right", maxWidth: 460 }}>
+                    of the 3-5yr SOM target<br /><span style={{ color: FG }}>already at current run-rate.</span>
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* ==================== CHAPTER 03 · WHERE WE OPERATE ==================== */}
+        <div className="market-chapter">
+          <ChapterStamp n="03" />
+          <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "clamp(28px, 4vw, 56px)" }}>
+            <Reveal>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 12, letterSpacing: ".22em", textTransform: "uppercase", color: FG4 }}>
+                  <span style={{ color: ACID }}>03 ·</span> &nbsp;Where we operate
+                </span>
+                <h2 style={{ margin: 0, fontFamily: FD, fontWeight: 800, fontStretch: "125%", fontVariationSettings: "'wght' 800,'wdth' 125",
+                  fontSize: "clamp(34px, 4.6vw, 64px)", lineHeight: 1.04, letterSpacing: "-.03em", color: FG, maxWidth: 1000 }}>
+                  Live across <span style={{ color: ACID }}>three regions.</span> Two more next.
+                </h2>
+              </div>
+            </Reveal>
+
+            <Reveal variant="scale" delay={0.05}>
+              <GeoMap maxWidth={1200} callouts={false} showLabels={true} />
+            </Reveal>
+
+            {/* legend — two big pills */}
+            <Reveal delay={0.1}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 18, padding: "clamp(18px, 2.2vw, 26px) clamp(20px, 2.4vw, 28px)",
+                  background: "linear-gradient(135deg, rgba(204,255,0,.07), rgba(204,255,0,.015) 70%)",
+                  border: "1px solid rgba(204,255,0,.28)", borderRadius: 12 }}>
+                  <span style={{ flex: "none", width: 14, height: 14, borderRadius: "50%", background: ACID, boxShadow: "0 0 18px rgba(204,255,0,.6), 0 0 4px rgba(204,255,0,.9)" }} />
+                  <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: ACID }}>Live today</span>
+                    <span style={{ fontFamily: FD, fontWeight: 700, fontStretch: "125%", fontSize: "clamp(19px, 2.2vw, 26px)", letterSpacing: "-.015em", color: FG }}>MENA · LATAM · SE Asia</span>
+                  </div>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 18, padding: "clamp(18px, 2.2vw, 26px) clamp(20px, 2.4vw, 28px)",
+                  background: "linear-gradient(135deg, rgba(255,122,26,.06), rgba(255,122,26,.01) 70%)",
+                  border: "1px solid rgba(255,122,26,.22)", borderRadius: 12 }}>
+                  <span style={{ flex: "none", width: 14, height: 14, borderRadius: "50%", background: ROAD, boxShadow: "0 0 18px rgba(255,122,26,.55), 0 0 4px rgba(255,122,26,.85)" }} />
+                  <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    <span style={{ fontFamily: FD, fontWeight: 600, fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: ROAD }}>On roadmap</span>
+                    <span style={{ fontFamily: FD, fontWeight: 700, fontStretch: "125%", fontSize: "clamp(19px, 2.2vw, 26px)", letterSpacing: "-.015em", color: FG }}>USA · EU</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.14}>
+              <p style={{ margin: 0, fontFamily: FD, fontWeight: 500, fontSize: "clamp(15px, 1.7vw, 20px)", lineHeight: 1.4,
+                color: FG3, maxWidth: 760, letterSpacing: "-.01em" }}>
+                Concrete markets, not aspirational TAM. Validated by team analysis and existing partner coverage <span style={{ color: FG4 }}>(Rain · Bridge · Due)</span>.
+              </p>
+            </Reveal>
+          </div>
+        </div>
+
+      </Section>
+    </React.Fragment>
+  );
+}
+Object.assign(window, { MarketRedesign });
+

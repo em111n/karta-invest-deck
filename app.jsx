@@ -57,7 +57,11 @@ function App() {
       <div className="chapter" style={{ position: "relative" }}><SolutionHandV2 /></div>
       <div className="chapter" style={{ position: "relative" }}><HowItWorks /></div>
       <div className="chapter" style={{ position: "relative" }}><Traction /></div>
-      <div className="chapter" style={{ position: "relative" }}><Market /></div>
+      <div className="chapter" style={{ position: "relative" }}>{
+        location.pathname.includes('/olsamo') ? <MarketRedesign /> :
+        location.pathname.includes('/pitch') ? <MarketPitch /> :
+        <Market />
+      }</div>
       <div className="chapter" style={{ position: "relative" }}><Vision /></div>
       <div className="chapter" style={{ position: "relative" }}><Team /></div>
       <div className="chapter" style={{ position: "relative" }}><Roadmap /></div>
