@@ -433,11 +433,22 @@ const socials = {
   in: "M5.5 7.5H7.3V13H5.5V7.5ZM6.4 4.8a1 1 0 1 1 0 2.1 1 1 0 0 1 0-2.1ZM8.5 7.5h1.7v.8c.3-.5.9-.9 1.7-.9 1.5 0 2.1 1 2.1 2.6V13h-1.8v-2.5c0-.7-.2-1.2-.9-1.2-.6 0-.9.4-.9 1.1V13H8.5V7.5Z",
   x: "M11.6 4.5h1.7l-3.7 4.3 4.4 5.7h-3.4L8.3 11l-2.9 3.5H3.6l4-4.7L3.4 4.5h3.5L9.3 7.7 11.6 4.5Zm-.6 8.9h.9L7 5.5h-1L11 13.4Z",
   tg: "M14.5 4.3 3.6 8.5c-.6.24-.6.9-.04 1.07l2.7.84 1.05 3.3c.13.36.5.45.78.21l1.5-1.22 2.86 2.1c.36.26.86.06.94-.38l1.86-9.2c.1-.5-.38-.9-.85-.72Z",
+  ig: "M6 3.5h6c1.4 0 2.5 1.1 2.5 2.5v6c0 1.4-1.1 2.5-2.5 2.5H6A2.5 2.5 0 0 1 3.5 12V6A2.5 2.5 0 0 1 6 3.5Zm0 1A1.5 1.5 0 0 0 4.5 6v6A1.5 1.5 0 0 0 6 13.5h6a1.5 1.5 0 0 0 1.5-1.5V6A1.5 1.5 0 0 0 12 4.5H6Zm3 2A2.5 2.5 0 1 1 9 11.5 2.5 2.5 0 0 1 9 6.5Zm0 1A1.5 1.5 0 1 0 9 10.5 1.5 1.5 0 0 0 9 7.5Zm3.2-1.7a.6.6 0 1 1 0 1.2.6.6 0 0 1 0-1.2Z",
+};
+const socialUrls = {
+  in: "https://www.linkedin.com/company/joinkarta/",
+  x:  "https://x.com/Karta_Personal",
+  tg: "https://t.me/karta",
+  tg_news: "https://t.me/karta_news",
+  ig: "https://www.instagram.com/karta.personal",
 };
 function Social({ k }) {
   const [h, setH] = useState(false);
+  const url = socialUrls[k] || "#";
   return (
-    <a href="#" onClick={(e) => e.preventDefault()} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+    <a href={url} target="_blank" rel="noopener noreferrer"
+      onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
+      aria-label={k === "in" ? "LinkedIn" : k === "x" ? "X / Twitter" : k === "tg" ? "Telegram" : k === "ig" ? "Instagram" : "Social"}
       style={{ width: 40, height: 40, borderRadius: 12, background: h ? "#3a3a3a" : "var(--pp-control)", display: "flex", alignItems: "center", justifyContent: "center", transition: "background .3s" }}>
       <svg width="18" height="18" viewBox="0 0 18 18" fill="#fff"><path d={socials[k]} /></svg>
     </a>
@@ -468,4 +479,5 @@ function Stagger({ text, style, base = 0.15, step = 0.03 }) {
 Object.assign(window, {
   useReveal, Reveal, CountUp, Label, ArrowIcon, Button, PillButton, HCard,
   Section, SectionHero, StaggerTitle, Statement, Hi, Bar, PhoneMockup, HandScreen, Social, Stagger,
+  socials, socialUrls,
 });

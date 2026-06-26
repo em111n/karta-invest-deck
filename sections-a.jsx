@@ -32,37 +32,83 @@ function Header({ active }) {
   const [open, setOpen] = uS(false);
   const [solid, setSolid] = uS(false);
   const [copied, setCopied] = uS(false);
-  const copyEmail = () => { try { navigator.clipboard.writeText("hello@karta.io"); } catch (e) {} setCopied(true); setTimeout(() => setCopied(false), 1800); };
+  const pillRef = uR(null);
+  const copyEmail = () => { try { navigator.clipboard.writeText("olsamo@karta.io"); } catch (e) {} setCopied(true); setTimeout(() => setCopied(false), 1800); };
   uE(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  uE(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        if (document.activeElement && typeof document.activeElement.blur === "function") {
+          document.activeElement.blur();
+        }
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+  uE(() => {
+    if (!open) return;
+    const onPointerDown = (e) => {
+      if (pillRef.current && !pillRef.current.contains(e.target)) {
+        setOpen(false);
+        if (document.activeElement && typeof document.activeElement.blur === "function") {
+          document.activeElement.blur();
+        }
+      }
+    };
+    window.addEventListener("pointerdown", onPointerDown);
+    return () => window.removeEventListener("pointerdown", onPointerDown);
+  }, [open]);
   const go = (id) => {
     setOpen(false);
     const el = document.getElementById(id);
     if (!el) return;
-    // If the target id is a sticky section divider, skip past it to the key
-    // content frame (its next sibling) rather than landing on the divider.
     const sticky = getComputedStyle(el).position === "sticky";
     const target = (sticky && el.nextElementSibling) ? el.nextElementSibling : el;
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
+    const dest = target.getBoundingClientRect().top + window.scrollY - 90;
+    const distance = Math.abs(dest - window.scrollY);
+    if (distance < window.innerHeight * 1.5) {
+      window.scrollTo({ top: dest, behavior: "smooth" });
+      return;
+    }
+    let overlay = document.getElementById("__nav_fade");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "__nav_fade";
+      overlay.style.cssText = "position:fixed;inset:0;background:#040404;z-index:9999;opacity:0;pointer-events:none;transition:opacity .22s ease";
+      document.body.appendChild(overlay);
+    }
+    overlay.style.opacity = "0";
+    requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = "1"; }));
+    setTimeout(() => {
+      const html = document.documentElement;
+      const prev = html.style.scrollBehavior;
+      html.style.scrollBehavior = "auto";
+      window.scrollTo(0, dest);
+      html.style.scrollBehavior = prev;
+      setTimeout(() => { overlay.style.opacity = "0"; }, 30);
+    }, 240);
   };
   return (
     <header style={{ position: "fixed", top: 16, left: 0, right: 0, zIndex: 60, width: "min(100% - 28px, 1000px)", margin: "0 auto" }}>
-      <div style={{
+      <div ref={pillRef} style={{
         position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
         width: open ? "min(100%, 900px)" : "min(100%, 300px)",
         background: "rgba(20,20,20,0.55)",
         backdropFilter: "blur(22px) saturate(165%)", WebkitBackdropFilter: "blur(22px) saturate(165%)",
         border: "1px solid rgba(255,255,255,0.12)", borderRadius: 12, overflow: "hidden",
         boxShadow: open
-          ? "0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,0.18)"
-          : (solid ? "0 8px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,0.16)" : "inset 0 1px 0 rgba(255,255,255,0.16)"),
+          ? "0 30px 80px rgba(0,0,0,.55)"
+          : (solid ? "0 8px 30px rgba(0,0,0,.35)" : "none"),
         transition: "width .55s cubic-bezier(.44,0,.16,1), box-shadow .4s, background .4s",
       }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 58, pointerEvents: "none", background: "linear-gradient(180deg, rgba(255,255,255,0.08), transparent)" }} />
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 58, pointerEvents: "none", background: "linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0) 70%)" }} />
         <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px", height: 58 }}>
           <a href="#mission" onClick={(e) => { e.preventDefault(); go("mission"); }} style={{ display: "flex", alignItems: "center" }}>
             <img src="assets/karta-logo-white.svg" alt="Karta" style={{ height: 19 }} />
@@ -73,7 +119,9 @@ function Header({ active }) {
             <span>{open ? "Close" : "Menu"}</span>
           </button>
         </div>
-        <div style={{ maxHeight: open ? 620 : 0, opacity: open ? 1 : 0, overflow: "hidden", transition: "max-height .55s cubic-bezier(.44,0,.16,1) " + (open ? ".05s" : "0s") + ", opacity .35s ease" }}>
+        <div style={{ maxHeight: open ? 620 : 0, opacity: open ? 1 : 0, overflow: "hidden", transition: open
+          ? "max-height .55s cubic-bezier(.44,0,.16,1) .05s, opacity .35s ease"
+          : "max-height .3s cubic-bezier(.55,0,.4,1) .08s, opacity .2s ease" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr", gap: 14, padding: "6px 16px 18px" }}>
             <nav style={{ background: "rgba(13,13,13,0.5)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "14px 10px", display: "grid", gridTemplateColumns: "1fr 1fr", gridAutoFlow: "column", gridTemplateRows: "repeat(7, auto)", gap: "2px 14px", alignContent: "start" }}>
               {SECTIONS.map((it, i) => {
@@ -82,8 +130,8 @@ function Header({ active }) {
                   <button key={it.id} onClick={() => go(it.id)}
                     style={{ textAlign: "left", background: "transparent", border: "none", cursor: "pointer", padding: "9px 12px", borderRadius: 8, display: "flex", alignItems: "baseline", gap: 12,
                       color: on ? "var(--pp-acid)" : "#fafafa", fontFamily: "var(--pp-font-display)", fontWeight: 500, fontSize: 19, letterSpacing: "-.01em",
-                      transform: open ? "translateY(0)" : "translateY(8px)", opacity: open ? 1 : 0,
-                      transition: `transform .4s cubic-bezier(.44,0,.16,1) ${0.05 + i * 0.022}s, opacity .4s ease ${0.05 + i * 0.022}s, color .2s, background .2s` }}
+                      whiteSpace: "nowrap",
+                      transition: "color .2s, background .2s" }}
                     onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,.04)"; if (!on) e.currentTarget.style.color = "var(--pp-acid)"; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; if (!on) e.currentTarget.style.color = "#fafafa"; }}>
                     <span style={{ fontSize: 12, color: on ? "var(--pp-acid)" : "var(--pp-fg-4)", fontVariantNumeric: "tabular-nums" }}>{it.n}</span>
@@ -92,19 +140,42 @@ function Header({ active }) {
                 );
               })}
             </nav>
-            <div style={{ padding: "12px 8px", display: "flex", flexDirection: "column", gap: 18, transform: open ? "translateY(0)" : "translateY(10px)", opacity: open ? 1 : 0, transition: "transform .5s cubic-bezier(.44,0,.16,1) .12s, opacity .5s ease .12s" }}>
+            <div style={{ padding: "12px 8px", display: "flex", flexDirection: "column", gap: 18, transform: open ? "translateY(0)" : "translateY(6px)", opacity: open ? 1 : 0, transition: open
+              ? "transform .5s cubic-bezier(.44,0,.16,1) .12s, opacity .5s ease .12s"
+              : "transform .22s ease-in, opacity .18s ease-in" }}>
               <h3 style={{ margin: 0, fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 26, color: "#fafafa", letterSpacing: "-.01em" }}>Get in touch.</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
-                <p className="pp-body" style={{ margin: 0, fontSize: 14 }}>Send an email to:</p>
+                <p className="pp-body" style={{ margin: 0, fontSize: 14 }}>Jana Olsamo · Karta</p>
                 <button onClick={copyEmail} style={{ display: "inline-flex", alignItems: "center", gap: 10, alignSelf: "flex-start", background: "var(--pp-control)", border: "none", borderRadius: 8, padding: "9px 13px", cursor: "pointer" }}>
                   <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="#fafafa" strokeWidth="1.5"><rect x="6" y="6" width="8" height="8" rx="1.5"/><path d="M11.5 6V5a1.5 1.5 0 0 0-1.5-1.5H5A1.5 1.5 0 0 0 3.5 5v5A1.5 1.5 0 0 0 5 11.5h1"/></svg>
-                  <span className="pp-body" style={{ color: "#fafafa", fontSize: 14 }}>{copied ? "Email copied" : "hello@karta.io"}</span>
+                  <span className="pp-body" style={{ color: "#fafafa", fontSize: 14 }}>{copied ? "Email copied" : "olsamo@karta.io"}</span>
                 </button>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
-                <p className="pp-body" style={{ margin: 0, fontSize: 14 }}>Follow us:</p>
-                <div style={{ display: "flex", gap: 8 }}><Social k="in" /><Social k="x" /><Social k="tg" /></div>
+                <p className="pp-body" style={{ margin: 0, fontSize: 14 }}>Join Karta</p>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {[
+                    { k: "ig", label: "Instagram", url: "https://www.instagram.com/karta.personal" },
+                    { k: "tg", label: "@karta_news", url: "https://t.me/karta_news" },
+                    { k: "x", label: "X", url: "https://x.com/Karta_Personal" },
+                    { k: "in", label: "LinkedIn", url: "https://www.linkedin.com/company/joinkarta/" },
+                  ].map(s => (
+                    <a key={s.k} href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                      style={{ width: 44, height: 44, display: "inline-flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.08)", color: "#fafafa", borderRadius: 999, textDecoration: "none", transition: "background .2s, border-color .2s" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(204,255,0,.08)"; e.currentTarget.style.borderColor = "rgba(204,255,0,.35)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,.05)"; e.currentTarget.style.borderColor = "rgba(255,255,255,.08)"; }}>
+                      <svg width="20" height="20" viewBox="0 0 18 18" fill="#fafafa"><path d={socials[s.k]} /></svg>
+                    </a>
+                  ))}
+                </div>
               </div>
+              <a href="https://t.me/karta" target="_blank" rel="noopener noreferrer"
+                style={{ marginTop: 4, display: "inline-flex", alignSelf: "flex-start", alignItems: "center", gap: 10, background: "var(--pp-acid)", color: "#0a0a0a", borderRadius: 999, padding: "12px 22px", textDecoration: "none", fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 15, letterSpacing: "-.01em" }}>
+                <svg width="22" height="12" viewBox="43 93 202 104" fill="none" aria-hidden="true">
+                  <path d="M234.659 93C242.077 93.0008 245.789 101.965 240.544 107.203L208.596 139.111C205.348 142.355 205.339 147.628 208.596 150.877L240.537 182.793C245.78 188.031 242.064 196.993 234.645 196.993L181.527 197C179.319 196.994 177.201 196.122 175.641 194.565L128.471 147.44C126.912 145.88 124.797 145.003 122.586 145.006H51.3258C46.7329 145.006 43.0004 141.288 43 136.688V101.329C43.003 96.7399 46.7247 93.0119 51.3325 93.009H117.709C122.302 93.0149 126.032 96.7307 126.035 101.331V124.924C126.036 132.336 135.008 136.047 140.253 130.809L175.646 95.4526C177.205 93.8931 179.325 93.0188 181.536 93.0157L234.654 93.009V93H234.659Z" fill="#0a0a0a"/>
+                </svg>
+                Karta App
+              </a>
             </div>
           </div>
         </div>

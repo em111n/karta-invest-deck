@@ -484,22 +484,16 @@ function Close() {
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <div style={{ display: "flex", gap: 40, flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <span className="pp-h3" style={{ fontSize: 22 }}>Let's build it.</span>
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <PillButton href="#" onClick={(e) => e.preventDefault()} variant="accent" glyph="arrow">Request data room</PillButton>
-                <PillButton href="#" onClick={(e) => e.preventDefault()} glyph="check">[ Nik · email ]</PillButton>
-              </div>
+          <div style={{ display: "flex", gap: "clamp(20px, 3vw, 40px)", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", borderTop: "1px solid var(--pp-line)", paddingTop: "clamp(28px, 3vw, 40px)" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: "var(--pp-fg-4)" }}>Contact</span>
+              <span style={{ fontFamily: "var(--pp-font-display)", fontWeight: 600, fontStretch: "125%", fontSize: "clamp(20px, 2.4vw, 28px)", color: "var(--pp-acid)", letterSpacing: "-.01em" }}>Jana Olsamo</span>
+              <a href="mailto:olsamo@karta.io" className="inl-link" style={{ fontFamily: "var(--pp-font-body)", fontSize: 16, color: "var(--pp-fg-2)", letterSpacing: "-.005em" }}>olsamo@karta.io</a>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <p className="pp-body" style={{ margin: 0 }}>Follow Karta</p>
-              <div style={{ display: "flex", gap: 8 }}><Social k="in" /><Social k="x" /><Social k="tg" /></div>
-            </div>
+            <img src="assets/karta-logo-white.svg" alt="Karta" style={{ height: 34, opacity: .9 }} />
           </div>
         </Reveal>
-        <img src="assets/karta-logo-white.svg" alt="Karta" style={{ height: 34, opacity: .9, marginTop: 10 }} />
-        <p className="pp-caption" style={{ margin: 0, color: "var(--pp-fg-4)" }}>Seed round · 2026 · Figures April 2026 (Manifest Beautiful Table, Mixpanel). [ FILL ] = pending input.</p>
+        <p className="pp-caption" style={{ margin: 0, color: "var(--pp-fg-4)" }}>Figures April 2026 (Manifest Beautiful Table, Mixpanel).</p>
       </div>
     </footer>
   );
@@ -548,11 +542,11 @@ const SIZE_FRAME = [
 ];
 /* map markers - base grid 201×97 (matches the site's GeoMap) */
 const GEO = [
-  { id: "usa",   x: 22.9, y: 32.0, lx: 22.9, ly: 9,  side: "top",    live: false, label: "USA" },
-  { id: "eu",    x: 51.7, y: 24.7, lx: 51.7, ly: 7,  side: "top",    live: false, label: "EU" },
-  { id: "mena",  x: 65.4, y: 41.2, lx: 66,   ly: 12, side: "top",    live: true,  label: "UAE / MENA" },
-  { id: "sea",   x: 79.1, y: 58.8, lx: 80,   ly: 87, side: "bottom", live: true,  label: "SE Asia" },
-  { id: "latam", x: 31.8, y: 63.9, lx: 30,   ly: 88, side: "bottom", live: true,  label: "LATAM" },
+  { id: "usa",   x: 17.5, y: 33.0, lx: 17.5, ly: 7,  side: "top",    live: false, label: "USA" },
+  { id: "eu",    x: 50.0, y: 28.0, lx: 50.0, ly: 7,  side: "top",    live: false, label: "EU" },
+  { id: "mena",  x: 63.0, y: 33.0, lx: 66.0, ly: 7,  side: "top",    live: true,  label: "UAE / MENA" },
+  { id: "sea",   x: 82.0, y: 58.0, lx: 82.0, ly: 92, side: "bottom", live: true,  label: "SE Asia" },
+  { id: "latam", x: 28.0, y: 62.0, lx: 32.0, ly: 92, side: "bottom", live: true,  label: "LATAM" },
 ];
 
 /* ---------------- shared bits ---------------- */
@@ -593,14 +587,19 @@ function Marker({ x, y, live, delay, label, pos, showLabel }) {
       {showLabel && <span style={geoLabel(pos)}>{label}</span>}
     </span>);
 }
-/* the world map + pins. `callouts` overlays region stat cards (variant A). */
-function GeoMap({ maxWidth = 1180, callouts = false, showLabels = true }) {
-  const leader = showLabels && !callouts;
+/* the world map + pins.
+   - `callouts` overlays region stat cards (variant A)
+   - `inline` keeps the pulsing pin ON the country with a dashed leader line
+     to a floating label (Olsamo variant)
+   - default leader-line + off-map pulsing dot (variants B/C) */
+function GeoMap({ maxWidth = 1180, callouts = false, showLabels = true, inline = false }) {
+  const leader = !inline && showLabels && !callouts;
+  const showLines = leader || inline;
   return (
     <div className="geo-map" style={{ position: "relative", width: "100%", maxWidth, margin: "0 auto" }}>
       <img src="assets/world-map-dots-sm.svg" alt="World map - Karta active regions" draggable={false}
         style={{ display: "block", width: "100%", height: "auto", filter: "saturate(0) brightness(1.05)", opacity: 0.82 }} />
-      {leader && (
+      {showLines && (
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }}>
           {GEO.map((m) => (
             <line key={m.id} x1={m.x} y1={m.y} x2={m.lx} y2={m.ly} stroke={m.live ? ACID : ROAD} strokeWidth="1" strokeDasharray="2.5 2.5" vectorEffect="non-scaling-stroke" opacity=".55" />
@@ -610,7 +609,14 @@ function GeoMap({ maxWidth = 1180, callouts = false, showLabels = true }) {
       <div style={{ position: "absolute", inset: 0 }}>
         {leader
           ? GEO.map((m, i) => <React.Fragment key={m.id}><OriginDot x={m.x} y={m.y} live={m.live} /><LeaderDot {...m} delay={i * 0.3} /></React.Fragment>)
-          : GEO.map((m, i) => <Marker key={m.id} {...m} delay={i * 0.3} showLabel={false} />)}
+          : inline
+            ? GEO.map((m, i) => (
+                <React.Fragment key={m.id}>
+                  <Marker x={m.x} y={m.y} live={m.live} delay={i * 0.3} label={m.label} showLabel={false} />
+                  <span style={{ position: "absolute", left: m.lx + "%", top: m.ly + "%", transform: "translate(-50%, -50%)", fontFamily: FD, fontWeight: 700, fontStretch: "125%", fontVariationSettings: "'wght' 700,'wdth' 125", fontSize: "clamp(12px,1vw,17px)", letterSpacing: "-.01em", color: FG, textShadow: "0 1px 6px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,.9)", pointerEvents: "none", whiteSpace: "nowrap" }}>{m.label}</span>
+                </React.Fragment>
+              ))
+            : GEO.map((m, i) => <Marker key={m.id} {...m} delay={i * 0.3} showLabel={false} />)}
         {callouts && (
           <React.Fragment>
             <RegionCallout region={REGIONS[2]} place={{ left: "0%",  top: "0%" }} />
@@ -1077,15 +1083,6 @@ function MarketRedesign() {
                   }}>$16.7T</span>
                 </div>
 
-                {/* year axis */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", marginTop: 6, position: "relative" }}>
-                  {["2020","2021","2022","2023","2024","2025"].map((y, i) => (
-                    <div key={y} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 6, position: "relative" }}>
-                      <span style={{ width: 1, height: 10, background: i === 5 ? ACID : "#1f1f1f" }} />
-                      <span style={{ fontFamily: FD, fontWeight: 500, fontSize: 11, letterSpacing: ".08em", color: i === 5 ? ACID : FG4, fontVariantNumeric: "tabular-nums" }}>{y}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
             </Reveal>
 
@@ -1186,7 +1183,7 @@ function MarketRedesign() {
             </Reveal>
 
             <Reveal variant="scale" delay={0.05}>
-              <GeoMap maxWidth={1200} callouts={false} showLabels={true} />
+              <GeoMap maxWidth={1200} inline={true} />
             </Reveal>
 
             {/* legend — two big pills */}
@@ -1216,7 +1213,7 @@ function MarketRedesign() {
             <Reveal delay={0.14}>
               <p style={{ margin: 0, fontFamily: FD, fontWeight: 500, fontSize: "clamp(15px, 1.7vw, 20px)", lineHeight: 1.4,
                 color: FG3, maxWidth: 760, letterSpacing: "-.01em" }}>
-                Concrete markets, not aspirational TAM. Validated by team analysis and existing partner coverage <span style={{ color: FG4 }}>(Rain · Bridge · Due)</span>.
+                Concrete markets, not aspirational TAM. Validated by team analysis and existing partner coverage.
               </p>
             </Reveal>
           </div>
